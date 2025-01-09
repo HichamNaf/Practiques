@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Circle.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/CircleArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/CircleArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Contour.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/ContourArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/ContourArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Face.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/FaceArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/FaceArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Flow.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/FlowArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/FlowArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/FlowStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Line.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/LineArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/LineArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Moment.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/MomentArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/MomentArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Point2D.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Point2DArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Point2DArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Point2DStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Rect.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/RectArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/RectArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/RotatedRect.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/RotatedRectArray.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/RotatedRectArrayStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/RotatedRectStamped.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/msg/Size.js"
+  "/home/vboxuser/practica_ws/devel/share/gennodejs/ros/opencv_apps/srv/FaceRecognitionTrain.js"
+  "CMakeFiles/opencv_apps_generate_messages_nodejs"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/opencv_apps_generate_messages_nodejs.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,240 @@
+Altaveu
+
+void InitAltaveu(void);
+//Pre:---
+//Post: inicialitzar variables del TAD altaveu.
+
+void MotorAltaveu(void);
+//Pre: ---
+//Post: genera un pwm de periode fix i duty cycle variable.
+
+void SorollAlt(unsigned char teclaS);
+//Pre: han premut una tecla.
+//Post: generar un pwm amb duty cycle correcponent a la tecla.
+void fiSoroll(void);
+
+Comunicacio
+
+void endMSG(void);
+
+char MotorCOM(char* new_msgC);
+//Pre: ---
+//Post: retorna el missatge a enviar
+
+
+EQM
+
+void EQMInit(void);
+
+void EQM_MSG(void);
+
+char ConfWIFI(void);
+
+char EnterChatMode(void);
+
+void MotorEQM(void);
+
+void MotorEQM(void);
+
+char ListAccesPoints(void);
+
+
+Joystick
+
+void JoyInit(void);
+//Pre: ---
+//Post: inicialitza els registres ADCON1 i ADCON2 del ADC.
+void startConversion(void);
+//Pre: ---
+//Post: inicia la conversió d'un canal analogic.
+
+char finishConversion(void);
+//Pre: s'ha cridat la funci startConversion().
+//Post: retorna CERT si ha acabat la conversio i viceversa.
+
+char mouJoyAvail(void);
+//Pre: la funcio finishConversion() ha retornat CERT.
+//Post: retorna CERT si hi ha una accio del joystick i viceversa.
+
+char getAction(void);
+//Pre: la funcio actionAvail() ha retornat CERT.
+//Post: retorna l'accio que cal fer.
+
+void setJoyChannel(void);
+//Pre: ---
+//Post: selecciona el canal analogic AN0.
+
+
+LCD
+
+void LcInit(char rows, char columns);
+// Pre: Rows = {1, 2, 4}  Columns = {8, 16, 20, 24, 32, 40 }
+// Pre: There is a free timer
+// Pre: It needs 40ms of tranquility between the VCC raising and this constructor being called.
+// Post: This routine can last up to 100ms
+// Post: The display remains cleared, the cursor turned off and at the position 0, 0.
+
+void LcClear(void);
+// Post: Clears the display and sets the cursor to its previous state. 
+// Post: The next order can last up to 1.6ms. 
+
+void LcCursorOn(void);
+// Post: Turn on the cursor
+// Post: The next order can last up to 40us. 
+
+void LcCursorOff(void);
+// Post: Turns off the cursor
+// Post: The next order can last up to 40us. 
+
+void LcGotoXY(char Column, char Row);
+// Pre : Column between 0 and 39, row between 0 and 3. 
+// Post: Sets the cursor to those coordinates. 
+// Post: The next order can last up to 40us. 
+
+void LcPutChar(char c);
+// Post: Paints the char in the actual cursor position and increments 
+// its position. If the column gets to 39 it returns to 0.
+// The row of the LCD is increased when this happens until the second
+// row and then it is reset back to row 0 if it has 2 rows total. 
+// If the LCD has 4 rows it will reset back to row 0 when it
+// reaches row 4 and the columns will go till 39 before reseting to 0.
+// The one row LCDs returns to 0 when a column gets to 39. 
+// The row is never increased. 
+// The char is written
+
+char LcPutString(char *s);
+// Post: Paints the string from the actual cursor position. 
+// The coordinate criteria is the same as the LcPutChar. 
+// Post: Can last up to 40us per char of a routine output.
+
+
+Menu
+
+void MenuInit(void);
+//Pre: ---
+//Post: inicialitzar variables del TAD menu.
+void MotorMenu(void);
+//Pre: el joystick s'ha mogut cap amunt.
+//Post: fer scroll de les opcions del menu verticalment i cap amunt.
+void startMenu(void);
+
+void stopMenu(void);
+
+char StateMenu(void);
+
+char OpcioMenu(void);
+
+
+RxCom
+
+void rxInit(void);
+//Pre: ---
+//Post: 
+
+char GetRxMSG(void);
+//Pre: 
+//Post: 
+
+void MotorRX(void);
+//Pre: ---
+//Post: 
+char GetFlag(void);
+
+
+SIO
+
+void SIO_Init(void);
+// Post: Configuració de la UART en mode assíncron, 9600 bauds, suposant fOsc=10MHz.
+
+unsigned char SIO_RXAvail(void);
+//Post: Retorna el nombre de caràcters disponibles a la cua de RX.
+
+unsigned char SIO_GetChar(void);
+// Pre: SIO_RXAvail() ha retornat CERT.
+// Post: Fa lectura destructiva del caràcter rebut.
+
+unsigned char SIO_TXAvail(void);
+//Post: Retorna el nombre de caràcters disponibles a la cua de TX. 0 si no hi ha espai, i fins a MAX_TX si està buida.
+
+void SIO_PutChar (unsigned char Valor);
+// Pre: SIO_TXAvail() ha retornat >> 0.
+// Post: Posa un nou caràcter a enviament.
+
+
+Teclat
+
+void KeyBoardInit(void);
+//Pre: ---
+//Post: inicialitza l'escombrat del teclat a la primera columna.
+
+char HiHaTecla(void);
+//Pre: ---
+//Post: retorna cert si s'ha premut alguna tecla i viceversa.
+
+char GetTecla(void);
+//Pre: la funcio HiHaTecla() ha retornat cert.
+//Post: retorna el valor de la tecla premuda.
+
+void MotorKeyboard(void);
+//Pre: ---
+//Post: espera a que es premi alguna tecla i després comprova quina tecla s'ha premut.
+char TeclaPremuda(void);
+
+
+Timer
+
+void RSI_Timer0(void);
+    // IMPORTANT! Funció que ha der ser cridadda des de la RSI, en en cas que TMR0IF==1.
+    // La RSI ha de contenir: if (TMR0IF==1) RSI_Timer0();
+
+void TI_Init (void);
+	// Post: Constructor. És precondició global haver cridat aquesta funció quan es cridi qualsevol altra funció del TAD
+
+unsigned char TI_NewTimer(unsigned char *TimerHandle) ;
+	// Post: Retorna TI_CERT en cas que s'hagi creat adequadament un nou timer, i TI_FALS en cas contrati.
+    // Posa a *TimerHandle l'identificador de timer assignat, necessari per usar les funcions TI_GetTics i TI_ResetTics.
+
+void TI_ResetTics (unsigned char TimerHandle);
+	// Pre: Handle ha estat retornat per Ti_NewTimer.
+	// Post: Engega la temporització associada a 'TimerHandle', guardant la referencia temporal en el moment de la crida.
+
+unsigned long TI_GetTics (unsigned char TimerHandle);
+	// Pre: Handle ha estat retornat per TI_NewGetTimer.
+	// Post: Retorna els tics transcorreguts des de la crida a TI_ResetTics per al mateix TimerHandle.
+
+void TI_End (void);
+	// Post: Destructor del TAD
+
+
+TxCom
+
+void txInit(void);
+//Pre: ---
+//Post: 
+
+void SetMSG(unsigned char new_msg);
+//Pre: 
+//Post: 
+
+void MotorTX(void);
+//Pre: ---
+//Post: 
+char GetEND(void);
+
+
+Valorsteclat
+
+void ValorsTeclatInit(void);
+
+char ValorsState(void);
+
+void StartRead(char numMax);
+
+char getMSG(char index);
+
+char getIND();
+
+void ValorTecla(char fila);
+
+void MotorValorsTeclat(void);
+

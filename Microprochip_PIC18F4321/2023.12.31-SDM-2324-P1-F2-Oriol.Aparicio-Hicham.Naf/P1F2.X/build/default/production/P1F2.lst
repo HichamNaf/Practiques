@@ -1,0 +1,1891 @@
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;PRACTICA 1 FASE 2
+                      00002     ;membre_1: Hicham Naf
+                      00003     ;membre_2: Oriol Aparicio
+                      00004     ;identificador_grup: 82
+                      00005 
+                      00006 #include <p18f4321.inc>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Oct 24 2019
+                      00005 ;  MPASM PIC18F4321 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      01455         LIST
+                      00007 
+                      00008     CONFIG OSC = HSPLL          ;utilitzem XSTALL extern de 10MHz amb PLL per anar a 40MHz
+                      00009     CONFIG MCLRE = ON           ;tenim polsador de reset per si el PIC es queda penjat
+                      00010     CONFIG PBADEN = DIG         ;Sempre digital
+                      00011     CONFIG WDT = OFF            ;Posem a OFF el watch dog timer perquè no l'utilitzarem
+                      00012     CONFIG LVP = OFF
+                      00013                             ;Mapejem les @ de la FLASH
+                      00014     ORG 0x0000
+000000 EF?? F???      00015     GOTO MAIN                   ;Quan el pic es reseteja anem al main
+                      00016     ORG 0x0008
+000008 EF?? F???      00017     GOTO RSI_GEN                ;declarem la interrupció del timer0 com a alta
+                      00018     ORG 0x0018
+000018 0011           00019     RETFIE FAST                 ;posem retfie per si de cas, tot i que no saltarà mai
+                      00020 
+                      00021 
+                      00022 ;-------------------------------------------------------------------------------
+                      00023 ; VARIABLES A LA RAM
+                      00024 ;------------------------------------------------------------------------------- 
+  00000001            00025 COMPTADOR                  EQU 0x01         ;comptadors pel control dels pwm's
+                      00026                    
+  00000002            00027 VALOR                      EQU 0x02         ;GUARDEM EL CONTINGUT DE LA RAM
+                      00028                            
+  00000004            00029 COMPT_MATRIU               EQU 0x04
+                      00030                    
+  00000005            00031 LED_Blue_Mirall            EQU 0x05
+  00000006            00032 LED_Green_Mirall           EQU 0x06
+  00000007            00033 LED_Red_Mirall             EQU 0x07
+                      00034                    
+  00000008            00035 COMPTADOR1                 EQU 0x08     
+  00000009            00036 COMPTADOR2                 EQU 0x09
+                      00037                    
+  0000000A            00038 VALUEESPERA                EQU 0x0A
+                      00039 
+  0000000B            00040 SOROLL_FREQ                EQU 0x0B
+                      00041                    
+  0000000C            00042 COORD_X                    EQU 0x0C
+  0000000D            00043 COORD_Y                    EQU 0X0D
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044                            
+  0000000E            00045 RAM_COORD                  EQU 0x0E                
+  0000000F            00046 CONTINGUT_RAM              EQU 0x0F
+  00000010            00047 CURRENT_GRID               EQU 0x10
+                      00048 
+  00000013            00049 TEMPS_INC_L                EQU 0x13
+  00000014            00050 TEMPS_INC_H                EQU 0x14     
+                      00051 
+  00000015            00052 ACTUAL_PWM                 EQU 0x15
+  00000016            00053 PWM_S0                     EQU 0x16
+  00000017            00054 PWM_S1                     EQU 0x17
+  00000018            00055 MAX_PWM                    EQU 0x18
+                      00056            
+  0000001A            00057 COMPT_1S                   EQU 0x1A
+                      00058                    
+                      00059 ;-------------------------------------------------------------------------------
+                      00060 ; TAULES DE LA FLASH
+                      00061 ;------------------------------------------------------------------------------- 
+  00000020            00062 TAULASERVO EQU 0x20             ;definim taula de la flash per guardar els increments dels servos
+                      00063  
+                      00064     ORG TAULASERVO
+000020 18FC           00065     DB b'11111100',b'00011000'          ; Valor del comptador per tindre 5 increments   0x20,0x21
+000022 BFFC           00066     DB b'11111100', b'10111111'         ; Valor del comptador per tindre 6 increments   0x22,0x23
+000024 36FD           00067     DB b'11111101', b'00110110'         ; Valor del comptador per tindre 7 increments   0x24,0x25
+000026 8FFD           00068     DB b'11111101', b'10001111'         ; Valor del comptador per tindre 8 increments   0x26,0x27
+000028 D4FD           00069     DB b'11111101', b'11010100'         ; Valor del comptador per tindre 9 increments   0x28,0x29
+00002A 0CFE           00070     DB b'11111110', b'00001100'         ; Valor del comptador per tindre 10 increments  0x2A,0x2B
+00002C 39FE           00071     DB b'11111110', b'00111001'         ; Valor del comptador per tindre 11 increments  0x2C,0x2D
+00002E 5FFE           00072     DB b'11111110', b'01011111'         ; Valor del comptador per tindre 12 increments  0x2E,0x2F
+000030 7FFE           00073     DB b'11111110', b'01111111'         ; Valor del comptador per tindre 13 increments  0x30,0x31
+000032 9BFE           00074     DB HIGH(.65179), LOW(.65179)        ; Valor del comptador per tindre 14 increments  0x32,0x33
+000034 B3FE           00075     DB HIGH(.65203), LOW(.65203)        ; Valor del comptador per tindre 15 increments  0x34,0x35
+000036 C8FE           00076     DB HIGH(.65224), LOW(.65224)        ; Valor del comptador per tindre 18 increments  0x36,0x37
+000038 F9FE           00077     DB HIGH(.65273), LOW(.65273)        ; Valor del comptador per tindre 16 increments  0x38,0x39
+00003A DAFE           00078     DB HIGH(.65242), LOW(.65242)        ; Valor del comptador per tindre 17 increments  0x3A,0x3B
+00003C EAFE           00079     DB HIGH(.65258), LOW(.65258)        ; Valor del comptador per tindre 19 increments  0x3C,0x3D
+00003E 06FF           00080     DB HIGH(.65286), LOW(.65286)        ; Valor del comptador per tindre 20 increments  0x3E,0x3F
+000040 12FF           00081     DB HIGH(.65298), LOW(.65298)        ; Valor del comptador per tindre 21 increments  0x40,0x41
+000042 1DFF           00082     DB HIGH(.65309), LOW(.65309)        ; Valor del comptador per tindre 22 increments  0x42,0x43
+000044 27FF           00083     DB HIGH(.65319), LOW(.65319)        ; Valor del comptador per tindre 23 increments  0x44,0x45
+000046 30FF           00084     DB HIGH(.65328), LOW(.65328)        ; Valor del comptador per tindre 24 increments  0x46,0x47
+000048 38FF           00085     DB HIGH(.65336), LOW(.65336)        ; Valor del comptador per tindre 25 increments  0x48,0x49       
+                               
+                      00086 
+                      00087 ;-------------------------------------------------------------------------------
+                      00088 ; 1. CONFIGURACIO DE PORTS
+                      00089 ;-------------------------------------------------------------------------------  
+                      00090 
+00004A                00091 CONFIG_PORTS
+                      00092     
+00004A                00093 CONFIG_PWM_PORTS    
+00004A 9095           00094     BCF     TRISD,RD0,0                 ;Grid
+00004C 8495           00095     BSF     TRISD,RD2,0                 ;StartGame
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00004E 9292           00096     BCF     TRISA,RA1,0                 ;FleetStatus0
+000050 9492           00097     BCF     TRISA,RA2,0                 ;FleetStatus1 
+000052 9692           00098     BCF     TRISA,RA3,0                 ;ACK
+000054 9892           00099     BCF     TRISA,RA4,0                 ;CurrentGrid    
+000056 9A92           00100     BCF     TRISA,RA5,0                 ;Speaker
+000058                00101 CONFIG_BUTTONS    
+000058 6893           00102     SETF TRISB, 0               ;0-NewCoord, 1-NewBoat, 3-Up, 4-Left, 5-Down
+00005A 8295           00103     BSF TRISD,RD1,0                     ;Right
+00005C 8695           00104     BSF TRISD,RD3,0                     ;Attack
+00005E 9EF1           00105     BCF     INTCON2,RBPU,0              ;activem pull ups al port B
+000060                00106 CONFIG_COORDS
+000060 6894           00107     SETF TRISC, 0       ;inicialitzem tot el port C com a entrada
+000062 0012           00108     RETURN
+                      00109     
+000064                00110 ESPERA                              ;Bucle d'espera fins que VALUEESPERA valgui 0
+000064 0000           00111     NOP
+000066 0000           00112     NOP
+000068 0000           00113     NOP
+00006A 060A           00114     DECF    VALUEESPERA,1,0
+00006C A4D8           00115     BTFSS   STATUS,Z,0
+00006E EF?? F???      00116     GOTO        ESPERA
+000072 0012           00117     RETURN
+                      00118 
+                      00119 ;-------------------------------------------------------------------------------
+                      00120 ; 1.1. INICIALITZAR VARIABLES
+                      00121 ;------------------------------------------------------------------------------- 
+000074                00122 INIT_VARS
+000074 9010           00123     BCF     CURRENT_GRID,0,0
+                      00124                         
+000076 9689           00125     BCF     LATA,RA3,0          
+000078 9889           00126     BCF     LATA,RA4,0          
+00007A 9A89           00127     BCF     LATA,RB5,0
+00007C                00128 INIT_PWM 
+00007C 6A18           00129     CLRF    MAX_PWM,0
+00007E 908C           00130     BCF     LATD,RD0,0                     
+000080 9289           00131     BCF     LATA,RA1,0                     
+000082 9489           00132     BCF     LATA,RA2,0
+                      00133    
+000084 0E80           00134     MOVLW   b'10000000'     ;Inicialitzem el PWM
+000086 6E01           00135     MOVWF   COMPTADOR,0
+                      00136     
+000088                00137 INIT_RAM
+000088 0E01           00138     MOVLW 0x01
+00008A 6EEA           00139     MOVWF FSR0H, 0      ;Indiquem que volem utilitzar el banc 1.
+                      00140   
+00008C 6AE9           00141     CLRF FSR0L, 0       ;Comencem en l'adressa 0 del banc 1
+00008E EC?? F???      00142     CALL RESET_RAM
+000092 0012           00143     RETURN
+                      00144     
+000094                00145 RESET_RAM
+000094 0E00           00146     MOVLW .0
+000096 6EEE           00147     MOVWF POSTINC0, 0
+000098 0E81           00148     MOVLW .129
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00009A 62E9           00149     CPFSEQ FSR0L, 0
+00009C EF?? F???      00150     GOTO RESET_RAM
+0000A0 6AE9           00151     CLRF FSR0L, 0
+0000A2 0012           00152     RETURN   
+                      00153 
+0000A4                00154 INIT_TIMER0    
+0000A4 8AF2           00155     BSF  INTCON,TMR0IE,0                    ;Activem interrupcio timer0 
+0000A6 EC?? F???      00156     CALL TIMER0_LOW
+0000AA EC?? F???      00157     CALL INIT_INTERUPT_VARIABLES
+0000AE 0012           00158     RETURN
+                      00159     
+0000B0                00160 INIT_INTERUPT_VARIABLES
+0000B0 0E00           00161     MOVLW 0x00          ;Load TBLPTR with the base
+0000B2 6EF8           00162     MOVWF TBLPTRU       ;Address of the word
+0000B4 0E00           00163     MOVLW 0x00          
+0000B6 6EF7           00164     MOVWF TBLPTRH
+                      00165     
+0000B8 0E05           00166     MOVLW .5
+0000BA 5C18           00167     SUBWF MAX_PWM,0,0
+0000BC 0D02           00168     MULLW .2
+0000BE 50F3           00169     MOVF PRODL,0
+0000C0 0F20           00170     ADDLW TAULASERVO
+0000C2 6EF6           00171     MOVWF TBLPTRL,0
+                      00172     
+0000C4                00173 READ_WORD
+0000C4 0009           00174     TBLRD*+             ;Read into TABLAT and increment
+0000C6 50F5           00175     MOVF TABLAT, 0      ;Get data
+0000C8 6E14           00176     MOVWF TEMPS_INC_H,0
+0000CA 0008           00177     TBLRD*              ;Read into TABLAT
+0000CC 50F5           00178     MOVF TABLAT, 0      ;Get data
+0000CE 6E13           00179     MOVWF TEMPS_INC_L,0
+                      00180     
+0000D0 6A15           00181     CLRF ACTUAL_PWM,0
+0000D2 2A18           00182     INCF MAX_PWM,1,0
+0000D4 C018 F016      00183     MOVFF   MAX_PWM, PWM_S0
+0000D8 C018 F017      00184     MOVFF   MAX_PWM, PWM_S1
+                      00185     
+0000DC 0012           00186     RETURN    
+                      00187 ;-------------------------------------------------------------------------------
+                      00188 ; 2. INTERRUPCIONS
+                      00189 ;-------------------------------------------------------------------------------  
+0000DE                00190 CONFIG_INT
+0000DE 9ED0           00191     BCF     RCON,IPEN,0                     ;desactivo prioritats sempre per tenir nomes la alta
+0000E0 8EF2           00192     BSF     INTCON,GIE,0                    ;activem les interrupcions internes
+0000E2 8CF2           00193     BSF     INTCON,PEIE,0                   ;activem masked i unmasked interrupts sempre
+0000E4 9AF2           00194     BCF     INTCON,TMR0IE,0                 ;de moment desactivem la interrupcio del timer0
+0000E6 88F2           00195     BSF     INTCON,INT0IE,0                 ;activem interrupcio RB0
+                      00196     
+0000E8 9CF1           00197     BCF     INTCON2,INTEDG0,0               ;INT0 per flanc de baixada
+0000EA 8AF1           00198     BSF     INTCON2,INTEDG1,0               ;INT1 per flanc de pujada
+                      00199     
+0000EC 86F0           00200     BSF     INTCON3,INT1IE,0                ;activem interrupcio RB1
+                      00201     
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00202                                             ;per comptar de 20ms en 20ms si vaig a 100ns haig de fer 200
+                            .000 increments,
+0000EE 0E81           00203     MOVLW   b'10000001'                     ;per tant necessitare prescaler (amb prescaler de 4 em surte
+                            n 50.000 increments
+0000F0 6ED5           00204     MOVWF   T0CON,0                         ;i ja em dona mes petit de 16b)
+0000F2 0012           00205     RETURN
+                      00206     
+0000F4                00207 RSI_GEN
+0000F4 B2F2           00208     BTFSC   INTCON,INT0IF,0
+0000F6 EF?? F???      00209     GOTO    RSI_INT0
+0000FA B0F0           00210     BTFSC   INTCON3,INT1IF,0
+0000FC EF?? F???      00211     GOTO    RSI_INT1
+000100 B4F2           00212     BTFSC   INTCON,TMR0IF,0
+000102 EF?? F???      00213     GOTO    RSI_T0
+000106 0011           00214     RETFIE FAST
+                      00215 ;-------------------------------------------------------------------------------
+                      00216 ; 2.1. INTERRUPCIO DEL TIMER0
+                      00217 ;------------------------------------------------------------------------------- 
+000108                00218 TIMER0_LOW                      
+000108 0EFB           00219     MOVLW   HIGH(.64286)                    ;(16b) 65536 - 1250 = 64286 (0.5ms)
+00010A 6ED7           00220     MOVWF   TMR0H,0
+00010C 0E1E           00221     MOVLW   LOW(.64286)
+00010E 6ED6           00222     MOVWF   TMR0L,0
+000110 2A15           00223     INCF ACTUAL_PWM,1,0
+000112 2A1A           00224     INCF COMPT_1S,1,0
+000114 EC?? F???      00225     CALL ESPERA_T0
+000118 0012           00226     RETURN
+00011A                00227 TIMER0_INCREMENT
+00011A C014 FFD7      00228     MOVFF   TEMPS_INC_H, TMR0H
+00011E C013 FFD6      00229     MOVFF   TEMPS_INC_L, TMR0L
+000122 EC?? F???      00230     CALL ESPERA_T0
+000126 0012           00231     RETURN  
+000128                00232 TIMER0_HIGH                     
+000128 0E55           00233     MOVLW   HIGH(.21786)                    ;(16b) 65536 - 43750 = 21786 (17.5ms)
+00012A 6ED7           00234     MOVWF   TMR0H,0
+00012C 0E1A           00235     MOVLW   LOW(.21786)
+00012E 6ED6           00236     MOVWF   TMR0L,0
+000130 6A15           00237     CLRF ACTUAL_PWM,0
+000132 0012           00238     RETURN
+000134                00239 T0_LOW
+000134 8289           00240     BSF LATA,1,0 
+000136 8489           00241     BSF LATA,2,0
+000138 EC?? F???      00242     CALL TIMER0_LOW
+00013C EF?? F???      00243     GOTO RSI_T0   
+000140                00244 T0_HIGH
+000140 EC?? F???      00245     CALL TIMER0_HIGH
+000144 9289           00246     BCF LATA,1,0 
+000146 9489           00247     BCF LATA,2,0
+000148 EF?? F???      00248     GOTO END_RSI_T0  
+                      00249 
+00014C                00250 ESPERA_T0
+00014C A4F2           00251     BTFSS INTCON,TMR0IF,0
+00014E EF?? F???      00252     GOTO ESPERA_T0
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000152 0012           00253     RETURN
+000154                00254 RSI_T0
+000154 9AF2           00255     BCF     INTCON,TMR0IE,0                 ;Desactivem interrupcio timer0 
+000156 94F2           00256     BCF     INTCON,TMR0IF,0
+000158 0E00           00257     MOVLW .0
+00015A 6415           00258     CPFSGT ACTUAL_PWM,0
+00015C EF?? F???      00259     GOTO    T0_LOW                          
+000160 5015           00260     MOVF ACTUAL_PWM,0
+000162 6418           00261     CPFSGT MAX_PWM,0
+000164 EF?? F???      00262     GOTO    T0_HIGH
+                      00263     
+000168 5015           00264     MOVF ACTUAL_PWM,0
+00016A 6416           00265     CPFSGT PWM_S0,0
+00016C 9289           00266     BCF LATA,1,0
+00016E 6417           00267     CPFSGT PWM_S1,0
+000170 9489           00268     BCF LATA,2,0
+000172 EC?? F???      00269     CALL TIMER0_INCREMENT
+000176 2A15           00270     INCF ACTUAL_PWM,1,0
+000178 EF?? F???      00271     GOTO RSI_T0
+                      00272     
+00017C                00273 END_RSI_T0    
+00017C 94F2           00274     BCF     INTCON,TMR0IF,0                 ;netejem el flac de la interrupcio i fem retfie fast
+00017E 8AF2           00275     BSF     INTCON,TMR0IE,0                 ;activem interrupcio timer0
+000180 0011           00276     RETFIE  FAST  
+                      00277     
+000182                00278 RSI_INT0                                    ;Interrupcio NewCoord
+000182 0EFF           00279     MOVLW   .255
+000184 6E0A           00280     MOVWF   VALUEESPERA,0
+000186 EC?? F???      00281     CALL        ESPERA
+00018A EC?? F???      00282     CALL ESCRIPTURA_VALORS_F1
+                      00283     
+00018E A010           00284     BTFSS   CURRENT_GRID,0,0
+000190 2A18           00285     INCF MAX_PWM,1,0
+                      00286     
+000192 8689           00287     BSF     LATA,RA3,0
+000194 EC?? F???      00288     CALL    ESPERA_1MS
+000198 9689           00289     BCF     LATA,RA3
+                      00290     
+00019A                00291 END_RSI_INT0    
+00019A 92F2           00292     BCF     INTCON,INT0IF,0                 ;Netejem el flac de la interrupcio i fem retfie fast    
+00019C 0011           00293     RETFIE FAST
+                      00294     
+00019E                00295 RSI_INT1                                    ;Interrupció del NewBoat per canviar de jugador
+                      00296     
+00019E 7010           00297     BTG CURRENT_GRID,0,0
+0001A0 7889           00298     BTG LATA,RA4,0
+0001A2 EC?? F???      00299     CALL    LECTURA_VALORS
+0001A6 0EFF           00300     MOVLW   .255
+0001A8 6E0A           00301     MOVWF   VALUEESPERA,0
+0001AA EC?? F???      00302     CALL        ESPERA
+                      00303     
+0001AE                00304 END_RSI_INT1    
+0001AE 90F0           00305     BCF     INTCON3,INT1IF,0                ;Netejem el flac de la interrupcio i fem retfie fast    
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0001B0 0011           00306     RETFIE FAST
+                      00307     
+                      00308 ;-------------------------------------------------------------------------------
+                      00309 ; 3. MODUL CONTROL DE RAM
+                      00310     
+                      00311 ;3.1 LECTURA TAULELL RAM I MOSTRAR MATRIU
+                      00312 ;-------------------------------------------------------------------------------     
+                      00313     
+0001B2                00314 LECTURA_VALORS
+0001B2 0E41           00315     MOVLW .65
+0001B4 B010           00316     BTFSC CURRENT_GRID,0,0
+0001B6 6EE9           00317     MOVWF   FSR0L,0
+                      00318     
+0001B8                00319 BUCLE_LECTURA    
+0001B8 9AF2           00320     BCF     INTCON,TMR0IE,0                 ;Desactivem interrupcio timer0 
+                      00321     
+0001BA CFEE F002      00322     MOVFF POSTINC0, VALOR                   ;Guardem la posicio de la RAM actual i incrementem el punter
+                      00323     ;Tenim el color de tots els taulells.
+0001BE A483           00324     BTFSS PORTD, 2, 0  ;SI L'USUARI HA COMENÇAT EL JOC MOSTRAREM ELS VALORS DE LA FASE 2
+0001C0 EC?? F???      00325     CALL PRINT_VALORS_F1
+0001C4 B483           00326     BTFSC PORTD, 2, 0  ;SI L'USUARI NO HA COMENÇAT EL JOC MOSTRAREM ELS VALORS DE LA FASE 1
+0001C6 EC?? F???      00327     CALL PRINT_VALORS_F2
+0001CA 0E40           00328     MOVLW .64       
+0001CC 64E9           00329     CPFSGT FSR0L, 0                         ;Jugador 0
+0001CE EF?? F???      00330     GOTO BUCLE_LECTURA
+0001D2 0E81           00331     MOVLW .129
+0001D4 62E9           00332     CPFSEQ FSR0L, 0                         ;Jugador 1
+0001D6 EF?? F???      00333     GOTO BUCLE_LECTURA
+0001DA 6AE9           00334     CLRF FSR0L, 0
+0001DC B483           00335     BTFSC   PORTD,RD2,0                     ;Activem la interrupcio nomes si estem a la Fase 2
+0001DE 8AF2           00336     BSF     INTCON,TMR0IE,0                 ;Activo interrupcio timer0 
+                      00337     
+0001E0 0012           00338     RETURN    
+                      00339 
+                      00340 ;-------------------------------------------------------------------------------
+                      00341 ;3.2 ESCRIPTURA RAM FASE 1
+                      00342 ;-------------------------------------------------------------------------------      
+0001E2                00343 ESCRIPTURA_VALORS_F1        ;CRIDEM LA FUNCIÓ QUAN REBEM EL SENYAL NewCoord
+                      00344     
+0001E2 EC?? F???      00345     CALL COORD_F1
+                      00346     
+0001E6 C00E FFE9      00347     MOVFF RAM_COORD, FSR0L      ;ASSIGNEM EL VALOR AL PUNTER DE LA RAM
+                      00348     
+0001EA 0E01           00349     MOVLW .1
+0001EC 6EEF           00350     MOVWF INDF0,0               ;POSEM DE COLOR VERD LA POSICIÓ AL TAULELL
+                      00351     
+0001EE 6AE9           00352     CLRF FSR0L, 0               ;POSEM EL PUNTER DE LA RAM A 0
+                      00353     
+0001F0 EC?? F???      00354     CALL LECTURA_VALORS         ;MOSTRAR ACTUALITZAR LA MATRIU
+                      00355     
+0001F4 0012           00356     RETURN
+                      00357     
+                      00358 ;-------------------------------------------------------------------------------
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00359 ;3.3 OBTENCIO NEW COORD
+                      00360 ;-------------------------------------------------------------------------------    
+                      00361     
+0001F6                00362 COORD_F1
+0001F6 5082           00363     MOVF PORTC, 0           ;POSEM EL VALOR DEL PORT C AL REGISTRE WREG
+0001F8 0B0F           00364     ANDLW 0x0F              ;MULTIPLIQUEM ELS 4 LSB PER 1 I ELS 4 MSB PER 0
+0001FA 6E0D           00365     MOVWF COORD_Y, 0        ;GUARDEM EL RESULTAT A COORD_Y
+                      00366     
+0001FC CF82 F00C      00367     MOVFF PORTC, COORD_X    ;MOVEM EL VALOR DEL PORT C A LA VARIABLE COORD_X
+000200 460C           00368     rlncf COORD_X,1,0       ;ROTEM 4 VEGADES EL VALOR
+000202 460C           00369     rlncf COORD_X,1,0
+000204 460C           00370     rlncf COORD_X,1,0
+000206 460C           00371     rlncf COORD_X,1,0
+000208 500C           00372     MOVF COORD_X, 0, 0      ;COPIEM EL VALOR AL REGISTRE WREG
+00020A 0B0F           00373     ANDLW 0x0F              ;MULTIPLIQUEM ELS 4 LSB PER 1 I ELS 4 MSB PER 0
+00020C 6E0C           00374     MOVWF COORD_X, 0        ;GUARDEM EL RESULTAT A COORD_X
+                      00375     
+00020E EC?? F???      00376     CALL CONVERT_COORD_TO_RAM
+                      00377     
+000212 0012           00378     RETURN
+                      00379 
+                      00380 ;-------------------------------------------------------------------------------
+                      00381 ;3.4 CONVERSIO COORDENADA A POSICIO MATRIU
+                      00382 ;-------------------------------------------------------------------------------     
+000214                00383 CONVERT_COORD_TO_RAM
+                      00384   
+000214 C00D F00E      00385     MOVFF COORD_Y, RAM_COORD        ;RESTAR 1 A COORD_Y
+000218 060E           00386     DECF RAM_COORD, 1, 0
+                      00387     
+00021A 0E08           00388     MOVLW .8                        ;MULTIPLICAR PER 8
+00021C 020E           00389     MULWF RAM_COORD,0
+                      00390     
+00021E 500C           00391     MOVF COORD_X, 0                 ;MOVEM LA COORD_X AL REGISTRE WREG
+000220 24F3           00392     ADDWF PRODL, 0, 0               ;SUMAR COORD_X A PRODL, I GUARDAR EL RESULTAT AL ACUMULADOR
+000222 6E0E           00393     MOVWF RAM_COORD, 0              ;A RAM_COORD TENIM LA POSICIÓ DE LA RAM DE LES COORDENADES
+000224 060E           00394     DECF RAM_COORD, 1, 0            ;RESTEM 1 A RAM_COORD PER A QUE COINCIDEIXI LA ADREÇA DE LA RAM
+                      00395     
+000226 0E41           00396     MOVLW .65
+000228 B010           00397     BTFSC CURRENT_GRID, 0, 0        ;MIREM SI CURRENT_GRID ES DEL JUGADOR 0 O 1
+00022A 260E           00398     ADDWF RAM_COORD, 1, 0           ;SELECCIONAR TAULELL JUGADOR 1, SI HO SALTEM ESTAREM FENT EL JUGADOR
+                             0
+                      00399     
+00022C 0012           00400     RETURN
+                      00401     
+                      00402  
+                      00403 ;-------------------------------------------------------------------------------
+                      00404 ; 4. MODUL CONTROL MOVIMENT CURSOR + ATACAR
+                      00405 ;-------------------------------------------------------------------------------     
+00022E                00406 INIT_CURSOR
+00022E 0E01           00407     MOVLW .1
+000230 6E0C           00408     MOVWF COORD_X, 0        ;POSEM A 1 LA COORDENADA X
+000232 0E01           00409     MOVLW .1
+000234 6E0D           00410     MOVWF COORD_Y, 0        ;POSEM A 1 LA COORDENADA Y
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000236 0012           00411     RETURN
+                      00412    
+000238                00413 MOURE_DOWN
+                      00414     ;DOWN
+000238 0E01           00415     MOVLW .1
+00023A 260D           00416     ADDWF COORD_Y, 1,0      ;SUMEM 1 AL VALOR DE LA COORD_Y
+                      00417     ;SI VOLEM SALTAR DEL 8 AL 1
+00023C 0E08           00418     MOVLW .8
+00023E 640D           00419     CPFSGT COORD_Y, 0       ;COMPARA EL WREG AMB COORD_Y, SI COORD_Y ES MES GRAN SALTA DE LINEA
+000240 EF?? F???      00420     GOTO LECTURA_VALORS
+000244 0E01           00421     MOVLW .1
+000246 6E0D           00422     MOVWF COORD_Y, 0
+000248 EF?? F???      00423     GOTO LECTURA_VALORS
+                      00424     
+                      00425   
+00024C                00426 MOURE_UP
+                      00427     ;UP + SALTAR DE 1 A 8
+00024C 2E0D           00428     DECFSZ COORD_Y, 1, 0    ;RESTEM 1 AL VALOR DE COORD_Y
+00024E EF?? F???      00429     GOTO LECTURA_VALORS   ;TORNEM SI NO ESTEM A 1
+000252 0E08           00430     MOVLW .8
+000254 6E0D           00431     MOVWF COORD_Y, 0        ;SI ESTAVEM A 1 EL POSEM A 8
+000256 EF?? F???      00432     GOTO LECTURA_VALORS
+                      00433     
+                      00434     
+00025A                00435 MOURE_RIGHT
+                      00436     ;RIGHT
+00025A 0E01           00437     MOVLW .1
+00025C 260C           00438     ADDWF COORD_X, 1, 0     ;SUMEM 1 AL VALOR DE LA COORD_X
+                      00439     ;SI VOLEM SALTAR DEL 8 AL 1
+00025E 0E08           00440     MOVLW .8
+000260 640C           00441     CPFSGT COORD_X, 0       ;COMPARA EL WREG AMB COORD_X, SI COORD_Y ES MES GRAN SALTA DE LINEA
+000262 EF?? F???      00442     GOTO LECTURA_VALORS
+000266 0E01           00443     MOVLW .1
+000268 6E0C           00444     MOVWF COORD_X, 0
+00026A EF?? F???      00445     GOTO LECTURA_VALORS
+                      00446     
+                      00447     
+00026E                00448 MOURE_LEFT
+                      00449     ;LEFT + SALTAR DE 1 A 8
+00026E 2E0C           00450     DECFSZ COORD_X, 1, 0    ;RESTEM 1 AL VALOR DE COORD_X
+000270 EF?? F???      00451     GOTO LECTURA_VALORS   ;TORNEM SI NO ESTEM A 1
+000274 0E08           00452     MOVLW .8
+000276 6E0C           00453     MOVWF COORD_X, 0        ;SI ESTAVEM A 1 EL POSEM A 8
+000278 EF?? F???      00454     GOTO LECTURA_VALORS
+                      00455     
+                      00456     
+00027C                00457 ATACAR
+                      00458     ;CONVERTIR A RAM LA COORDENADA ACTUAL
+00027C EC?? F???      00459     CALL CONVERT_COORD_TO_RAM
+                      00460     
+000280 C00E FFE9      00461     MOVFF RAM_COORD,FSR0L       ;AGAFEM L'ADREÇA DE LA COORDENADA A ATACAR I LA CARREGUEM AL PUNTER
+                      00462 
+                      00463     ;COMPROVAR EL VALOR QUE TE 00 O 01
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000284 CFEF F00F      00464     MOVFF   INDF0, CONTINGUT_RAM ;COPIEM EL CONTINGUT DE LA RAM A LA VARIABLE CONTINGUT_RAM
+000288 0E00           00465     MOVLW .0
+00028A 640F           00466     CPFSGT  CONTINGUT_RAM, 0    ;SI EL CONTINGUT DE LA RAM EL MAJOR A 00 S'HO SALTA
+00028C EF?? F???      00467     GOTO HAS_TOCAT_AIGUA
+000290 0E01           00468     MOVLW .1
+000292 640F           00469     CPFSGT  CONTINGUT_RAM, 0    ;SI EL CONTINGUT DE LA RAM EL MAJOR A 01 S'HO SALTA
+000294 EF?? F???      00470     GOTO HAS_TOCAT_BARCO
+000298 6AE9           00471     CLRF FSR0L,0
+00029A 0012           00472     RETURN
+                      00473     
+                      00474     
+00029C                00475 HAS_TOCAT_AIGUA
+                      00476     ;POSAR LA POSICIO EN VERMELL
+00029C 0E02           00477     MOVLW .2
+00029E 6EEF           00478     MOVWF INDF0, 0          ;POSEM 10 A LA COORDENADA ATACADA
+0002A0 0E09           00479     MOVLW b'00001001'               ;MOVEM EL CURSOR FORA DE LA MATRIU A MOSTRAR   
+0002A2 6E0D           00480     MOVWF COORD_Y,0
+                      00481     ;MOSTREM LA MATRIU ACTUALITZADA
+0002A4 6AE9           00482     CLRF FSR0L,0
+0002A6 EC?? F???      00483     CALL LECTURA_VALORS
+                      00484     ;FER EL SOROLL GREU 1S
+0002AA 6A1A           00485     CLRF COMPT_1S,0
+0002AC 0E4E           00486     MOVLW .78
+0002AE 6E0B           00487     MOVWF   SOROLL_FREQ,0
+0002B0 EC?? F???      00488     CALL SOROLL_ALTAVEU
+0002B4 6A1A           00489     CLRF COMPT_1S,0
+0002B6 EC?? F???      00490     CALL ESPERA_1S
+0002BA 6A1A           00491     CLRF COMPT_1S,0
+0002BC EC?? F???      00492     CALL ESPERA_1S
+                      00493     
+0002C0 EC?? F???      00494     CALL INIT_CURSOR
+0002C4 7010           00495     BTG CURRENT_GRID,0,0
+0002C6 7889           00496     BTG LATA,RA4,0
+0002C8 EC?? F???      00497     CALL LECTURA_VALORS
+                      00498     
+0002CC 0012           00499     RETURN
+                      00500     
+0002CE                00501 HAS_TOCAT_BARCO
+                      00502     ;POSAR LA POSICIO EN VERD
+0002CE 0E03           00503     MOVLW .3
+0002D0 6EEF           00504     MOVWF INDF0, 0          ;POSEM 11 A LA COORDENADA ATACADA
+0002D2 0E09           00505     MOVLW b'00001001'               ;MOVEM EL CURSOR FORA DE LA MATRIU A MOSTRAR     
+0002D4 6E0D           00506     MOVWF COORD_Y,0
+                      00507     
+                      00508     ;MOSTREM LA MATRIU ACTUALITZADA
+0002D6 6AE9           00509     CLRF FSR0L,0
+0002D8 EC?? F???      00510     CALL LECTURA_VALORS
+0002DC B010           00511     BTFSC CURRENT_GRID ,0,0
+0002DE 0617           00512     DECF PWM_S1,1,0
+0002E0 A010           00513     BTFSS CURRENT_GRID ,0,0
+0002E2 0616           00514     DECF PWM_S0,1,0
+                      00515     ;FER EL SOROLL AGUT 1S
+0002E4 6A1A           00516     CLRF COMPT_1S,0
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0002E6 0E0A           00517     MOVLW .10
+0002E8 6E0B           00518     MOVWF   SOROLL_FREQ,0
+0002EA EC?? F???      00519     CALL SOROLL_ALTAVEU
+0002EE 6A1A           00520     CLRF COMPT_1S,0
+0002F0 EC?? F???      00521     CALL ESPERA_1S
+0002F4 6A1A           00522     CLRF COMPT_1S,0
+0002F6 EC?? F???      00523     CALL ESPERA_1S
+0002FA 0E01           00524     MOVLW   .1
+0002FC 6416           00525     CPFSGT   PWM_S0,0
+0002FE EF?? F???      00526     GOTO    END_GAME
+000302 6417           00527     CPFSGT   PWM_S1,0
+000304 EF?? F???      00528     GOTO    END_GAME
+                      00529     
+000308 EC?? F???      00530     CALL INIT_CURSOR
+00030C 7010           00531     BTG CURRENT_GRID,0,0
+00030E 7889           00532     BTG LATA,RA4,0
+000310 EC?? F???      00533     CALL LECTURA_VALORS
+000314 0012           00534     RETURN
+                      00535 
+000316                00536 ESPERA_1S
+000316 0E32           00537     MOVLW .50
+000318 641A           00538     CPFSGT COMPT_1S,0
+00031A EF?? F???      00539     GOTO ESPERA_1S
+00031E 0012           00540     RETURN
+                      00541     
+000320                00542 SOROLL_ALTAVEU  
+000320 8A89           00543     BSF LATA,RA5,0                  
+000322 C00B F009      00544     MOVFF   SOROLL_FREQ, COMPTADOR2 
+000326 EC?? F???      00545     CALL INCREMENTA_XS
+00032A 9A89           00546     BCF LATA,RA5,0
+00032C C00B F009      00547     MOVFF   SOROLL_FREQ, COMPTADOR2
+000330 EC?? F???      00548     CALL INCREMENTA_XS
+000334 0E32           00549     MOVLW .50
+000336 641A           00550     CPFSGT COMPT_1S,0
+000338 EF?? F???      00551     GOTO SOROLL_ALTAVEU
+00033C 0012           00552     RETURN  
+                      00553     
+                      00554 ;-------------------------------------------------------------------------------
+                      00555 ; 5. MODUL CONTROL DE LED
+                      00556 ;------------------------------------------------------------------------------- 
+00033E                00557 PRINT_VALORS_F1
+00033E 0E00           00558     MOVLW .0
+000340 6402           00559     CPFSGT VALOR,0
+000342 EF?? F???      00560     GOTO ASSIGN_BLUE
+000346 0E01           00561     MOVLW .1
+000348 6402           00562     CPFSGT VALOR,0
+00034A EF?? F???      00563     GOTO ASSIGN_GREEN 
+00034E 0012           00564     RETURN
+                      00565     
+000350                00566 PRINT_VALORS_F2
+000350 EC?? F???      00567     CALL CONVERT_COORD_TO_RAM
+000354 500E           00568     MOVF RAM_COORD, 0 
+000356 28E8           00569     INCF WREG,0,0
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00570     
+000358 62E9           00571     CPFSEQ FSR0L,0          ;A la fase 2 printarem el taulell i a la posició
+00035A EF?? F???      00572     GOTO PRINT_V_2          ;on tinguem el cursor la mostrarem de color blanc
+00035E EF?? F???      00573     GOTO ASSIGN_WHITE
+                      00574     
+000362                00575 PRINT_V_2    
+000362 0E03           00576     MOVLW .3
+000364 6002           00577     CPFSLT VALOR,0
+000366 EF?? F???      00578     GOTO ASSIGN_GREEN
+00036A 0E02           00579     MOVLW .2
+00036C 6002           00580     CPFSLT VALOR,0
+00036E EF?? F???      00581     GOTO ASSIGN_RED
+000372 EF?? F???      00582     GOTO ASSIGN_BLUE
+                      00583     
+000376                00584 ASSIGN_WHITE
+000376 0E03           00585     MOVLW  .3
+000378 6E05           00586     MOVWF LED_Blue_Mirall,0
+00037A 6E07           00587     MOVWF LED_Red_Mirall,0 
+00037C 6E06           00588     MOVWF LED_Green_Mirall,0   
+00037E EF?? F???      00589     GOTO PRINT_LED 
+                      00590     
+000382                00591 ASSIGN_BLUE
+000382 0E01           00592     MOVLW   .1
+000384 6E05           00593     MOVWF LED_Blue_Mirall,0
+000386 6A07           00594     CLRF  LED_Red_Mirall,0 
+000388 6A06           00595     CLRF  LED_Green_Mirall,0   
+00038A EF?? F???      00596     GOTO PRINT_LED 
+                      00597     
+00038E                00598 ASSIGN_GREEN   
+00038E 0E03           00599     MOVLW   .3
+000390 6E06           00600     MOVWF LED_Green_Mirall,0
+000392 6A07           00601     CLRF  LED_Red_Mirall,0
+000394 6A05           00602     CLRF  LED_Blue_Mirall,0   
+000396 EF?? F???      00603     GOTO PRINT_LED 
+                      00604     
+00039A                00605 ASSIGN_RED
+00039A 0E03           00606     MOVLW  .3
+00039C 6E07           00607     MOVWF LED_Red_Mirall,0
+00039E 6A05           00608     CLRF  LED_Blue_Mirall,0 
+0003A0 6A06           00609     CLRF  LED_Green_Mirall,0   
+0003A2 EF?? F???      00610     GOTO PRINT_LED   
+                      00611  
+0003A6                00612 PRINT_LED  
+                      00613 
+0003A6                00614 LED_GREEN
+0003A6 808C           00615     BSF LATD,RD0,0
+0003A8 4606           00616     rlncf LED_Green_Mirall,1,0
+0003AA 0000           00617     NOP
+0003AC AE06           00618     BTFSS LED_Green_Mirall,7,0
+0003AE 908C           00619     BCF LATD,RD0,0
+0003B0 4601           00620     rlncf COMPTADOR,1,0
+0003B2 0000           00621     NOP
+0003B4 0000           00622     NOP
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0003B6 908C           00623     BCF LATD,RD0,0
+0003B8 A001           00624     BTFSS COMPTADOR,0,0
+0003BA EF?? F???      00625     GOTO LED_GREEN 
+0003BE                00626 LED_RED   
+0003BE 808C           00627     BSF LATD,RD0,0
+0003C0 4607           00628     rlncf LED_Red_Mirall,1,0
+0003C2 0000           00629     NOP
+0003C4 AE07           00630     BTFSS LED_Red_Mirall,7,0
+0003C6 908C           00631     BCF LATD,RD0,0
+0003C8 4601           00632     rlncf COMPTADOR,1,0
+0003CA 0000           00633     NOP
+0003CC 0000           00634     NOP
+0003CE 908C           00635     BCF LATD,RD0,0
+0003D0 A001           00636     BTFSS COMPTADOR,0,0
+0003D2 EF?? F???      00637     GOTO LED_RED  
+0003D6                00638 LED_BLUE    
+0003D6 808C           00639     BSF LATD,RD0,0
+0003D8 4605           00640     rlncf LED_Blue_Mirall,1,0
+0003DA 0000           00641     NOP
+0003DC AE05           00642     BTFSS LED_Blue_Mirall,7,0
+0003DE 908C           00643     BCF LATD,RD0,0
+0003E0 4601           00644     rlncf COMPTADOR,1,0
+0003E2 0000           00645     NOP
+0003E4 0000           00646     NOP
+0003E6 908C           00647     BCF LATD,RD0,0
+0003E8 A001           00648     BTFSS COMPTADOR,0,0
+0003EA EF?? F???      00649     GOTO LED_BLUE    
+0003EE 0012           00650     RETURN
+                      00651 ;-------------------------------------------------------------------------------
+                      00652 ; 6. MODUL CONTROL DE REBOTS
+                      00653 ;-------------------------------------------------------------------------------     
+0003F0                00654 ESPERA_16MS
+0003F0 6808           00655     SETF    COMPTADOR1,0                    ;a freq = 40MHz, tenim un Tinst = 100ns,
+0003F2 0ED0           00656     MOVLW   .208                            ;amb increments de 255 i 208 arribem a 16ms
+0003F4 6E09           00657     MOVWF   COMPTADOR2,0    
+0003F6 EF?? F???      00658     GOTO INCREMENTA_XS
+                      00659 
+0003FA                00660 INCREMENTA_16MS
+0003FA 2E08           00661     DECFSZ  COMPTADOR1,1,0                  ;miro si COMPTADOR1 és 0
+0003FC EF?? F???      00662     GOTO    INCREMENTA_16MS                 ;si no és 0, segueixo comptant
+000400 6808           00663     SETF    COMPTADOR1,0
+000402 2E09           00664     DECFSZ  COMPTADOR2,1,0                  ;miro si COMPTADOR2 és 0    
+000404 EF?? F???      00665     GOTO    INCREMENTA_16MS                 ;si no és 0, segueixo comptant
+000408 0012           00666     RETURN    
+                      00667 
+00040A                00668 ESPERA_1MS
+00040A 6808           00669     SETF    COMPTADOR1,             ;a freq = 40MHz, tenim un Tinst = 100ns,
+00040C 0E0D           00670     MOVLW   .13                     ;amb increments de 255 i 13 arribem a 1ms
+00040E 6E09           00671     MOVWF   COMPTADOR2,0    
+000410 EF?? F???      00672     GOTO INCREMENTA_XS
+                      00673     
+000414                00674 INCREMENTA_XS
+000414 2E08           00675     DECFSZ  COMPTADOR1,1,0                  ;miro si COMPTADOR1 és 0
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000416 EF?? F???      00676     GOTO    INCREMENTA_XS                   ;si no és 0, segueixo comptant
+00041A 6808           00677     SETF    COMPTADOR1,0
+00041C 2E09           00678     DECFSZ  COMPTADOR2,1,0                  ;miro si COMPTADOR2 és 0    
+00041E EF?? F???      00679     GOTO    INCREMENTA_XS                   ;si no és 0, segueixo comptant
+000422 0012           00680     RETURN      
+                      00681 ;-------------------------------------------------------------------------------
+                      00682 ; 7. POLLING PULSADORS
+                      00683 ;
+                      00684 ; 7.1. PULSADOR RIGHT   
+                      00685 ;-------------------------------------------------------------------------------
+                      00686     
+000424                00687 CONTROL_RIGHT
+000424 EC?? F???      00688     CALL    ESPERA_16MS
+000428 A283           00689     BTFSS   PORTD,RD1,0 
+00042A 0012           00690     RETURN
+00042C EC?? F???      00691     CALL    MOURE_RIGHT
+000430                00692 ESPERA_POLSADOR_RD1
+000430 B283           00693     BTFSC   PORTD,RD1,0                     ;Esperem a que es des premi el polsador.
+000432 EF?? F???      00694     GOTO    ESPERA_POLSADOR_RD1
+000436 EC?? F???      00695     CALL    ESPERA_16MS
+00043A B283           00696     BTFSC   PORTD,RD1,0                     ;Esperem a que es des premi el polsador.
+00043C EF?? F???      00697     GOTO    ESPERA_POLSADOR_RD1
+000440 0012           00698     RETURN
+                      00699     
+                      00700 ;-------------------------------------------------------------------------------
+                      00701 ; 7.2. PULSADOR DOWN
+                      00702 ;-------------------------------------------------------------------------------      
+000442                00703 CONTROL_DOWN
+000442 EC?? F???      00704     CALL    ESPERA_16MS
+000446 BA81           00705     BTFSC   PORTB,RB5,0 
+000448 0012           00706     RETURN
+00044A EC?? F???      00707     CALL    MOURE_DOWN
+00044E                00708 ESPERA_POLSADOR_RB5
+00044E AA81           00709     BTFSS   PORTB,RB5,0                     ;Esperem a que es des premi el polsador.
+000450 EF?? F???      00710     GOTO    ESPERA_POLSADOR_RB5
+000454 EC?? F???      00711     CALL    ESPERA_16MS
+000458 0012           00712     RETURN  
+                      00713 ;-------------------------------------------------------------------------------
+                      00714 ; 7.3. PULSADOR ATACK
+                      00715 ;-------------------------------------------------------------------------------      
+00045A                00716 CONTROL_ATACK
+00045A EC?? F???      00717     CALL    ESPERA_16MS
+00045E A683           00718     BTFSS   PORTD,RD3,0 
+000460 0012           00719     RETURN
+000462 EC?? F???      00720     CALL    ATACAR
+000466                00721 ESPERA_POLSADOR_RB7
+000466 B683           00722     BTFSC   PORTD,RD3,0                     ;Esperem a que es des premi el polsador.
+000468 EF?? F???      00723     GOTO    ESPERA_POLSADOR_RB7
+00046C EC?? F???      00724     CALL    ESPERA_16MS
+000470 0012           00725     RETURN   
+                      00726     
+                      00727 ;-------------------------------------------------------------------------------
+                      00728 ; 7.4. PULSADOR LEFT
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00729 ;-------------------------------------------------------------------------------      
+000472                00730 CONTROL_LEFT
+000472 EC?? F???      00731     CALL    ESPERA_16MS
+000476 B881           00732     BTFSC   PORTB,RB4,0 
+000478 0012           00733     RETURN
+00047A EC?? F???      00734     CALL    MOURE_LEFT
+00047E                00735 ESPERA_POLSADOR_RB4
+00047E A881           00736     BTFSS   PORTB,RB4,0                     ;Esperem a que es des premi el polsador.
+000480 EF?? F???      00737     GOTO    ESPERA_POLSADOR_RB4
+000484 EC?? F???      00738     CALL    ESPERA_16MS
+000488 0012           00739     RETURN   
+                      00740 ;-------------------------------------------------------------------------------
+                      00741 ; 7.5. PULSADOR UP
+                      00742 ;-------------------------------------------------------------------------------      
+00048A                00743 CONTROL_UP
+00048A EC?? F???      00744     CALL    ESPERA_16MS
+00048E B681           00745     BTFSC   PORTB,RB3,0 
+000490 0012           00746     RETURN
+000492 EC?? F???      00747     CALL    MOURE_UP
+000496                00748 ESPERA_POLSADOR_RB3
+000496 A681           00749     BTFSS   PORTB,RB3,0                     ;Esperem a que es des premi el polsador.
+000498 EF?? F???      00750     GOTO    ESPERA_POLSADOR_RB3
+00049C EC?? F???      00751     CALL    ESPERA_16MS
+0004A0 0012           00752     RETURN     
+                      00753  
+                      00754 ;-------------------------------------------------------------------------------
+                      00755 ; 8. FINALITZACIO DEL JOC
+                      00756 ;-------------------------------------------------------------------------------     
+0004A2                00757 END_GAME
+0004A2 6A1A           00758     CLRF COMPT_1S,0         ;FAREM SONAR LES 5 NOTES DE L'ALTAVEU UN COP ACABEM
+0004A4 0E04           00759     MOVLW .4
+0004A6 6E0B           00760     MOVWF   SOROLL_FREQ,0
+0004A8 EC?? F???      00761     CALL SOROLL_ALTAVEU     ;1 NOTA
+0004AC 6A1A           00762     CLRF COMPT_1S,0
+0004AE 0E0A           00763     MOVLW .10
+0004B0 6E0B           00764     MOVWF   SOROLL_FREQ,0
+0004B2 EC?? F???      00765     CALL SOROLL_ALTAVEU     ;2 NOTA
+0004B6 6A1A           00766     CLRF COMPT_1S,0
+0004B8 0E1E           00767     MOVLW .30
+0004BA 6E0B           00768     MOVWF   SOROLL_FREQ,0
+0004BC EC?? F???      00769     CALL SOROLL_ALTAVEU     ;3 NOTA
+0004C0 6A1A           00770     CLRF COMPT_1S,0
+0004C2 0E32           00771     MOVLW .50
+0004C4 6E0B           00772     MOVWF   SOROLL_FREQ,0
+0004C6 EC?? F???      00773     CALL SOROLL_ALTAVEU     ;4 NOTA
+0004CA 6A1A           00774     CLRF COMPT_1S,0
+0004CC 0E50           00775     MOVLW .80
+0004CE 6E0B           00776     MOVWF   SOROLL_FREQ,0
+0004D0 EC?? F???      00777     CALL SOROLL_ALTAVEU     ;5 NOTA
+0004D4                00778 END_BUCLE                   ;DEIXEM EL PROGRAMA EN AQUEST BUCLE FINS QUE ES
+0004D4 6A1A           00779     CLRF COMPT_1S,0         ;TORNI A APRETAR PCI
+0004D6 EF?? F???      00780     GOTO END_BUCLE
+                      00781     
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00782 ;-------------------------------------------------------------------------------
+                      00783 ; MAIN
+                      00784 ;------------------------------------------------------------------------------- 
+0004DA                00785 MAIN
+0004DA EC?? F???      00786     CALL    CONFIG_PORTS                    ;inicialitzar ports
+0004DE EC?? F???      00787     CALL    INIT_VARS                       ;inicialitzar perifèrics i variables
+0004E2 EC?? F???      00788     CALL    CONFIG_INT
+                      00789     
+                      00790     ;CARREGAR JUGADOR 0
+0004E6 0EFF           00791     MOVLW   .255                ;AQUI ANIREM LLEGINT LES COORDENADES 
+0004E8 6E0A           00792     MOVWF   VALUEESPERA,0       ;DE LA FASE 1 I LES ANIREM GUARDANT A LA RAM
+0004EA EC?? F???      00793     CALL    ESPERA
+0004EE EC?? F???      00794     CALL    LECTURA_VALORS
+0004F2 0EFF           00795     MOVLW   .255
+0004F4 6E0A           00796     MOVWF   VALUEESPERA,0
+0004F6 EC?? F???      00797     CALL    ESPERA
+0004FA EC?? F???      00798     CALL    LECTURA_VALORS 
+                      00799     
+0004FE 0EFF           00800     MOVLW   .255
+000500 6E0A           00801     MOVWF   VALUEESPERA,0
+000502 EC?? F???      00802     CALL    ESPERA
+                      00803     
+000506                00804 FASE1   
+000506 A483           00805     BTFSS   PORTD,RD2,0     ;ESPEREM EL SENYAL START GAME PER SABER SI 
+000508 EF?? F???      00806     GOTO FASE1              ;HEM DE SORTIR DEL BUCLE DE LA FASE 1 I 
+00050C EC?? F???      00807     CALL INIT_CURSOR        ;JA PODEM COMENÇAR A JUGAR
+000510 EC?? F???      00808     CALL INIT_TIMER0
+000514 7010           00809     BTG  CURRENT_GRID,0,0
+000516 EC?? F???      00810     CALL    LECTURA_VALORS 
+00051A 0EFF           00811     MOVLW   .255
+00051C 6E0A           00812     MOVWF   VALUEESPERA,0
+00051E EC?? F???      00813     CALL        ESPERA
+                      00814     
+000522                00815 LOOP                                        ;fem polling dels polsadors
+                      00816     
+000522 B283           00817     BTFSC   PORTD,RD1,0                     ;Esperem a que es premi el polsador.
+000524 EC?? F???      00818     CALL    CONTROL_RIGHT
+000528 AA81           00819     BTFSS   PORTB,RB5,0                     ;Esperem a que es premi el polsador.
+00052A EC?? F???      00820     CALL    CONTROL_DOWN
+00052E B683           00821     BTFSC   PORTD,RD3,0                     ;Esperem a que es premi el polsador.
+000530 EC?? F???      00822     CALL    CONTROL_ATACK
+000534 A881           00823     BTFSS   PORTB,RB4,0                     ;Esperem a que es premi el polsador.
+000536 EC?? F???      00824     CALL    CONTROL_LEFT
+00053A A681           00825     BTFSS   PORTB,RB3,0                     ;Esperem a que es premi el polsador.
+00053C EC?? F???      00826     CALL    CONTROL_UP
+000540 EF?? F???      00827     GOTO LOOP    
+                      00828     
+                      00829     END
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+A                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ACCESS                            00000000
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ACQT0                             00000003
+ACQT1                             00000004
+ACQT2                             00000005
+ACTUAL_PWM                        00000015
+ADCON0                            00000FC2
+ADCON1                            00000FC1
+ADCON2                            00000FC0
+ADCS0                             00000000
+ADCS1                             00000001
+ADCS2                             00000002
+ADDEN                             00000003
+ADEN                              00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADIP                              00000006
+ADMSK1                            00000001
+ADMSK2                            00000002
+ADMSK3                            00000003
+ADMSK4                            00000004
+ADMSK5                            00000005
+ADON                              00000000
+ADRES                             00000FC3
+ADRESH                            00000FC4
+ADRESL                            00000FC3
+AN0                               00000000
+AN1                               00000001
+AN10                              00000001
+AN11                              00000004
+AN12                              00000000
+AN2                               00000002
+AN3                               00000003
+AN4                               00000005
+AN5                               00000000
+AN6                               00000001
+AN7                               00000002
+AN8                               00000002
+AN9                               00000003
+ASSIGN_BLUE                       00000382
+ASSIGN_GREEN                      0000038E
+ASSIGN_RED                        0000039A
+ASSIGN_WHITE                      00000376
+ATACAR                            0000027C
+BANKED                            00000001
+BAUDCON                           00000FB8
+BAUDCTL                           00000FB8
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BCLIE                             00000003
+BCLIF                             00000003
+BCLIP                             00000003
+BF                                00000000
+BGST                              00000005
+BOR                               00000000
+BRG16                             00000003
+BRGH                              00000002
+BSR                               00000FE0
+BUCLE_LECTURA                     000001B8
+C                                 00000000
+C1INV                             00000004
+C1N                               00000000
+C1OUT_CMCON                       00000006
+C1OUT_PORTA                       00000004
+C1P                               00000003
+C2INV                             00000005
+C2N                               00000001
+C2OUT_CMCON                       00000007
+C2OUT_PORTA                       00000005
+C2P                               00000002
+CCP1                              00000002
+CCP1CON                           00000FBD
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1IP                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           00000FBA
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2IP                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCP2_PORTB                        00000003
+CCP2_PORTC                        00000001
+CCPR1                             00000FBE
+CCPR1H                            00000FBF
+CCPR1L                            00000FBE
+CCPR2                             00000FBB
+CCPR2H                            00000FBC
+CCPR2L                            00000FBB
+CFGS                              00000006
+CHS0                              00000002
+CHS1                              00000003
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CHS2                              00000004
+CHS3                              00000005
+CIS                               00000003
+CK                                00000006
+CKE                               00000006
+CKP                               00000004
+CLKI                              00000007
+CLKO                              00000006
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000FB4
+CMIE                              00000006
+CMIF                              00000006
+CMIP                              00000006
+COMPTADOR                         00000001
+COMPTADOR1                        00000008
+COMPTADOR2                        00000009
+COMPT_1S                          0000001A
+COMPT_MATRIU                      00000004
+CONFIG_BUTTONS                    00000058
+CONFIG_COORDS                     00000060
+CONFIG_INT                        000000DE
+CONFIG_PORTS                      0000004A
+CONFIG_PWM_PORTS                  0000004A
+CONTINGUT_RAM                     0000000F
+CONTROL_ATACK                     0000045A
+CONTROL_DOWN                      00000442
+CONTROL_LEFT                      00000472
+CONTROL_RIGHT                     00000424
+CONTROL_UP                        0000048A
+CONVERT_COORD_TO_RAM              00000214
+COORD_F1                          000001F6
+COORD_X                           0000000C
+COORD_Y                           0000000D
+CREN                              00000004
+CS                                00000002
+CSRC                              00000007
+CURRENT_GRID                      00000010
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            00000FB5
+CVREF                             00000002
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+CVRSS                             00000004
+D                                 00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DC2B0                             00000004
+DC2B1                             00000005
+DDRA                              TRISA
+DDRB                              TRISB
+DDRC                              TRISC
+DDRD                              TRISD
+DDRE                              TRISE
+DONE                              00000001
+D_A                               00000005
+D_NOT_A                           00000005
+ECCP1AS                           00000FB6
+ECCP1CON                          00000FBD
+ECCP1DEL                          00000FB7
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             00000FA9
+EECON1                            00000FA6
+EECON2                            00000FA7
+EEDATA                            00000FA8
+EEIE                              00000004
+EEIF                              00000004
+EEIP                              00000004
+EEPGD                             00000007
+END_BUCLE                         000004D4
+END_GAME                          000004A2
+END_RSI_INT0                      0000019A
+END_RSI_INT1                      000001AE
+END_RSI_T0                        0000017C
+ESCRIPTURA_VALORS_F1              000001E2
+ESPERA                            00000064
+ESPERA_16MS                       000003F0
+ESPERA_1MS                        0000040A
+ESPERA_1S                         00000316
+ESPERA_POLSADOR_RB3               00000496
+ESPERA_POLSADOR_RB4               0000047E
+ESPERA_POLSADOR_RB5               0000044E
+ESPERA_POLSADOR_RB7               00000466
+ESPERA_POLSADOR_RD1               00000430
+ESPERA_T0                         0000014C
+FASE1                             00000506
+FAST                              00000001
+FERR                              00000002
+FLT0                              00000000
+FLTS                              00000002
+FREE                              00000004
+FSR0                              00000000
+FSR0H                             00000FEA
+FSR0L                             00000FE9
+FSR1                              00000001
+FSR1H                             00000FE2
+FSR1L                             00000FE1
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+FSR2                              00000002
+FSR2H                             00000FDA
+FSR2L                             00000FD9
+GCEN                              00000007
+GIE                               00000007
+GIEH                              00000007
+GIEL                              00000006
+GIE_GIEH                          00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HAS_TOCAT_AIGUA                   0000029C
+HAS_TOCAT_BARCO                   000002CE
+HLVDCON                           00000FD2
+HLVDEN                            00000004
+HLVDIE                            00000002
+HLVDIF                            00000002
+HLVDIN                            00000005
+HLVDIP                            00000002
+HLVDL0                            00000000
+HLVDL1                            00000001
+HLVDL2                            00000002
+HLVDL3                            00000003
+IBF                               00000007
+IBOV                              00000005
+IDLEN                             00000007
+INCREMENTA_16MS                   000003FA
+INCREMENTA_XS                     00000414
+INDF0                             00000FEF
+INDF1                             00000FE7
+INDF2                             00000FDF
+INIT_CURSOR                       0000022E
+INIT_INTERUPT_VARIABLES           000000B0
+INIT_PWM                          0000007C
+INIT_RAM                          00000088
+INIT_TIMER0                       000000A4
+INIT_VARS                         00000074
+INT0                              00000000
+INT0E                             00000004
+INT0F                             00000001
+INT0IE                            00000004
+INT0IF                            00000001
+INT1                              00000001
+INT1E                             00000003
+INT1F                             00000000
+INT1IE                            00000003
+INT1IF                            00000000
+INT1IP                            00000006
+INT1P                             00000006
+INT2                              00000002
+INT2E                             00000004
+INT2F                             00000001
+INT2IE                            00000004
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INT2IF                            00000001
+INT2IP                            00000007
+INT2P                             00000007
+INTCON                            00000FF2
+INTCON2                           00000FF1
+INTCON3                           00000FF0
+INTEDG0                           00000006
+INTEDG1                           00000005
+INTEDG2                           00000004
+INTSRC                            00000007
+IOFS                              00000002
+IPEN                              00000007
+IPR1                              00000F9F
+IPR2                              00000FA2
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRVST                             00000005
+KBI0                              00000004
+KBI1                              00000005
+KBI2                              00000006
+KBI3                              00000007
+LATA                              00000F89
+LATA0                             00000000
+LATA1                             00000001
+LATA2                             00000002
+LATA3                             00000003
+LATA4                             00000004
+LATA5                             00000005
+LATA6                             00000006
+LATA7                             00000007
+LATB                              00000F8A
+LATB0                             00000000
+LATB1                             00000001
+LATB2                             00000002
+LATB3                             00000003
+LATB4                             00000004
+LATB5                             00000005
+LATB6                             00000006
+LATB7                             00000007
+LATC                              00000F8B
+LATC0                             00000000
+LATC1                             00000001
+LATC2                             00000002
+LATC3                             00000003
+LATC4                             00000004
+LATC5                             00000005
+LATC6                             00000006
+LATC7                             00000007
+LATD                              00000F8C
+LATD0                             00000000
+LATD1                             00000001
+LATD2                             00000002
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LATD3                             00000003
+LATD4                             00000004
+LATD5                             00000005
+LATD6                             00000006
+LATD7                             00000007
+LATE                              00000F8D
+LATE0                             00000000
+LATE1                             00000001
+LATE2                             00000002
+LECTURA_VALORS                    000001B2
+LED_BLUE                          000003D6
+LED_Blue_Mirall                   00000005
+LED_GREEN                         000003A6
+LED_Green_Mirall                  00000006
+LED_RED                           000003BE
+LED_Red_Mirall                    00000007
+LOOP                              00000522
+LVDCON                            00000FD2
+LVDEN                             00000004
+LVDIE                             00000002
+LVDIF                             00000002
+LVDIP                             00000002
+LVDL0                             00000000
+LVDL1                             00000001
+LVDL2                             00000002
+LVDL3                             00000003
+LVV0                              00000000
+LVV1                              00000001
+LVV2                              00000002
+LVV3                              00000003
+MAIN                              000004DA
+MAX_PWM                           00000018
+MCLR                              00000003
+MOURE_DOWN                        00000238
+MOURE_LEFT                        0000026E
+MOURE_RIGHT                       0000025A
+MOURE_UP                          0000024C
+N                                 00000004
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_CS                            00000002
+NOT_DONE                          00000001
+NOT_MCLR                          00000003
+NOT_PD                            00000002
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RD                            00000000
+NOT_RI                            00000004
+NOT_SS                            00000005
+NOT_T1SYNC                        00000002
+NOT_T3SYNC                        00000002
+NOT_TO                            00000003
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_W                             00000002
+NOT_WR                            00000001
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OSC1                              00000007
+OSC2                              00000006
+OSCCON                            00000FD3
+OSCFIE                            00000007
+OSCFIF                            00000007
+OSCFIP                            00000007
+OSCTUNE                           00000F9B
+OSTS                              00000003
+OV                                00000003
+P                                 00000004
+P1A                               00000002
+P1B                               00000005
+P1C                               00000006
+P1D                               00000007
+P1M0                              00000006
+P1M1                              00000007
+PC                                00000FF9
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000FF9
+PCLATH                            00000FFA
+PCLATU                            00000FFB
+PD                                00000002
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PEIE_GIEL                         00000006
+PEN                               00000002
+PGC                               00000006
+PGD                               00000007
+PGM                               00000005
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIR1                              00000F9E
+PIR2                              00000FA1
+PLLEN                             00000006
+PLUSW0                            00000FEB
+PLUSW1                            00000FE3
+PLUSW2                            00000FDB
+POR                               00000001
+PORTA                             00000F80
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTB                             00000F81
+PORTC                             00000F82
+PORTD                             00000F83
+PORTE                             00000F84
+POSTDEC0                          00000FED
+POSTDEC1                          00000FE5
+POSTDEC2                          00000FDD
+POSTINC0                          00000FEE
+POSTINC1                          00000FE6
+POSTINC2                          00000FDE
+PR2                               00000FCB
+PREINC0                           00000FEC
+PREINC1                           00000FE4
+PREINC2                           00000FDC
+PRINT_LED                         000003A6
+PRINT_VALORS_F1                   0000033E
+PRINT_VALORS_F2                   00000350
+PRINT_V_2                         00000362
+PROD                              00000FF3
+PRODH                             00000FF4
+PRODL                             00000FF3
+PRSEN                             00000007
+PSA                               00000003
+PSP0                              00000000
+PSP1                              00000001
+PSP2                              00000002
+PSP3                              00000003
+PSP4                              00000004
+PSP5                              00000005
+PSP6                              00000006
+PSP7                              00000007
+PSPIE                             00000007
+PSPIF                             00000007
+PSPIP                             00000007
+PSPMODE                           00000004
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PWM1CON                           00000FB7
+PWM_S0                            00000016
+PWM_S1                            00000017
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RAM_COORD                         0000000E
+RB0                               00000000
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RBIP                              00000000
+RBPU                              00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCIP                              00000005
+RCMT                              00000006
+RCON                              00000FD0
+RCREG                             00000FAE
+RCSTA                             00000FAB
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD16                              00000007
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+RE3                               00000003
+READ_WORD                         000000C4
+RESET_RAM                         00000094
+RI                                00000004
+RSEN                              00000001
+RSI_GEN                           000000F4
+RSI_INT0                          00000182
+RSI_INT1                          0000019E
+RSI_T0                            00000154
+RX                                00000007
+RX9                               00000006
+RX9D                              00000000
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 27
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RXDTP                             00000005
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000006
+SCK                               00000003
+SCKP                              00000004
+SCL                               00000003
+SCS0                              00000000
+SCS1                              00000001
+SDA                               00000004
+SDI                               00000004
+SDO                               00000005
+SEN                               00000000
+SENDB                             00000003
+SMP                               00000007
+SOROLL_ALTAVEU                    00000320
+SOROLL_FREQ                       0000000B
+SP0                               00000000
+SP1                               00000001
+SP2                               00000002
+SP3                               00000003
+SP4                               00000004
+SPBRG                             00000FAF
+SPBRGH                            00000FB0
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON1                           00000FC6
+SSPCON2                           00000FC5
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPIP                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000FC7
+STATUS                            00000FD8
+STKFUL                            00000007
+STKOVF                            00000007
+STKPTR                            00000FFC
+STKUNF                            00000006
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+T016BIT                           00000006
+T08BIT                            00000006
+T0CKI                             00000004
+T0CON                             00000FD5
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 28
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0PS0                             00000000
+T0PS1                             00000001
+T0PS2                             00000002
+T0SE                              00000004
+T0_HIGH                           00000140
+T0_LOW                            00000134
+T13CKI                            00000000
+T1CKI                             00000000
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000FCD
+T1OSCEN                           00000003
+T1OSI                             00000001
+T1OSO                             00000000
+T1RUN                             00000006
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000FCA
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+T3CCP1                            00000003
+T3CCP2                            00000006
+T3CKPS0                           00000004
+T3CKPS1                           00000005
+T3CON                             00000FB1
+T3SYNC                            00000002
+TABLAT                            00000FF5
+TAULASERVO                        00000020
+TBLPTR                            00000FF6
+TBLPTRH                           00000FF7
+TBLPTRL                           00000FF6
+TBLPTRU                           00000FF8
+TEMPS_INC_H                       00000014
+TEMPS_INC_L                       00000013
+TIMER0_HIGH                       00000128
+TIMER0_INCREMENT                  0000011A
+TIMER0_LOW                        00000108
+TMR0                              00000FD6
+TMR0H                             00000FD7
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR0IP                            00000002
+TMR0L                             00000FD6
+TMR0ON                            00000007
+TMR1                              00000FCE
+TMR1CS                            00000001
+TMR1H                             00000FCF
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1IP                            00000000
+TMR1L                             00000FCE
+TMR1ON                            00000000
+TMR2                              00000FCC
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2IP                            00000001
+TMR2ON                            00000002
+TMR3                              00000FB2
+TMR3CS                            00000001
+TMR3H                             00000FB3
+TMR3IE                            00000001
+TMR3IF                            00000001
+TMR3IP                            00000001
+TMR3L                             00000FB2
+TMR3ON                            00000000
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
+TOSL                              00000FFD
+TOSU                              00000FFF
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000F92
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000F93
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000F94
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISC7                            00000007
+TRISD                             00000F95
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000F96
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX                                00000006
+TX9                               00000006
+TX9D                              00000000
+TXCKP                             00000004
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXIP                              00000004
+TXREG                             00000FAD
+TXSTA                             00000FAC
+UA                                00000001
+VALOR                             00000002
+VALUEESPERA                       0000000A
+VCFG0                             00000004
+VCFG1                             00000005
+VDIRMAG                           00000007
+VPP                               00000003
+VREFM                             00000002
+VREFP                             00000003
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000FD1
+WR                                00000001
+WREG                              00000FE8
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_BBSIZ_BB1K_4L                    000000FF
+_BBSIZ_BB256_4L                   000000CF
+_BBSIZ_BB512_4L                   000000DF
+_BORV_0_2L                        000000E7
+_BORV_1_2L                        000000EF
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BORV_2_2L                        000000F7
+_BORV_3_2L                        000000FF
+_BOR_NOSLP_2L                     000000FD
+_BOR_OFF_2L                       000000F9
+_BOR_ON_2L                        000000FF
+_BOR_SOFT_2L                      000000FB
+_CCP2MX_RB3_3H                    000000FE
+_CCP2MX_RC1_3H                    000000FF
+_CONFIG1H                         00300001
+_CONFIG2H                         00300003
+_CONFIG2L                         00300002
+_CONFIG3H                         00300005
+_CONFIG4L                         00300006
+_CONFIG5H                         00300009
+_CONFIG5L                         00300008
+_CONFIG6H                         0030000B
+_CONFIG6L                         0030000A
+_CONFIG7H                         0030000D
+_CONFIG7L                         0030000C
+_CP0_OFF_5L                       000000FF
+_CP0_ON_5L                        000000FE
+_CP1_OFF_5L                       000000FF
+_CP1_ON_5L                        000000FD
+_CPB_OFF_5H                       000000FF
+_CPB_ON_5H                        000000BF
+_CPD_OFF_5H                       000000FF
+_CPD_ON_5H                        0000007F
+_DEBUG_OFF_4L                     000000FF
+_DEBUG_ON_4L                      0000007F
+_DEVID1                           003FFFFE
+_DEVID2                           003FFFFF
+_EBTR0_OFF_7L                     000000FF
+_EBTR0_ON_7L                      000000FE
+_EBTR1_OFF_7L                     000000FF
+_EBTR1_ON_7L                      000000FD
+_EBTRB_OFF_7H                     000000FF
+_EBTRB_ON_7H                      000000BF
+_FCMEN_OFF_1H                     000000BF
+_FCMEN_ON_1H                      000000FF
+_IDLOC0                           00200000
+_IDLOC1                           00200001
+_IDLOC2                           00200002
+_IDLOC3                           00200003
+_IDLOC4                           00200004
+_IDLOC5                           00200005
+_IDLOC6                           00200006
+_IDLOC7                           00200007
+_IESO_OFF_1H                      0000007F
+_IESO_ON_1H                       000000FF
+_LPT1OSC_OFF_3H                   000000FB
+_LPT1OSC_ON_3H                    000000FF
+_LVP_OFF_4L                       000000FB
+_LVP_ON_4L                        000000FF
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 32
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_MCLRE_OFF_3H                     0000007F
+_MCLRE_ON_3H                      000000FF
+_OSC_ECIO_1H                      000000F5
+_OSC_EC_1H                        000000F4
+_OSC_HSPLL_1H                     000000F6
+_OSC_HS_1H                        000000F2
+_OSC_INTIO1_1H                    000000F9
+_OSC_INTIO2_1H                    000000F8
+_OSC_LP_1H                        000000F0
+_OSC_RCIO_1H                      000000F7
+_OSC_RC_1H                        000000F3
+_OSC_XT_1H                        000000F1
+_PBADEN_ANA_3H                    000000FF
+_PBADEN_DIG_3H                    000000FD
+_PWRT_OFF_2L                      000000FF
+_PWRT_ON_2L                       000000FE
+_STVREN_OFF_4L                    000000FE
+_STVREN_ON_4L                     000000FF
+_WDTPS_1024_2H                    000000F5
+_WDTPS_128_2H                     000000EF
+_WDTPS_16384_2H                   000000FD
+_WDTPS_16_2H                      000000E9
+_WDTPS_1_2H                       000000E1
+_WDTPS_2048_2H                    000000F7
+_WDTPS_256_2H                     000000F1
+_WDTPS_2_2H                       000000E3
+_WDTPS_32768_2H                   000000FF
+_WDTPS_32_2H                      000000EB
+_WDTPS_4096_2H                    000000F9
+_WDTPS_4_2H                       000000E5
+_WDTPS_512_2H                     000000F3
+_WDTPS_64_2H                      000000ED
+_WDTPS_8192_2H                    000000FB
+_WDTPS_8_2H                       000000E7
+_WDT_OFF_2H                       000000FE
+_WDT_ON_2H                        000000FF
+_WRT0_OFF_6L                      000000FF
+_WRT0_ON_6L                       000000FE
+_WRT1_OFF_6L                      000000FF
+_WRT1_ON_6L                       000000FD
+_WRTB_OFF_6H                      000000FF
+_WRTB_ON_6H                       000000BF
+_WRTC_OFF_6H                      000000FF
+_WRTC_ON_6H                       000000DF
+_WRTD_OFF_6H                      000000FF
+_WRTD_ON_6H                       0000007F
+_XINST_OFF_4L                     000000BF
+_XINST_ON_4L                      000000FF
+__18F4321                         00000001
+
+MPASM 5.86                          P1F2.ASM   1-10-2024  10:31:09         PAGE 33
+
+
+
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

@@ -1,0 +1,1197 @@
+[p PRO_MODE GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK SPACEOPT EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4321 ]
+[d frameptr 4065 ]
+"14 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\altaveu.c
+[v _InitAltaveu InitAltaveu `(v  1 e 1 0 ]
+"22
+[v _SorollAlt SorollAlt `(v  1 e 1 0 ]
+"38
+[v _fiSoroll fiSoroll `(v  1 e 1 0 ]
+"42
+[v _MotorAltaveu MotorAltaveu `(v  1 e 1 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"14 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\comunicacio.c
+[v _endMSG endMSG `(v  1 e 1 0 ]
+"19
+[v _MotorCOM MotorCOM `(uc  1 e 1 0 ]
+"57 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _EQMInit EQMInit `(v  1 e 1 0 ]
+"69
+[v _EQM_MSG EQM_MSG `(v  1 e 1 0 ]
+"76
+[v _ConfWIFI ConfWIFI `(uc  1 e 1 0 ]
+"239
+[v _ListAccesPoints ListAccesPoints `(uc  1 e 1 0 ]
+"266
+[v _ShowConnStatus ShowConnStatus `(uc  1 e 1 0 ]
+"303
+[v _CloseConn CloseConn `(uc  1 e 1 0 ]
+"337
+[v _EnterChatMode EnterChatMode `(uc  1 e 1 0 ]
+"475
+[v _ListLastMessages ListLastMessages `(uc  1 e 1 0 ]
+"625
+[v _ReciveMSG ReciveMSG `(v  1 e 1 0 ]
+"753
+[v _MotorEQM MotorEQM `(v  1 e 1 0 ]
+"16 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\joystick.c
+[v _JoyInit JoyInit `(v  1 e 1 0 ]
+"28
+[v _startConversion startConversion `(v  1 e 1 0 ]
+"34
+[v _finishConversion finishConversion `(uc  1 e 1 0 ]
+"40
+[v _mouJoyAvail mouJoyAvail `(uc  1 e 1 0 ]
+"58
+[v _getAction getAction `(uc  1 e 1 0 ]
+"64
+[v _setJoyChannel setJoyChannel `(v  1 e 1 0 ]
+"70 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\lcd.c
+[v _LcInit LcInit `(v  1 e 1 0 ]
+"115
+[v _LcClear LcClear `(v  1 e 1 0 ]
+"129
+[v _LcCursorOff LcCursorOff `(v  1 e 1 0 ]
+"136
+[v _LcGotoXY LcGotoXY `(v  1 e 1 0 ]
+"163
+[v _LcPutChar LcPutChar `(v  1 e 1 0 ]
+"197
+[v _LcPutString LcPutString `(uc  1 e 1 0 ]
+"235
+[v _Espera Espera `(v  1 e 1 0 ]
+"240
+[v _CantaPartAlta CantaPartAlta `(v  1 e 1 0 ]
+"247
+[v _CantaPartBaixa CantaPartBaixa `(v  1 e 1 0 ]
+"254
+[v _CantaIR CantaIR `(v  1 e 1 0 ]
+"270
+[v _CantaData CantaData `(v  1 e 1 0 ]
+"286
+[v _WaitForBusy WaitForBusy `(v  1 e 1 0 ]
+"304
+[v _EscriuPrimeraOrdre EscriuPrimeraOrdre `(v  1 e 1 0 ]
+"41 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\main.c
+[v _my_rsi my_rsi `IIH(v  1 e 1 0 ]
+"45
+[v _configInt configInt `(v  1 e 1 0 ]
+"55
+[v _main main `(v  1 e 1 0 ]
+"28 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _MenuInit MenuInit `(v  1 e 1 0 ]
+"39
+[v _startMenu startMenu `(v  1 e 1 0 ]
+"43
+[v _stopMenu stopMenu `(v  1 e 1 0 ]
+"47
+[v _StateMenu StateMenu `(uc  1 e 1 0 ]
+"50
+[v _OpcioMenu OpcioMenu `(uc  1 e 1 0 ]
+"54
+[v _MotorMenu MotorMenu `(v  1 e 1 0 ]
+"17 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\rxcom.c
+[v _rxInit rxInit `(v  1 e 1 0 ]
+"29
+[v _GetRxMSG GetRxMSG `(uc  1 e 1 0 ]
+"34
+[v _GetFlag GetFlag `(uc  1 e 1 0 ]
+"38
+[v _MotorRX MotorRX `(v  1 e 1 0 ]
+"12 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\sio.c
+[v _SIO_Init SIO_Init `(v  1 e 1 0 ]
+"29
+[v _SIO_RXAvail SIO_RXAvail `(uc  1 e 1 0 ]
+"34
+[v _SIO_GetChar SIO_GetChar `(uc  1 e 1 0 ]
+"45
+[v _SIO_PutChar SIO_PutChar `(v  1 e 1 0 ]
+"17 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _KeyBoardInit KeyBoardInit `(v  1 e 1 0 ]
+"47
+[v _GetTecla GetTecla `(uc  1 e 1 0 ]
+"95
+[v _TeclaPremuda TeclaPremuda `(uc  1 e 1 0 ]
+"98
+[v _HiHaTecla HiHaTecla `(uc  1 e 1 0 ]
+"102
+[v _MotorKeyboard MotorKeyboard `(v  1 e 1 0 ]
+"26 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _RSI_Timer0 RSI_Timer0 `(v  1 e 1 0 ]
+"33
+[v _TI_Init TI_Init `(v  1 e 1 0 ]
+"44
+[v _TI_NewTimer TI_NewTimer `(uc  1 e 1 0 ]
+"54
+[v _TI_ResetTics TI_ResetTics `(v  1 e 1 0 ]
+"59
+[v _TI_GetTics TI_GetTics `(ul  1 e 4 0 ]
+"15 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\txcom.c
+[v _txInit txInit `(v  1 e 1 0 ]
+"25
+[v _SetMSG SetMSG `(v  1 e 1 0 ]
+"31
+[v _GetEND GetEND `(uc  1 e 1 0 ]
+"35
+[v _MotorTX MotorTX `(v  1 e 1 0 ]
+"44 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _ValorsTeclatInit ValorsTeclatInit `(v  1 e 1 0 ]
+"56
+[v _ValorsState ValorsState `(uc  1 e 1 0 ]
+"60
+[v _StartRead StartRead `(v  1 e 1 0 ]
+"72
+[v _getMSG getMSG `(uc  1 e 1 0 ]
+"76
+[v _getIND getIND `(uc  1 e 1 0 ]
+"80
+[v _ValorTecla ValorTecla `(v  1 e 1 0 ]
+"114
+[v _MotorValorsTeclat MotorValorsTeclat `(v  1 e 1 0 ]
+"9 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\altaveu.c
+[v _sound sound `uc  1 s 1 sound ]
+"10
+[v _dutycycle dutycycle `uc  1 s 1 dutycycle ]
+"11
+[v _timer@altaveu$F1595 timer `uc  1 s 1 timer ]
+"12
+[v _isBusy isBusy `uc  1 s 1 isBusy ]
+"284 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h
+[v _PORTB PORTB `VEuc  1 e 1 @3969 ]
+[s S566 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"328
+[s S686 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S695 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 PGM 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S704 . 1 `uc 1 FLT0 1 0 :1:0 
+]
+[s S706 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S709 . 1 `S566 1 . 1 0 `S686 1 . 1 0 `S695 1 . 1 0 `S704 1 . 1 0 `S706 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES709  1 e 1 @3969 ]
+[s S324 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"680
+[s S439 . 1 `uc 1 PSP0 1 0 :1:0 
+`uc 1 PSP1 1 0 :1:1 
+`uc 1 PSP2 1 0 :1:2 
+`uc 1 PSP3 1 0 :1:3 
+`uc 1 PSP4 1 0 :1:4 
+`uc 1 PSP5 1 0 :1:5 
+`uc 1 PSP6 1 0 :1:6 
+`uc 1 PSP7 1 0 :1:7 
+]
+[s S448 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 P1B 1 0 :1:5 
+`uc 1 P1C 1 0 :1:6 
+`uc 1 P1D 1 0 :1:7 
+]
+[s S453 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 SS2 1 0 :1:7 
+]
+[u S456 . 1 `S324 1 . 1 0 `S439 1 . 1 0 `S448 1 . 1 0 `S453 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES456  1 e 1 @3971 ]
+[s S748 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"1015
+[s S757 . 1 `uc 1 LA0 1 0 :1:0 
+`uc 1 LA1 1 0 :1:1 
+`uc 1 LA2 1 0 :1:2 
+`uc 1 LA3 1 0 :1:3 
+`uc 1 LA4 1 0 :1:4 
+`uc 1 LA5 1 0 :1:5 
+`uc 1 LA6 1 0 :1:6 
+`uc 1 LA7 1 0 :1:7 
+]
+[u S766 . 1 `S748 1 . 1 0 `S757 1 . 1 0 ]
+[v _LATAbits LATAbits `VES766  1 e 1 @3977 ]
+[s S637 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"1127
+[s S646 . 1 `uc 1 LB0 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+`uc 1 LB2 1 0 :1:2 
+`uc 1 LB3 1 0 :1:3 
+`uc 1 LB4 1 0 :1:4 
+`uc 1 LB5 1 0 :1:5 
+`uc 1 LB6 1 0 :1:6 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S655 . 1 `S637 1 . 1 0 `S646 1 . 1 0 ]
+[v _LATBbits LATBbits `VES655  1 e 1 @3978 ]
+[s S978 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
+]
+"1239
+[s S987 . 1 `uc 1 LC0 1 0 :1:0 
+`uc 1 LC1 1 0 :1:1 
+`uc 1 LC2 1 0 :1:2 
+`uc 1 LC3 1 0 :1:3 
+`uc 1 LC4 1 0 :1:4 
+`uc 1 LC5 1 0 :1:5 
+`uc 1 LC6 1 0 :1:6 
+`uc 1 LC7 1 0 :1:7 
+]
+[u S996 . 1 `S978 1 . 1 0 `S987 1 . 1 0 ]
+[v _LATCbits LATCbits `VES996  1 e 1 @3979 ]
+"1324
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+[s S390 . 1 `uc 1 LATD0 1 0 :1:0 
+`uc 1 LATD1 1 0 :1:1 
+`uc 1 LATD2 1 0 :1:2 
+`uc 1 LATD3 1 0 :1:3 
+`uc 1 LATD4 1 0 :1:4 
+`uc 1 LATD5 1 0 :1:5 
+`uc 1 LATD6 1 0 :1:6 
+`uc 1 LATD7 1 0 :1:7 
+]
+"1351
+[s S399 . 1 `uc 1 LD0 1 0 :1:0 
+`uc 1 LD1 1 0 :1:1 
+`uc 1 LD2 1 0 :1:2 
+`uc 1 LD3 1 0 :1:3 
+`uc 1 LD4 1 0 :1:4 
+`uc 1 LD5 1 0 :1:5 
+`uc 1 LD6 1 0 :1:6 
+`uc 1 LD7 1 0 :1:7 
+]
+[u S408 . 1 `S390 1 . 1 0 `S399 1 . 1 0 ]
+[v _LATDbits LATDbits `VES408  1 e 1 @3980 ]
+[s S597 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1520
+[s S606 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+[u S615 . 1 `S597 1 . 1 0 `S606 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES615  1 e 1 @3986 ]
+[s S557 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"1742
+[u S575 . 1 `S557 1 . 1 0 `S566 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES575  1 e 1 @3987 ]
+[s S938 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1964
+[s S947 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S956 . 1 `S938 1 . 1 0 `S947 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES956  1 e 1 @3988 ]
+"2154
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+[s S315 . 1 `uc 1 TRISD0 1 0 :1:0 
+`uc 1 TRISD1 1 0 :1:1 
+`uc 1 TRISD2 1 0 :1:2 
+`uc 1 TRISD3 1 0 :1:3 
+`uc 1 TRISD4 1 0 :1:4 
+`uc 1 TRISD5 1 0 :1:5 
+`uc 1 TRISD6 1 0 :1:6 
+`uc 1 TRISD7 1 0 :1:7 
+]
+"2186
+[u S333 . 1 `S315 1 . 1 0 `S324 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES333  1 e 1 @3989 ]
+[s S1241 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 PSPIF 1 0 :1:7 
+]
+"2704
+[s S1250 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+]
+[u S1254 . 1 `S1241 1 . 1 0 `S1250 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES1254  1 e 1 @3998 ]
+"3121
+[v _RCSTA RCSTA `VEuc  1 e 1 @4011 ]
+"3331
+[v _TXSTA TXSTA `VEuc  1 e 1 @4012 ]
+"3587
+[v _TXREG TXREG `VEuc  1 e 1 @4013 ]
+"3599
+[v _RCREG RCREG `VEuc  1 e 1 @4014 ]
+"3611
+[v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
+[s S1192 . 1 `uc 1 ABDEN 1 0 :1:0 
+`uc 1 WUE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG16 1 0 :1:3 
+`uc 1 TXCKP 1 0 :1:4 
+`uc 1 RXDTP 1 0 :1:5 
+`uc 1 RCIDL 1 0 :1:6 
+`uc 1 ABDOVF 1 0 :1:7 
+]
+"4188
+[s S1201 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 SCKP 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RCMT 1 0 :1:6 
+]
+[s S1206 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 RXCKP 1 0 :1:5 
+]
+[s S1209 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 W4E 1 0 :1:1 
+]
+[u S1212 . 1 `S1192 1 . 1 0 `S1201 1 . 1 0 `S1206 1 . 1 0 `S1209 1 . 1 0 ]
+[v _BAUDCONbits BAUDCONbits `VES1212  1 e 1 @4024 ]
+"4645
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
+"4716
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"4801
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+[s S1466 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"4845
+[s S1469 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+]
+[s S1473 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+]
+[s S1480 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S1483 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S1486 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S1489 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[s S1492 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S1495 . 1 `S1466 1 . 1 0 `S1469 1 . 1 0 `S1473 1 . 1 0 `S1480 1 . 1 0 `S1483 1 . 1 0 `S1486 1 . 1 0 `S1489 1 . 1 0 `S1492 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES1495  1 e 1 @4034 ]
+"4934
+[v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+[s S28 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"5724
+[s S30 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+[s S33 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+[s S36 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+[s S39 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+[s S42 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 . 1 0 :2:5 
+`uc 1 IPEN 1 0 :1:7 
+]
+[s S50 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 SBOREN 1 0 :1:6 
+]
+[u S58 . 1 `S28 1 . 1 0 `S30 1 . 1 0 `S33 1 . 1 0 `S36 1 . 1 0 `S39 1 . 1 0 `S42 1 . 1 0 `S50 1 . 1 0 ]
+[v _RCONbits RCONbits `VES58  1 e 1 @4048 ]
+"6183
+[v _T0CON T0CON `VEuc  1 e 1 @4053 ]
+"6260
+[v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
+[s S146 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_RBPU 1 0 :1:7 
+]
+"6656
+[s S149 . 1 `uc 1 RBIP 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 TMR0IP 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INTEDG2 1 0 :1:4 
+`uc 1 INTEDG1 1 0 :1:5 
+`uc 1 INTEDG0 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+[s S158 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 RBPU 1 0 :1:7 
+]
+[u S161 . 1 `S146 1 . 1 0 `S149 1 . 1 0 `S158 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES161  1 e 1 @4081 ]
+[s S97 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"6733
+[s S106 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S115 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S119 . 1 `S97 1 . 1 0 `S106 1 . 1 0 `S115 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES119  1 e 1 @4082 ]
+"8513
+[v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
+"10 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\comunicacio.c
+[v _msgC msgC `*.35uc  1 s 2 msgC ]
+"22 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _start@EQM$F1359 start `uc  1 s 1 start ]
+"23
+[v _timer@EQM$F1360 timer `uc  1 s 1 timer ]
+"24
+[v _index@EQM$F1361 index `uc  1 s 1 index ]
+"25
+[v _port port `[10]uc  1 s 10 port ]
+"26
+[v _user user `[3]uc  1 s 3 user ]
+"27
+[v _msg msg `uc  1 s 1 msg ]
+"28
+[v _iMSG iMSG `uc  1 s 1 iMSG ]
+"29
+[v _INTENTS INTENTS `uc  1 s 1 INTENTS ]
+"30
+[v _state_option state_option `uc  1 s 1 state_option ]
+"31
+[v _state4 state4 `uc  1 s 1 state4 ]
+"36
+[v _maxMSG maxMSG `uc  1 s 1 maxMSG ]
+"37
+[v _lastMSG lastMSG `uc  1 s 1 lastMSG ]
+"38
+[v _Opt3 Opt3 `uc  1 s 1 Opt3 ]
+"39
+[v _Opt4 Opt4 `uc  1 s 1 Opt4 ]
+"41
+[v _compt compt `uc  1 s 1 compt ]
+"42
+[v _compt2 compt2 `uc  1 s 1 compt2 ]
+"43
+[v _action action `uc  1 s 1 action ]
+"44
+[v _tecla tecla `uc  1 s 1 tecla ]
+"46
+[v _msgToSend msgToSend `*.39uc  1 s 2 msgToSend ]
+"47
+[v _msgToLCD msgToLCD `*.31uc  1 s 1 msgToLCD ]
+"49
+[v _wifiSTATE wifiSTATE `uc  1 s 1 wifiSTATE ]
+"50
+[v _statusSTATE statusSTATE `uc  1 s 1 statusSTATE ]
+"52
+[v _resetMENU resetMENU `uc  1 s 1 resetMENU ]
+"54
+[v _comptSEC comptSEC `uc  1 s 1 comptSEC ]
+"55
+[v _msgs msgs `[8][14]uc  1 s 112 msgs ]
+"12 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\joystick.c
+[v _estatAnterior estatAnterior `uc  1 s 1 estatAnterior ]
+"45 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\lcd.c
+[v _Rows Rows `uc  1 s 1 Rows ]
+[v _Columns Columns `uc  1 s 1 Columns ]
+"46
+[v _RowAct RowAct `uc  1 s 1 RowAct ]
+[v _ColumnAct ColumnAct `uc  1 s 1 ColumnAct ]
+"48
+[v _Timer Timer `uc  1 s 1 Timer ]
+"9 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _opcio_menu opcio_menu `[6][21]uc  1 s 126 opcio_menu ]
+"18
+[v _m0 m0 `uc  1 s 1 m0 ]
+"19
+[v _m1 m1 `uc  1 s 1 m1 ]
+"20
+[v _Opt Opt `uc  1 s 1 Opt ]
+"21
+[v _state@menu$F1450 state `uc  1 s 1 state ]
+"22
+[v _start@menu$F1451 start `uc  1 s 1 start ]
+"23
+[v _tecla@menu$F1452 tecla `uc  1 s 1 tecla ]
+"24
+[v _compt@menu$F1453 compt `uc  1 s 1 compt ]
+"25
+[v _action@menu$F1454 action `uc  1 s 1 action ]
+"26
+[v _timer@menu$F1455 timer `uc  1 s 1 timer ]
+"10 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\rxcom.c
+[v _nMSG@rxcom$F1158 nMSG `uc  1 s 1 nMSG ]
+"11
+[v _timer@rxcom$F1159 timer `uc  1 s 1 timer ]
+"12
+[v _MSG_AUX@rxcom$F1160 MSG_AUX `uc  1 s 1 MSG_AUX ]
+"13
+[v _flag_RX flag_RX `uc  1 s 1 flag_RX ]
+"14
+[v _index index `uc  1 s 1 index ]
+"15
+[v _inMSG inMSG `[4]uc  1 s 4 inMSG ]
+"12 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _state state `uc  1 s 1 state ]
+"13
+[v _columna columna `uc  1 s 1 columna ]
+"14
+[v _timer timer `uc  1 s 1 timer ]
+"15
+[v _teclapremuda teclapremuda `uc  1 s 1 teclapremuda ]
+[s S852 Timer 5 `ul 1 TicsInicials 4 0 `uc 1 Busy 1 4 ]
+"22 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _Timers Timers `[12]S852  1 s 60 Timers ]
+"24
+[v _Tics Tics `VEul  1 s 4 Tics ]
+"7 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\txcom.c
+[v _start@txcom$F1020 start `uc  1 s 1 start ]
+"8
+[v _MSG MSG `uc  1 s 1 MSG ]
+"9
+[v _nMSG nMSG `uc  1 s 1 nMSG ]
+"10
+[v _timer@txcom$F1023 timer `uc  1 s 1 timer ]
+"11
+[v _MSG_AUX MSG_AUX `uc  1 s 1 MSG_AUX ]
+"12
+[v _end_TX end_TX `uc  1 s 1 end_TX ]
+"21 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _timer@valorsteclat$F912 timer `uc  1 s 1 timer ]
+"22
+[v _start start `uc  1 s 1 start ]
+"23
+[v _pulsacio pulsacio `uc  1 s 1 pulsacio ]
+"24
+[v _filaAnterior filaAnterior `uc  1 s 1 filaAnterior ]
+"25
+[v _numChars numChars `uc  1 s 1 numChars ]
+"26
+[v _pos pos `uc  1 s 1 pos ]
+"27
+[v _maxChars maxChars `uc  1 s 1 maxChars ]
+"28
+[v _arrayChars arrayChars `[10]uc  1 s 10 arrayChars ]
+"31
+[v _lletres_teclat lletres_teclat `[10][2]uc  1 s 20 lletres_teclat ]
+"55 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"115
+} 0
+"15 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\txcom.c
+[v _txInit txInit `(v  1 e 1 0 ]
+{
+"16
+[v txInit@isBusy isBusy `uc  1 a 1 3 ]
+"23
+} 0
+"64 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\joystick.c
+[v _setJoyChannel setJoyChannel `(v  1 e 1 0 ]
+{
+"68
+} 0
+"17 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\rxcom.c
+[v _rxInit rxInit `(v  1 e 1 0 ]
+{
+"18
+[v rxInit@isBusy isBusy `uc  1 a 1 3 ]
+"27
+} 0
+"45 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\main.c
+[v _configInt configInt `(v  1 e 1 0 ]
+{
+"51
+} 0
+"44 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _ValorsTeclatInit ValorsTeclatInit `(v  1 e 1 0 ]
+{
+"47
+[v ValorsTeclatInit@isBusy isBusy `uc  1 a 1 3 ]
+"54
+} 0
+"33 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _TI_Init TI_Init `(v  1 e 1 0 ]
+{
+"34
+[v TI_Init@counter counter `uc  1 a 1 0 ]
+"42
+} 0
+"12 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\sio.c
+[v _SIO_Init SIO_Init `(v  1 e 1 0 ]
+{
+"26
+} 0
+"114 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _MotorValorsTeclat MotorValorsTeclat `(v  1 e 1 0 ]
+{
+"115
+[v MotorValorsTeclat@state state `uc  1 s 1 state ]
+"153
+} 0
+"80
+[v _ValorTecla ValorTecla `(v  1 e 1 0 ]
+{
+[v ValorTecla@fila fila `uc  1 a 1 wreg ]
+[v ValorTecla@fila fila `uc  1 a 1 wreg ]
+"81
+[v ValorTecla@valor valor `uc  1 s 1 valor ]
+"83
+[v ValorTecla@fila fila `uc  1 a 1 28 ]
+"112
+} 0
+"95 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _TeclaPremuda TeclaPremuda `(uc  1 e 1 0 ]
+{
+"97
+} 0
+"35 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\txcom.c
+[v _MotorTX MotorTX `(v  1 e 1 0 ]
+{
+"36
+[v MotorTX@state state `uc  1 s 1 state ]
+"86
+} 0
+"38 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\rxcom.c
+[v _MotorRX MotorRX `(v  1 e 1 0 ]
+{
+"39
+[v MotorRX@state state `uc  1 s 1 state ]
+"96
+} 0
+"69 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _EQM_MSG EQM_MSG `(v  1 e 1 0 ]
+{
+"72
+} 0
+"54 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _MotorMenu MotorMenu `(v  1 e 1 0 ]
+{
+"163
+} 0
+"102 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _MotorKeyboard MotorKeyboard `(v  1 e 1 0 ]
+{
+"176
+} 0
+"753 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _MotorEQM MotorEQM `(v  1 e 1 0 ]
+{
+"754
+[v MotorEQM@state state `uc  1 s 1 state ]
+"838
+} 0
+"625
+[v _ReciveMSG ReciveMSG `(v  1 e 1 0 ]
+{
+"626
+[v ReciveMSG@stateMSG stateMSG `uc  1 s 1 stateMSG ]
+"751
+} 0
+"43 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _stopMenu stopMenu `(v  1 e 1 0 ]
+{
+"45
+} 0
+"38 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\altaveu.c
+[v _fiSoroll fiSoroll `(v  1 e 1 0 ]
+{
+"40
+} 0
+"47 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _StateMenu StateMenu `(uc  1 e 1 0 ]
+{
+"49
+} 0
+"22 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\altaveu.c
+[v _SorollAlt SorollAlt `(v  1 e 1 0 ]
+{
+[v SorollAlt@tecla tecla `uc  1 a 1 wreg ]
+[v SorollAlt@tecla tecla `uc  1 a 1 wreg ]
+[v SorollAlt@tecla tecla `uc  1 a 1 0 ]
+"36
+} 0
+"50 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _OpcioMenu OpcioMenu `(uc  1 e 1 0 ]
+{
+"52
+} 0
+"475 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _ListLastMessages ListLastMessages `(uc  1 e 1 0 ]
+{
+"624
+} 0
+"28 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\joystick.c
+[v _startConversion startConversion `(v  1 e 1 0 ]
+{
+"32
+} 0
+"40
+[v _mouJoyAvail mouJoyAvail `(uc  1 e 1 0 ]
+{
+"56
+} 0
+"58
+[v _getAction getAction `(uc  1 e 1 0 ]
+{
+"62
+} 0
+"34
+[v _finishConversion finishConversion `(uc  1 e 1 0 ]
+{
+"38
+} 0
+"98 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _HiHaTecla HiHaTecla `(uc  1 e 1 0 ]
+{
+"100
+} 0
+"239 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _ListAccesPoints ListAccesPoints `(uc  1 e 1 0 ]
+{
+"264
+} 0
+"337
+[v _EnterChatMode EnterChatMode `(uc  1 e 1 0 ]
+{
+"473
+} 0
+"76 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _getIND getIND `(uc  1 e 1 0 ]
+{
+"78
+} 0
+"266 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _ShowConnStatus ShowConnStatus `(uc  1 e 1 0 ]
+{
+"301
+} 0
+"45 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\sio.c
+[v _SIO_PutChar SIO_PutChar `(v  1 e 1 0 ]
+{
+[v SIO_PutChar@Valor Valor `uc  1 a 1 wreg ]
+[v SIO_PutChar@Valor Valor `uc  1 a 1 wreg ]
+"48
+[v SIO_PutChar@Valor Valor `uc  1 a 1 0 ]
+"49
+} 0
+"47 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _GetTecla GetTecla `(uc  1 e 1 0 ]
+{
+"93
+} 0
+"76 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _ConfWIFI ConfWIFI `(uc  1 e 1 0 ]
+{
+"236
+} 0
+"39 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _startMenu startMenu `(v  1 e 1 0 ]
+{
+"41
+} 0
+"72 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _getMSG getMSG `(uc  1 e 1 0 ]
+{
+[v getMSG@index index `uc  1 a 1 wreg ]
+[v getMSG@index index `uc  1 a 1 wreg ]
+[v getMSG@index index `uc  1 a 1 0 ]
+"74
+} 0
+"14 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\comunicacio.c
+[v _endMSG endMSG `(v  1 e 1 0 ]
+{
+"16
+} 0
+"56 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\valorsteclat.c
+[v _ValorsState ValorsState `(uc  1 e 1 0 ]
+{
+"58
+} 0
+"60
+[v _StartRead StartRead `(v  1 e 1 0 ]
+{
+[v StartRead@numMax numMax `uc  1 a 1 wreg ]
+[v StartRead@numMax numMax `uc  1 a 1 wreg ]
+[v StartRead@numMax numMax `uc  1 a 1 0 ]
+"70
+} 0
+"29 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\sio.c
+[v _SIO_RXAvail SIO_RXAvail `(uc  1 e 1 0 ]
+{
+"32
+} 0
+"34
+[v _SIO_GetChar SIO_GetChar `(uc  1 e 1 0 ]
+{
+"38
+} 0
+"19 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\comunicacio.c
+[v _MotorCOM MotorCOM `(uc  1 e 1 0 ]
+{
+[v MotorCOM@new_msgC new_msgC `*.35uc  1 p 2 1 ]
+"20
+[v MotorCOM@state state `uc  1 s 1 state ]
+"68
+} 0
+"25 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\txcom.c
+[v _SetMSG SetMSG `(v  1 e 1 0 ]
+{
+[v SetMSG@new_msg new_msg `uc  1 a 1 wreg ]
+[v SetMSG@new_msg new_msg `uc  1 a 1 wreg ]
+[v SetMSG@new_msg new_msg `uc  1 a 1 0 ]
+"29
+} 0
+"31
+[v _GetEND GetEND `(uc  1 e 1 0 ]
+{
+"33
+} 0
+"29 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\rxcom.c
+[v _GetRxMSG GetRxMSG `(uc  1 e 1 0 ]
+{
+"32
+} 0
+"34
+[v _GetFlag GetFlag `(uc  1 e 1 0 ]
+{
+"36
+} 0
+"303 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _CloseConn CloseConn `(uc  1 e 1 0 ]
+{
+"335
+} 0
+"197 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\lcd.c
+[v _LcPutString LcPutString `(uc  1 e 1 0 ]
+{
+[v LcPutString@s s `*.35uc  1 p 2 23 ]
+"201
+[v LcPutString@state state `uc  1 s 1 state ]
+"202
+[v LcPutString@numChars numChars `uc  1 s 1 numChars ]
+"203
+[v LcPutString@string_ptr string_ptr `*.35uc  1 s 2 string_ptr ]
+"225
+} 0
+"163
+[v _LcPutChar LcPutChar `(v  1 e 1 0 ]
+{
+[v LcPutChar@c c `uc  1 a 1 wreg ]
+[v LcPutChar@c c `uc  1 a 1 wreg ]
+"173
+[v LcPutChar@c c `uc  1 a 1 22 ]
+"194
+} 0
+"136
+[v _LcGotoXY LcGotoXY `(v  1 e 1 0 ]
+{
+[v LcGotoXY@Column Column `uc  1 a 1 wreg ]
+"140
+[v LcGotoXY@Fisics Fisics `i  1 a 2 19 ]
+"136
+[v LcGotoXY@Column Column `uc  1 a 1 wreg ]
+[v LcGotoXY@Row Row `uc  1 p 1 14 ]
+[v LcGotoXY@Column Column `uc  1 a 1 21 ]
+"161
+} 0
+"270
+[v _CantaData CantaData `(v  1 e 1 0 ]
+{
+[v CantaData@Data Data `uc  1 a 1 wreg ]
+[v CantaData@Data Data `uc  1 a 1 wreg ]
+[v CantaData@Data Data `uc  1 a 1 6 ]
+"284
+} 0
+"115
+[v _LcClear LcClear `(v  1 e 1 0 ]
+{
+"120
+} 0
+"42 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\altaveu.c
+[v _MotorAltaveu MotorAltaveu `(v  1 e 1 0 ]
+{
+"43
+[v MotorAltaveu@state state `uc  1 s 1 state ]
+"63
+} 0
+"28 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\menu.c
+[v _MenuInit MenuInit `(v  1 e 1 0 ]
+{
+"30
+[v MenuInit@busy busy `uc  1 a 1 13 ]
+"37
+} 0
+"70 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\lcd.c
+[v _LcInit LcInit `(v  1 e 1 0 ]
+{
+[v LcInit@rows rows `uc  1 a 1 wreg ]
+"76
+[v LcInit@i i `i  1 a 2 23 ]
+"70
+[v LcInit@rows rows `uc  1 a 1 wreg ]
+[v LcInit@columns columns `uc  1 p 1 21 ]
+"77
+[v LcInit@rows rows `uc  1 a 1 22 ]
+"108
+} 0
+"235
+[v _Espera Espera `(v  1 e 1 0 ]
+{
+[v Espera@Timer Timer `i  1 p 2 13 ]
+[v Espera@ms ms `i  1 p 2 15 ]
+"238
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"304 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\lcd.c
+[v _EscriuPrimeraOrdre EscriuPrimeraOrdre `(v  1 e 1 0 ]
+{
+[v EscriuPrimeraOrdre@ordre ordre `uc  1 a 1 wreg ]
+[v EscriuPrimeraOrdre@ordre ordre `uc  1 a 1 wreg ]
+"306
+[v EscriuPrimeraOrdre@ordre ordre `uc  1 a 1 5 ]
+"313
+} 0
+"129
+[v _LcCursorOff LcCursorOff `(v  1 e 1 0 ]
+{
+"134
+} 0
+"286
+[v _WaitForBusy WaitForBusy `(v  1 e 1 0 ]
+{
+[v WaitForBusy@Busy Busy `uc  1 a 1 13 ]
+"302
+} 0
+"54 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _TI_ResetTics TI_ResetTics `(v  1 e 1 0 ]
+{
+[v TI_ResetTics@TimerHandle TimerHandle `uc  1 a 1 wreg ]
+[v TI_ResetTics@TimerHandle TimerHandle `uc  1 a 1 wreg ]
+[v TI_ResetTics@TimerHandle TimerHandle `uc  1 a 1 0 ]
+"56
+} 0
+"254 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\lcd.c
+[v _CantaIR CantaIR `(v  1 e 1 0 ]
+{
+[v CantaIR@IR IR `uc  1 a 1 wreg ]
+[v CantaIR@IR IR `uc  1 a 1 wreg ]
+[v CantaIR@IR IR `uc  1 a 1 6 ]
+"268
+} 0
+"247
+[v _CantaPartBaixa CantaPartBaixa `(v  1 e 1 0 ]
+{
+[v CantaPartBaixa@c c `uc  1 a 1 wreg ]
+[v CantaPartBaixa@c c `uc  1 a 1 wreg ]
+[v CantaPartBaixa@c c `uc  1 a 1 5 ]
+"252
+} 0
+"240
+[v _CantaPartAlta CantaPartAlta `(v  1 e 1 0 ]
+{
+[v CantaPartAlta@c c `uc  1 a 1 wreg ]
+[v CantaPartAlta@c c `uc  1 a 1 wreg ]
+[v CantaPartAlta@c c `uc  1 a 1 5 ]
+"245
+} 0
+"17 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\teclat.c
+[v _KeyBoardInit KeyBoardInit `(v  1 e 1 0 ]
+{
+"18
+[v KeyBoardInit@isBusy isBusy `uc  1 a 1 3 ]
+"45
+} 0
+"16 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\joystick.c
+[v _JoyInit JoyInit `(v  1 e 1 0 ]
+{
+"26
+} 0
+"14 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\altaveu.c
+[v _InitAltaveu InitAltaveu `(v  1 e 1 0 ]
+{
+"21
+} 0
+"59 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _TI_GetTics TI_GetTics `(ul  1 e 4 0 ]
+{
+[v TI_GetTics@TimerHandle TimerHandle `uc  1 a 1 wreg ]
+"60
+[v TI_GetTics@CopiaTicsActual CopiaTicsActual `ul  1 a 4 8 ]
+"59
+[v TI_GetTics@TimerHandle TimerHandle `uc  1 a 1 wreg ]
+[v TI_GetTics@TimerHandle TimerHandle `uc  1 a 1 12 ]
+"62
+} 0
+"57 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\EQM.c
+[v _EQMInit EQMInit `(v  1 e 1 0 ]
+{
+"58
+[v EQMInit@isBusy isBusy `uc  1 a 1 3 ]
+"67
+} 0
+"44 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _TI_NewTimer TI_NewTimer `(uc  1 e 1 0 ]
+{
+"45
+[v TI_NewTimer@Comptador Comptador `uc  1 a 1 2 ]
+"44
+[v TI_NewTimer@TimerHandle TimerHandle `*.30uc  1 p 1 0 ]
+"52
+} 0
+"41 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\main.c
+[v _my_rsi my_rsi `IIH(v  1 e 1 0 ]
+{
+"43
+} 0
+"26 C:\Users\DEKU\Documents\3r\Compus\P2\Compus_P2\P2_LSChat.X\timer.c
+[v _RSI_Timer0 RSI_Timer0 `(v  1 e 1 0 ]
+{
+"31
+} 0

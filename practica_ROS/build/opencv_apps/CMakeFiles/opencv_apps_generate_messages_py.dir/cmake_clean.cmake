@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Circle.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_CircleArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_CircleArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Contour.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_ContourArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_ContourArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Face.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_FaceArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_FaceArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Flow.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_FlowArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_FlowArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_FlowStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Line.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_LineArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_LineArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Moment.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_MomentArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_MomentArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Point2D.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Point2DArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Point2DArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Point2DStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Rect.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_RectArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_RectArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_RotatedRect.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_RotatedRectArray.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_RotatedRectArrayStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_RotatedRectStamped.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/_Size.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/msg/__init__.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/srv/_FaceRecognitionTrain.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/opencv_apps/srv/__init__.py"
+  "CMakeFiles/opencv_apps_generate_messages_py"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/opencv_apps_generate_messages_py.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

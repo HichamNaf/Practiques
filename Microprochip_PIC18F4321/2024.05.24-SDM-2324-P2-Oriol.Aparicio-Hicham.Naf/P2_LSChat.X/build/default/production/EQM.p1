@@ -1,0 +1,3285 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"26 ./timer.h
+[; ;./timer.h: 26: unsigned char TI_NewTimer(unsigned char *TimerHandle) ;
+[v _TI_NewTimer `(uc ~T0 @X0 0 ef1`*uc ]
+"52 ./lcd.h
+[; ;./lcd.h: 52: void LcClear(void);
+[v _LcClear `(v ~T0 @X0 0 ef ]
+"64
+[; ;./lcd.h: 64: void LcGotoXY(char Column, char Row);
+[v _LcGotoXY `(v ~T0 @X0 0 ef2`uc`uc ]
+"80
+[; ;./lcd.h: 80: char LcPutString(char *s);
+[v _LcPutString `(uc ~T0 @X0 0 ef1`*uc ]
+"15 ./valorsteclat.h
+[; ;./valorsteclat.h: 15: void StartRead(char numMax);
+[v _StartRead `(v ~T0 @X0 0 ef1`uc ]
+"13
+[; ;./valorsteclat.h: 13: char ValorsState(void);
+[v _ValorsState `(uc ~T0 @X0 0 ef ]
+"17
+[; ;./valorsteclat.h: 17: char getMSG(char index);
+[v _getMSG `(uc ~T0 @X0 0 ef1`uc ]
+"14 ./comunicacio.h
+[; ;./comunicacio.h: 14: char MotorCOM(char* new_msgC);
+[v _MotorCOM `(uc ~T0 @X0 0 ef1`*uc ]
+"23 ./rxcom.h
+[; ;./rxcom.h: 23: char GetFlag(void);
+[v _GetFlag `(uc ~T0 @X0 0 ef ]
+"16
+[; ;./rxcom.h: 16: char GetRxMSG(void);
+[v _GetRxMSG `(uc ~T0 @X0 0 ef ]
+"7 ./sio.h
+[; ;./sio.h: 7: unsigned char SIO_RXAvail(void);
+[v _SIO_RXAvail `(uc ~T0 @X0 0 ef ]
+"10
+[; ;./sio.h: 10: unsigned char SIO_GetChar(void);
+[v _SIO_GetChar `(uc ~T0 @X0 0 ef ]
+"30 ./timer.h
+[; ;./timer.h: 30: void TI_ResetTics (unsigned char TimerHandle);
+[v _TI_ResetTics `(v ~T0 @X0 0 ef1`uc ]
+"19 ./menu.h
+[; ;./menu.h: 19: void startMenu(void);
+[v _startMenu `(v ~T0 @X0 0 ef ]
+"12 ./comunicacio.h
+[; ;./comunicacio.h: 12: void endMSG(void);
+[v _endMSG `(v ~T0 @X0 0 ef ]
+"34 ./timer.h
+[; ;./timer.h: 34: unsigned long TI_GetTics (unsigned char TimerHandle);
+[v _TI_GetTics `(ul ~T0 @X0 0 ef1`uc ]
+"69 ./lcd.h
+[; ;./lcd.h: 69: void LcPutChar(char c);
+[v _LcPutChar `(v ~T0 @X0 0 ef1`uc ]
+"21 ./teclat.h
+[; ;./teclat.h: 21: char GetTecla(void);
+[v _GetTecla `(uc ~T0 @X0 0 ef ]
+"19 ./valorsteclat.h
+[; ;./valorsteclat.h: 19: char getIND();
+[v _getIND `(uc ~T0 @X0 0 e? ]
+"16 ./txcom.h
+[; ;./txcom.h: 16: void SetMSG(unsigned char new_msg);
+[v _SetMSG `(v ~T0 @X0 0 ef1`uc ]
+"23
+[; ;./txcom.h: 23: char GetEND(void);
+[v _GetEND `(uc ~T0 @X0 0 ef ]
+"17 ./sio.h
+[; ;./sio.h: 17: void SIO_PutChar (unsigned char Valor);
+[v _SIO_PutChar `(v ~T0 @X0 0 ef1`uc ]
+"17 ./teclat.h
+[; ;./teclat.h: 17: char HiHaTecla(void);
+[v _HiHaTecla `(uc ~T0 @X0 0 ef ]
+"14 ./joystick.h
+[; ;./joystick.h: 14: void startConversion(void);
+[v _startConversion `(v ~T0 @X0 0 ef ]
+"18
+[; ;./joystick.h: 18: char finishConversion(void);
+[v _finishConversion `(uc ~T0 @X0 0 ef ]
+"22
+[; ;./joystick.h: 22: char mouJoyAvail(void);
+[v _mouJoyAvail `(uc ~T0 @X0 0 ef ]
+"26
+[; ;./joystick.h: 26: char getAction(void);
+[v _getAction `(uc ~T0 @X0 0 ef ]
+"24 ./menu.h
+[; ;./menu.h: 24: char StateMenu(void);
+[v _StateMenu `(uc ~T0 @X0 0 ef ]
+"21
+[; ;./menu.h: 21: void stopMenu(void);
+[v _stopMenu `(v ~T0 @X0 0 ef ]
+"12 ./altaveu.h
+[; ;./altaveu.h: 12: void SorollAlt(unsigned char teclaS);
+[v _SorollAlt `(v ~T0 @X0 0 ef1`uc ]
+"15
+[; ;./altaveu.h: 15: void fiSoroll(void);
+[v _fiSoroll `(v ~T0 @X0 0 ef ]
+"26 ./menu.h
+[; ;./menu.h: 26: char OpcioMenu(void);
+[v _OpcioMenu `(uc ~T0 @X0 0 ef ]
+"54 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 54: __asm("PORTA equ 0F80h");
+[; <" PORTA equ 0F80h ;# ">
+"286
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 286: __asm("PORTB equ 0F81h");
+[; <" PORTB equ 0F81h ;# ">
+"465
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 465: __asm("PORTC equ 0F82h");
+[; <" PORTC equ 0F82h ;# ">
+"645
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 645: __asm("PORTD equ 0F83h");
+[; <" PORTD equ 0F83h ;# ">
+"787
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 787: __asm("PORTE equ 0F84h");
+[; <" PORTE equ 0F84h ;# ">
+"990
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 990: __asm("LATA equ 0F89h");
+[; <" LATA equ 0F89h ;# ">
+"1102
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1102: __asm("LATB equ 0F8Ah");
+[; <" LATB equ 0F8Ah ;# ">
+"1214
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1214: __asm("LATC equ 0F8Bh");
+[; <" LATC equ 0F8Bh ;# ">
+"1326
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1326: __asm("LATD equ 0F8Ch");
+[; <" LATD equ 0F8Ch ;# ">
+"1438
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1438: __asm("LATE equ 0F8Dh");
+[; <" LATE equ 0F8Dh ;# ">
+"1490
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1490: __asm("TRISA equ 0F92h");
+[; <" TRISA equ 0F92h ;# ">
+"1495
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1495: __asm("DDRA equ 0F92h");
+[; <" DDRA equ 0F92h ;# ">
+"1712
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1712: __asm("TRISB equ 0F93h");
+[; <" TRISB equ 0F93h ;# ">
+"1717
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1717: __asm("DDRB equ 0F93h");
+[; <" DDRB equ 0F93h ;# ">
+"1934
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1934: __asm("TRISC equ 0F94h");
+[; <" TRISC equ 0F94h ;# ">
+"1939
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 1939: __asm("DDRC equ 0F94h");
+[; <" DDRC equ 0F94h ;# ">
+"2156
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2156: __asm("TRISD equ 0F95h");
+[; <" TRISD equ 0F95h ;# ">
+"2161
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2161: __asm("DDRD equ 0F95h");
+[; <" DDRD equ 0F95h ;# ">
+"2378
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2378: __asm("TRISE equ 0F96h");
+[; <" TRISE equ 0F96h ;# ">
+"2383
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2383: __asm("DDRE equ 0F96h");
+[; <" DDRE equ 0F96h ;# ">
+"2542
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2542: __asm("OSCTUNE equ 0F9Bh");
+[; <" OSCTUNE equ 0F9Bh ;# ">
+"2607
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2607: __asm("PIE1 equ 0F9Dh");
+[; <" PIE1 equ 0F9Dh ;# ">
+"2684
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2684: __asm("PIR1 equ 0F9Eh");
+[; <" PIR1 equ 0F9Eh ;# ">
+"2761
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2761: __asm("IPR1 equ 0F9Fh");
+[; <" IPR1 equ 0F9Fh ;# ">
+"2838
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2838: __asm("PIE2 equ 0FA0h");
+[; <" PIE2 equ 0FA0h ;# ">
+"2904
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2904: __asm("PIR2 equ 0FA1h");
+[; <" PIR2 equ 0FA1h ;# ">
+"2970
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 2970: __asm("IPR2 equ 0FA2h");
+[; <" IPR2 equ 0FA2h ;# ">
+"3036
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3036: __asm("EECON1 equ 0FA6h");
+[; <" EECON1 equ 0FA6h ;# ">
+"3102
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3102: __asm("EECON2 equ 0FA7h");
+[; <" EECON2 equ 0FA7h ;# ">
+"3109
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3109: __asm("EEDATA equ 0FA8h");
+[; <" EEDATA equ 0FA8h ;# ">
+"3116
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3116: __asm("EEADR equ 0FA9h");
+[; <" EEADR equ 0FA9h ;# ">
+"3123
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3123: __asm("RCSTA equ 0FABh");
+[; <" RCSTA equ 0FABh ;# ">
+"3128
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3128: __asm("RCSTA1 equ 0FABh");
+[; <" RCSTA1 equ 0FABh ;# ">
+"3333
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3333: __asm("TXSTA equ 0FACh");
+[; <" TXSTA equ 0FACh ;# ">
+"3338
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3338: __asm("TXSTA1 equ 0FACh");
+[; <" TXSTA1 equ 0FACh ;# ">
+"3589
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3589: __asm("TXREG equ 0FADh");
+[; <" TXREG equ 0FADh ;# ">
+"3594
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3594: __asm("TXREG1 equ 0FADh");
+[; <" TXREG1 equ 0FADh ;# ">
+"3601
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3601: __asm("RCREG equ 0FAEh");
+[; <" RCREG equ 0FAEh ;# ">
+"3606
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3606: __asm("RCREG1 equ 0FAEh");
+[; <" RCREG1 equ 0FAEh ;# ">
+"3613
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3613: __asm("SPBRG equ 0FAFh");
+[; <" SPBRG equ 0FAFh ;# ">
+"3618
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3618: __asm("SPBRG1 equ 0FAFh");
+[; <" SPBRG1 equ 0FAFh ;# ">
+"3625
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3625: __asm("SPBRGH equ 0FB0h");
+[; <" SPBRGH equ 0FB0h ;# ">
+"3632
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3632: __asm("T3CON equ 0FB1h");
+[; <" T3CON equ 0FB1h ;# ">
+"3744
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3744: __asm("TMR3 equ 0FB2h");
+[; <" TMR3 equ 0FB2h ;# ">
+"3751
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3751: __asm("TMR3L equ 0FB2h");
+[; <" TMR3L equ 0FB2h ;# ">
+"3758
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3758: __asm("TMR3H equ 0FB3h");
+[; <" TMR3H equ 0FB3h ;# ">
+"3765
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3765: __asm("CMCON equ 0FB4h");
+[; <" CMCON equ 0FB4h ;# ">
+"3855
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3855: __asm("CVRCON equ 0FB5h");
+[; <" CVRCON equ 0FB5h ;# ">
+"3934
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 3934: __asm("ECCP1AS equ 0FB6h");
+[; <" ECCP1AS equ 0FB6h ;# ">
+"4016
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4016: __asm("ECCP1DEL equ 0FB7h");
+[; <" ECCP1DEL equ 0FB7h ;# ">
+"4021
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4021: __asm("PWM1CON equ 0FB7h");
+[; <" PWM1CON equ 0FB7h ;# ">
+"4154
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4154: __asm("BAUDCON equ 0FB8h");
+[; <" BAUDCON equ 0FB8h ;# ">
+"4159
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4159: __asm("BAUDCTL equ 0FB8h");
+[; <" BAUDCTL equ 0FB8h ;# ">
+"4334
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4334: __asm("CCP2CON equ 0FBAh");
+[; <" CCP2CON equ 0FBAh ;# ">
+"4413
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4413: __asm("CCPR2 equ 0FBBh");
+[; <" CCPR2 equ 0FBBh ;# ">
+"4420
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4420: __asm("CCPR2L equ 0FBBh");
+[; <" CCPR2L equ 0FBBh ;# ">
+"4427
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4427: __asm("CCPR2H equ 0FBCh");
+[; <" CCPR2H equ 0FBCh ;# ">
+"4434
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4434: __asm("CCP1CON equ 0FBDh");
+[; <" CCP1CON equ 0FBDh ;# ">
+"4439
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4439: __asm("ECCP1CON equ 0FBDh");
+[; <" ECCP1CON equ 0FBDh ;# ">
+"4626
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4626: __asm("CCPR1 equ 0FBEh");
+[; <" CCPR1 equ 0FBEh ;# ">
+"4633
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4633: __asm("CCPR1L equ 0FBEh");
+[; <" CCPR1L equ 0FBEh ;# ">
+"4640
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4640: __asm("CCPR1H equ 0FBFh");
+[; <" CCPR1H equ 0FBFh ;# ">
+"4647
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4647: __asm("ADCON2 equ 0FC0h");
+[; <" ADCON2 equ 0FC0h ;# ">
+"4718
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4718: __asm("ADCON1 equ 0FC1h");
+[; <" ADCON1 equ 0FC1h ;# ">
+"4803
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4803: __asm("ADCON0 equ 0FC2h");
+[; <" ADCON0 equ 0FC2h ;# ">
+"4922
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4922: __asm("ADRES equ 0FC3h");
+[; <" ADRES equ 0FC3h ;# ">
+"4929
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4929: __asm("ADRESL equ 0FC3h");
+[; <" ADRESL equ 0FC3h ;# ">
+"4936
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4936: __asm("ADRESH equ 0FC4h");
+[; <" ADRESH equ 0FC4h ;# ">
+"4943
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 4943: __asm("SSPCON2 equ 0FC5h");
+[; <" SSPCON2 equ 0FC5h ;# ">
+"5038
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5038: __asm("SSPCON1 equ 0FC6h");
+[; <" SSPCON1 equ 0FC6h ;# ">
+"5108
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5108: __asm("SSPSTAT equ 0FC7h");
+[; <" SSPSTAT equ 0FC7h ;# ">
+"5329
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5329: __asm("SSPADD equ 0FC8h");
+[; <" SSPADD equ 0FC8h ;# ">
+"5336
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5336: __asm("SSPBUF equ 0FC9h");
+[; <" SSPBUF equ 0FC9h ;# ">
+"5343
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5343: __asm("T2CON equ 0FCAh");
+[; <" T2CON equ 0FCAh ;# ">
+"5441
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5441: __asm("PR2 equ 0FCBh");
+[; <" PR2 equ 0FCBh ;# ">
+"5446
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5446: __asm("MEMCON equ 0FCBh");
+[; <" MEMCON equ 0FCBh ;# ">
+"5551
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5551: __asm("TMR2 equ 0FCCh");
+[; <" TMR2 equ 0FCCh ;# ">
+"5558
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5558: __asm("T1CON equ 0FCDh");
+[; <" T1CON equ 0FCDh ;# ">
+"5661
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5661: __asm("TMR1 equ 0FCEh");
+[; <" TMR1 equ 0FCEh ;# ">
+"5668
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5668: __asm("TMR1L equ 0FCEh");
+[; <" TMR1L equ 0FCEh ;# ">
+"5675
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5675: __asm("TMR1H equ 0FCFh");
+[; <" TMR1H equ 0FCFh ;# ">
+"5682
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5682: __asm("RCON equ 0FD0h");
+[; <" RCON equ 0FD0h ;# ">
+"5816
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5816: __asm("WDTCON equ 0FD1h");
+[; <" WDTCON equ 0FD1h ;# ">
+"5844
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5844: __asm("HLVDCON equ 0FD2h");
+[; <" HLVDCON equ 0FD2h ;# ">
+"5849
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 5849: __asm("LVDCON equ 0FD2h");
+[; <" LVDCON equ 0FD2h ;# ">
+"6102
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6102: __asm("OSCCON equ 0FD3h");
+[; <" OSCCON equ 0FD3h ;# ">
+"6185
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6185: __asm("T0CON equ 0FD5h");
+[; <" T0CON equ 0FD5h ;# ">
+"6262
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6262: __asm("TMR0 equ 0FD6h");
+[; <" TMR0 equ 0FD6h ;# ">
+"6269
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6269: __asm("TMR0L equ 0FD6h");
+[; <" TMR0L equ 0FD6h ;# ">
+"6276
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6276: __asm("TMR0H equ 0FD7h");
+[; <" TMR0H equ 0FD7h ;# ">
+"6283
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6283: __asm("STATUS equ 0FD8h");
+[; <" STATUS equ 0FD8h ;# ">
+"6354
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6354: __asm("FSR2 equ 0FD9h");
+[; <" FSR2 equ 0FD9h ;# ">
+"6361
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6361: __asm("FSR2L equ 0FD9h");
+[; <" FSR2L equ 0FD9h ;# ">
+"6368
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6368: __asm("FSR2H equ 0FDAh");
+[; <" FSR2H equ 0FDAh ;# ">
+"6375
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6375: __asm("PLUSW2 equ 0FDBh");
+[; <" PLUSW2 equ 0FDBh ;# ">
+"6382
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6382: __asm("PREINC2 equ 0FDCh");
+[; <" PREINC2 equ 0FDCh ;# ">
+"6389
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6389: __asm("POSTDEC2 equ 0FDDh");
+[; <" POSTDEC2 equ 0FDDh ;# ">
+"6396
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6396: __asm("POSTINC2 equ 0FDEh");
+[; <" POSTINC2 equ 0FDEh ;# ">
+"6403
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6403: __asm("INDF2 equ 0FDFh");
+[; <" INDF2 equ 0FDFh ;# ">
+"6410
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6410: __asm("BSR equ 0FE0h");
+[; <" BSR equ 0FE0h ;# ">
+"6417
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6417: __asm("FSR1 equ 0FE1h");
+[; <" FSR1 equ 0FE1h ;# ">
+"6424
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6424: __asm("FSR1L equ 0FE1h");
+[; <" FSR1L equ 0FE1h ;# ">
+"6431
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6431: __asm("FSR1H equ 0FE2h");
+[; <" FSR1H equ 0FE2h ;# ">
+"6438
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6438: __asm("PLUSW1 equ 0FE3h");
+[; <" PLUSW1 equ 0FE3h ;# ">
+"6445
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6445: __asm("PREINC1 equ 0FE4h");
+[; <" PREINC1 equ 0FE4h ;# ">
+"6452
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6452: __asm("POSTDEC1 equ 0FE5h");
+[; <" POSTDEC1 equ 0FE5h ;# ">
+"6459
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6459: __asm("POSTINC1 equ 0FE6h");
+[; <" POSTINC1 equ 0FE6h ;# ">
+"6466
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6466: __asm("INDF1 equ 0FE7h");
+[; <" INDF1 equ 0FE7h ;# ">
+"6473
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6473: __asm("WREG equ 0FE8h");
+[; <" WREG equ 0FE8h ;# ">
+"6485
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6485: __asm("FSR0 equ 0FE9h");
+[; <" FSR0 equ 0FE9h ;# ">
+"6492
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6492: __asm("FSR0L equ 0FE9h");
+[; <" FSR0L equ 0FE9h ;# ">
+"6499
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6499: __asm("FSR0H equ 0FEAh");
+[; <" FSR0H equ 0FEAh ;# ">
+"6506
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6506: __asm("PLUSW0 equ 0FEBh");
+[; <" PLUSW0 equ 0FEBh ;# ">
+"6513
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6513: __asm("PREINC0 equ 0FECh");
+[; <" PREINC0 equ 0FECh ;# ">
+"6520
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6520: __asm("POSTDEC0 equ 0FEDh");
+[; <" POSTDEC0 equ 0FEDh ;# ">
+"6527
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6527: __asm("POSTINC0 equ 0FEEh");
+[; <" POSTINC0 equ 0FEEh ;# ">
+"6534
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6534: __asm("INDF0 equ 0FEFh");
+[; <" INDF0 equ 0FEFh ;# ">
+"6541
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6541: __asm("INTCON3 equ 0FF0h");
+[; <" INTCON3 equ 0FF0h ;# ">
+"6633
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6633: __asm("INTCON2 equ 0FF1h");
+[; <" INTCON2 equ 0FF1h ;# ">
+"6703
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6703: __asm("INTCON equ 0FF2h");
+[; <" INTCON equ 0FF2h ;# ">
+"6820
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6820: __asm("PROD equ 0FF3h");
+[; <" PROD equ 0FF3h ;# ">
+"6827
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6827: __asm("PRODL equ 0FF3h");
+[; <" PRODL equ 0FF3h ;# ">
+"6834
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6834: __asm("PRODH equ 0FF4h");
+[; <" PRODH equ 0FF4h ;# ">
+"6841
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6841: __asm("TABLAT equ 0FF5h");
+[; <" TABLAT equ 0FF5h ;# ">
+"6850
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6850: __asm("TBLPTR equ 0FF6h");
+[; <" TBLPTR equ 0FF6h ;# ">
+"6857
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6857: __asm("TBLPTRL equ 0FF6h");
+[; <" TBLPTRL equ 0FF6h ;# ">
+"6864
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6864: __asm("TBLPTRH equ 0FF7h");
+[; <" TBLPTRH equ 0FF7h ;# ">
+"6871
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6871: __asm("TBLPTRU equ 0FF8h");
+[; <" TBLPTRU equ 0FF8h ;# ">
+"6880
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6880: __asm("PCLAT equ 0FF9h");
+[; <" PCLAT equ 0FF9h ;# ">
+"6887
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6887: __asm("PC equ 0FF9h");
+[; <" PC equ 0FF9h ;# ">
+"6894
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6894: __asm("PCL equ 0FF9h");
+[; <" PCL equ 0FF9h ;# ">
+"6901
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6901: __asm("PCLATH equ 0FFAh");
+[; <" PCLATH equ 0FFAh ;# ">
+"6908
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6908: __asm("PCLATU equ 0FFBh");
+[; <" PCLATU equ 0FFBh ;# ">
+"6915
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6915: __asm("STKPTR equ 0FFCh");
+[; <" STKPTR equ 0FFCh ;# ">
+"6989
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6989: __asm("TOS equ 0FFDh");
+[; <" TOS equ 0FFDh ;# ">
+"6996
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 6996: __asm("TOSL equ 0FFDh");
+[; <" TOSL equ 0FFDh ;# ">
+"7003
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 7003: __asm("TOSH equ 0FFEh");
+[; <" TOSH equ 0FFEh ;# ">
+"7010
+[; ;C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4321.h: 7010: __asm("TOSU equ 0FFFh");
+[; <" TOSU equ 0FFFh ;# ">
+"22 EQM.c
+[; ;EQM.c: 22: static unsigned char start;
+[v _start `uc ~T0 @X0 1 s ]
+"23
+[; ;EQM.c: 23: static unsigned char timer;
+[v _timer `uc ~T0 @X0 1 s ]
+"24
+[; ;EQM.c: 24: static unsigned char index;
+[v _index `uc ~T0 @X0 1 s ]
+"25
+[; ;EQM.c: 25: static unsigned char port[10];
+[v _port `uc ~T0 @X0 -> 10 `i s ]
+"26
+[; ;EQM.c: 26: static unsigned char user[3];
+[v _user `uc ~T0 @X0 -> 3 `i s ]
+"27
+[; ;EQM.c: 27: static unsigned char msg;
+[v _msg `uc ~T0 @X0 1 s ]
+"28
+[; ;EQM.c: 28: static unsigned char iMSG;
+[v _iMSG `uc ~T0 @X0 1 s ]
+"29
+[; ;EQM.c: 29: static unsigned char INTENTS;
+[v _INTENTS `uc ~T0 @X0 1 s ]
+"30
+[; ;EQM.c: 30: static unsigned char state_option = 0;
+[v _state_option `uc ~T0 @X0 1 s ]
+[i _state_option
+-> -> 0 `i `uc
+]
+"31
+[; ;EQM.c: 31: static unsigned char state4 = 0;
+[v _state4 `uc ~T0 @X0 1 s ]
+[i _state4
+-> -> 0 `i `uc
+]
+"32
+[; ;EQM.c: 32: static unsigned char lmsg;
+[v _lmsg `uc ~T0 @X0 1 s ]
+"33
+[; ;EQM.c: 33: static unsigned long temps=1000;
+[v _temps `ul ~T0 @X0 1 s ]
+[i _temps
+-> -> -> 1000 `i `l `ul
+]
+"36
+[; ;EQM.c: 36: static unsigned char maxMSG = 0;
+[v _maxMSG `uc ~T0 @X0 1 s ]
+[i _maxMSG
+-> -> 0 `i `uc
+]
+"37
+[; ;EQM.c: 37: static unsigned char lastMSG = 7;
+[v _lastMSG `uc ~T0 @X0 1 s ]
+[i _lastMSG
+-> -> 7 `i `uc
+]
+"38
+[; ;EQM.c: 38: static unsigned char Opt3 = 0;
+[v _Opt3 `uc ~T0 @X0 1 s ]
+[i _Opt3
+-> -> 0 `i `uc
+]
+"39
+[; ;EQM.c: 39: static unsigned char Opt4 = 0;
+[v _Opt4 `uc ~T0 @X0 1 s ]
+[i _Opt4
+-> -> 0 `i `uc
+]
+"41
+[; ;EQM.c: 41: static unsigned char compt = 0;
+[v _compt `uc ~T0 @X0 1 s ]
+[i _compt
+-> -> 0 `i `uc
+]
+"42
+[; ;EQM.c: 42: static unsigned char compt2 = 0;
+[v _compt2 `uc ~T0 @X0 1 s ]
+[i _compt2
+-> -> 0 `i `uc
+]
+"43
+[; ;EQM.c: 43: static unsigned char action = 0;
+[v _action `uc ~T0 @X0 1 s ]
+[i _action
+-> -> 0 `i `uc
+]
+"44
+[; ;EQM.c: 44: static unsigned char tecla = 0;
+[v _tecla `uc ~T0 @X0 1 s ]
+[i _tecla
+-> -> 0 `i `uc
+]
+"46
+[; ;EQM.c: 46: static char* msgToSend;
+[v _msgToSend `*uc ~T0 @X0 1 s ]
+"47
+[; ;EQM.c: 47: static char* msgToLCD;
+[v _msgToLCD `*uc ~T0 @X0 1 s ]
+"49
+[; ;EQM.c: 49: static unsigned char wifiSTATE=0;
+[v _wifiSTATE `uc ~T0 @X0 1 s ]
+[i _wifiSTATE
+-> -> 0 `i `uc
+]
+"50
+[; ;EQM.c: 50: static unsigned char statusSTATE=0;
+[v _statusSTATE `uc ~T0 @X0 1 s ]
+[i _statusSTATE
+-> -> 0 `i `uc
+]
+"52
+[; ;EQM.c: 52: static unsigned char resetMENU=0;
+[v _resetMENU `uc ~T0 @X0 1 s ]
+[i _resetMENU
+-> -> 0 `i `uc
+]
+"54
+[; ;EQM.c: 54: static unsigned char comptSEC=0;
+[v _comptSEC `uc ~T0 @X0 1 s ]
+[i _comptSEC
+-> -> 0 `i `uc
+]
+[v F2679 `uc ~T0 @X0 -> 14 `i t ]
+"55
+[; ;EQM.c: 55: static unsigned char msgs[8][14];
+[v _msgs `F2679 ~T0 @X0 -> 8 `i s ]
+"57
+[; ;EQM.c: 57: void EQMInit(void) {
+[v _EQMInit `(v ~T0 @X0 1 ef ]
+{
+[e :U _EQMInit ]
+[f ]
+"58
+[; ;EQM.c: 58:     char isBusy = TI_NewTimer(&timer);
+[v _isBusy `uc ~T0 @X0 1 a ]
+[e = _isBusy -> ( _TI_NewTimer (1 &U _timer `uc ]
+"59
+[; ;EQM.c: 59:     while(!isBusy);
+[e $U 281  ]
+[e :U 282 ]
+[e :U 281 ]
+[e $ ! != -> _isBusy `i -> 0 `i 282  ]
+[e :U 283 ]
+"60
+[; ;EQM.c: 60:     start = 1;
+[e = _start -> -> 1 `i `uc ]
+"61
+[; ;EQM.c: 61:     Opt3 = 0;
+[e = _Opt3 -> -> 0 `i `uc ]
+"62
+[; ;EQM.c: 62:     Opt4 = 0;
+[e = _Opt4 -> -> 0 `i `uc ]
+"63
+[; ;EQM.c: 63:     INTENTS=0;
+[e = _INTENTS -> -> 0 `i `uc ]
+"64
+[; ;EQM.c: 64:     port[4]=',';
+[e = *U + &U _port * -> -> -> 4 `i `ui `ux -> -> # *U &U _port `ui `ux -> -> 44 `ui `uc ]
+"65
+[; ;EQM.c: 65:     port[9]='\0';
+[e = *U + &U _port * -> -> -> 9 `i `ui `ux -> -> # *U &U _port `ui `ux -> -> 0 `ui `uc ]
+"66
+[; ;EQM.c: 66:     state_option = 0;
+[e = _state_option -> -> 0 `i `uc ]
+"67
+[; ;EQM.c: 67: }
+[e :UE 280 ]
+}
+"69
+[; ;EQM.c: 69: void EQM_MSG(void){
+[v _EQM_MSG `(v ~T0 @X0 1 ef ]
+{
+[e :U _EQM_MSG ]
+[f ]
+"71
+[; ;EQM.c: 71:     start=0;
+[e = _start -> -> 0 `i `uc ]
+"72
+[; ;EQM.c: 72: }
+[e :UE 284 ]
+}
+"76
+[; ;EQM.c: 76: char ConfWIFI(void){
+[v _ConfWIFI `(uc ~T0 @X0 1 ef ]
+{
+[e :U _ConfWIFI ]
+[f ]
+"77
+[; ;EQM.c: 77:     switch (state_option){
+[e $U 287  ]
+{
+"78
+[; ;EQM.c: 78:         case 0:
+[e :U 288 ]
+"79
+[; ;EQM.c: 79:             LcClear();
+[e ( _LcClear ..  ]
+"80
+[; ;EQM.c: 80:             LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"81
+[; ;EQM.c: 81:             state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"82
+[; ;EQM.c: 82:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"83
+[; ;EQM.c: 83:         case 1:
+[e :U 289 ]
+"84
+[; ;EQM.c: 84:             if (LcPutString("DEST.PORT: ") == 2) {
+[e $ ! == -> ( _LcPutString (1 :s 1C `i -> 2 `i 290  ]
+{
+"85
+[; ;EQM.c: 85:                 StartRead(4);
+[e ( _StartRead (1 -> -> 4 `i `uc ]
+"86
+[; ;EQM.c: 86:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"87
+[; ;EQM.c: 87:    }
+}
+[e :U 290 ]
+"88
+[; ;EQM.c: 88:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"90
+[; ;EQM.c: 90:   case 2:
+[e :U 291 ]
+"91
+[; ;EQM.c: 91:    if (ValorsState()==0) {
+[e $ ! == -> ( _ValorsState ..  `i -> 0 `i 292  ]
+{
+"92
+[; ;EQM.c: 92:                 port[0] = getMSG(0);
+[e = *U + &U _port * -> -> -> 0 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 0 `i `uc `uc ]
+"93
+[; ;EQM.c: 93:                 port[1] = getMSG(1);
+[e = *U + &U _port * -> -> -> 1 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 1 `i `uc `uc ]
+"94
+[; ;EQM.c: 94:                 port[2] = getMSG(2);
+[e = *U + &U _port * -> -> -> 2 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 2 `i `uc `uc ]
+"95
+[; ;EQM.c: 95:                 port[3] = getMSG(3);
+[e = *U + &U _port * -> -> -> 3 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 3 `i `uc `uc ]
+"96
+[; ;EQM.c: 96:                 LcClear();
+[e ( _LcClear ..  ]
+"97
+[; ;EQM.c: 97:                 LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"98
+[; ;EQM.c: 98:     state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"99
+[; ;EQM.c: 99:    }
+}
+[e :U 292 ]
+"100
+[; ;EQM.c: 100:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"101
+[; ;EQM.c: 101:         case 3:
+[e :U 293 ]
+"102
+[; ;EQM.c: 102:             if (LcPutString("REC.PORT: ") == 2) {
+[e $ ! == -> ( _LcPutString (1 :s 2C `i -> 2 `i 294  ]
+{
+"103
+[; ;EQM.c: 103:                 StartRead(4);
+[e ( _StartRead (1 -> -> 4 `i `uc ]
+"104
+[; ;EQM.c: 104:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"105
+[; ;EQM.c: 105:    }
+}
+[e :U 294 ]
+"106
+[; ;EQM.c: 106:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"107
+[; ;EQM.c: 107:         case 4:
+[e :U 295 ]
+"108
+[; ;EQM.c: 108:    if (ValorsState()==0) {
+[e $ ! == -> ( _ValorsState ..  `i -> 0 `i 296  ]
+{
+"109
+[; ;EQM.c: 109:                 port[5] = getMSG(0);
+[e = *U + &U _port * -> -> -> 5 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 0 `i `uc `uc ]
+"110
+[; ;EQM.c: 110:                 port[6] = getMSG(1);
+[e = *U + &U _port * -> -> -> 6 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 1 `i `uc `uc ]
+"111
+[; ;EQM.c: 111:                 port[7] = getMSG(2);
+[e = *U + &U _port * -> -> -> 7 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 2 `i `uc `uc ]
+"112
+[; ;EQM.c: 112:                 port[8] = getMSG(3);
+[e = *U + &U _port * -> -> -> 8 `i `ui `ux -> -> # *U &U _port `ui `ux -> ( _getMSG (1 -> -> 3 `i `uc `uc ]
+"113
+[; ;EQM.c: 113:                 LcClear();
+[e ( _LcClear ..  ]
+"114
+[; ;EQM.c: 114:                 LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"115
+[; ;EQM.c: 115:     state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"116
+[; ;EQM.c: 116:                 if (Opt3==1 ){
+[e $ ! == -> _Opt3 `i -> 1 `i 297  ]
+{
+"117
+[; ;EQM.c: 117:                     state_option=7;
+[e = _state_option -> -> 7 `i `uc ]
+"118
+[; ;EQM.c: 118:                 }
+}
+[e :U 297 ]
+"119
+[; ;EQM.c: 119:    }
+}
+[e :U 296 ]
+"120
+[; ;EQM.c: 120:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"121
+[; ;EQM.c: 121:         case 5:
+[e :U 298 ]
+"122
+[; ;EQM.c: 122:             if (LcPutString("USER NAME: ") == 2) {
+[e $ ! == -> ( _LcPutString (1 :s 3C `i -> 2 `i 299  ]
+{
+"123
+[; ;EQM.c: 123:                 StartRead(3);
+[e ( _StartRead (1 -> -> 3 `i `uc ]
+"124
+[; ;EQM.c: 124:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"125
+[; ;EQM.c: 125:    }
+}
+[e :U 299 ]
+"126
+[; ;EQM.c: 126:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"127
+[; ;EQM.c: 127:   case 6:
+[e :U 300 ]
+"128
+[; ;EQM.c: 128:             if (ValorsState()==0) {
+[e $ ! == -> ( _ValorsState ..  `i -> 0 `i 301  ]
+{
+"129
+[; ;EQM.c: 129:                 user[0] = getMSG(0);
+[e = *U + &U _user * -> -> -> 0 `i `ui `ux -> -> # *U &U _user `ui `ux -> ( _getMSG (1 -> -> 0 `i `uc `uc ]
+"130
+[; ;EQM.c: 130:                 user[1] = getMSG(1);
+[e = *U + &U _user * -> -> -> 1 `i `ui `ux -> -> # *U &U _user `ui `ux -> ( _getMSG (1 -> -> 1 `i `uc `uc ]
+"131
+[; ;EQM.c: 131:                 user[2] = getMSG(2);
+[e = *U + &U _user * -> -> -> 2 `i `ui `ux -> -> # *U &U _user `ui `ux -> ( _getMSG (1 -> -> 2 `i `uc `uc ]
+"132
+[; ;EQM.c: 132:                 LcClear();
+[e ( _LcClear ..  ]
+"133
+[; ;EQM.c: 133:                 LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"134
+[; ;EQM.c: 134:                 state_option++;}
+[e ++ _state_option -> -> 1 `i `uc ]
+}
+[e :U 301 ]
+"135
+[; ;EQM.c: 135:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"136
+[; ;EQM.c: 136:         case 7:
+[e :U 302 ]
+"137
+[; ;EQM.c: 137:             if (MotorCOM("AT+CIPCLOSE\r\n")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 4C `i -> 3 `i 303  ]
+{
+"138
+[; ;EQM.c: 138:                 index = 0;
+[e = _index -> -> 0 `i `uc ]
+"139
+[; ;EQM.c: 139:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"140
+[; ;EQM.c: 140:             }
+}
+[e :U 303 ]
+"141
+[; ;EQM.c: 141:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"142
+[; ;EQM.c: 142:         case 8:
+[e :U 304 ]
+"143
+[; ;EQM.c: 143:             if (GetFlag()==1){
+[e $ ! == -> ( _GetFlag ..  `i -> 1 `i 305  ]
+{
+"144
+[; ;EQM.c: 144:                 index++;
+[e ++ _index -> -> 1 `i `uc ]
+"145
+[; ;EQM.c: 145:                 msg= GetRxMSG();
+[e = _msg -> ( _GetRxMSG ..  `uc ]
+"146
+[; ;EQM.c: 146:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"147
+[; ;EQM.c: 147:             }
+}
+[e :U 305 ]
+"148
+[; ;EQM.c: 148:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"149
+[; ;EQM.c: 149:         case 9:
+[e :U 306 ]
+"150
+[; ;EQM.c: 150:             if (msg == '\n' && index>7){
+[e $ ! && == -> _msg `ui -> 10 `ui > -> _index `i -> 7 `i 307  ]
+{
+"151
+[; ;EQM.c: 151:                 index=0;
+[e = _index -> -> 0 `i `uc ]
+"152
+[; ;EQM.c: 152:                 state_option--;
+[e -- _state_option -> -> 1 `i `uc ]
+"153
+[; ;EQM.c: 153:             }else if (msg == '\n' && index<8) {
+}
+[e $U 308  ]
+[e :U 307 ]
+[e $ ! && == -> _msg `ui -> 10 `ui < -> _index `i -> 8 `i 309  ]
+{
+"154
+[; ;EQM.c: 154:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"155
+[; ;EQM.c: 155:             } else {
+}
+[e $U 310  ]
+[e :U 309 ]
+{
+"156
+[; ;EQM.c: 156:                 state_option--;
+[e -- _state_option -> -> 1 `i `uc ]
+"157
+[; ;EQM.c: 157:             }
+}
+[e :U 310 ]
+[e :U 308 ]
+"158
+[; ;EQM.c: 158:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"159
+[; ;EQM.c: 159:         case 10:
+[e :U 311 ]
+"162
+[; ;EQM.c: 162:             if(SIO_RXAvail()==1){
+[e $ ! == -> ( _SIO_RXAvail ..  `i -> 1 `i 312  ]
+{
+"163
+[; ;EQM.c: 163:                 msg =SIO_GetChar();
+[e = _msg ( _SIO_GetChar ..  ]
+"165
+[; ;EQM.c: 165:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"171
+[; ;EQM.c: 171:             }
+}
+[e :U 312 ]
+"172
+[; ;EQM.c: 172:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"173
+[; ;EQM.c: 173:         case 11:
+[e :U 313 ]
+"174
+[; ;EQM.c: 174:             if (MotorCOM("AT+CIPSTART=\"UDP\",\"255.255.255.255\",\0")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 5C `i -> 3 `i 314  ]
+{
+"176
+[; ;EQM.c: 176:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"177
+[; ;EQM.c: 177:             }
+}
+[e :U 314 ]
+"178
+[; ;EQM.c: 178:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"179
+[; ;EQM.c: 179:         case 12:
+[e :U 315 ]
+"180
+[; ;EQM.c: 180:             msgToSend =(char*)port;
+[e = _msgToSend -> &U _port `*uc ]
+"181
+[; ;EQM.c: 181:             if (MotorCOM(msgToSend)==3){
+[e $ ! == -> ( _MotorCOM (1 _msgToSend `i -> 3 `i 316  ]
+{
+"182
+[; ;EQM.c: 182:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"183
+[; ;EQM.c: 183:             }
+}
+[e :U 316 ]
+"184
+[; ;EQM.c: 184:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"185
+[; ;EQM.c: 185:         case 13:
+[e :U 317 ]
+"186
+[; ;EQM.c: 186:             if (MotorCOM("\r\n\0")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 6C `i -> 3 `i 318  ]
+{
+"187
+[; ;EQM.c: 187:                 comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"188
+[; ;EQM.c: 188:                 TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"189
+[; ;EQM.c: 189:                 index=0;
+[e = _index -> -> 0 `i `uc ]
+"190
+[; ;EQM.c: 190:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"191
+[; ;EQM.c: 191:             }
+}
+[e :U 318 ]
+"192
+[; ;EQM.c: 192:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"193
+[; ;EQM.c: 193:         case 14:
+[e :U 319 ]
+"194
+[; ;EQM.c: 194:             if(SIO_RXAvail()==1){
+[e $ ! == -> ( _SIO_RXAvail ..  `i -> 1 `i 320  ]
+{
+"196
+[; ;EQM.c: 196:                 if(SIO_GetChar()==0x06){
+[e $ ! == -> ( _SIO_GetChar ..  `i -> 6 `i 321  ]
+{
+"197
+[; ;EQM.c: 197:                     startMenu();
+[e ( _startMenu ..  ]
+"198
+[; ;EQM.c: 198:                     state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"199
+[; ;EQM.c: 199:                     wifiSTATE=1;
+[e = _wifiSTATE -> -> 1 `i `uc ]
+"200
+[; ;EQM.c: 200:                     return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 285  ]
+"201
+[; ;EQM.c: 201:                 }else
+}
+[e $U 322  ]
+[e :U 321 ]
+"202
+[; ;EQM.c: 202:                 {
+{
+"203
+[; ;EQM.c: 203:                     endMSG();
+[e ( _endMSG ..  ]
+"204
+[; ;EQM.c: 204:                     state_option=11;
+[e = _state_option -> -> 11 `i `uc ]
+"205
+[; ;EQM.c: 205:                     INTENTS++;
+[e ++ _INTENTS -> -> 1 `i `uc ]
+"206
+[; ;EQM.c: 206:                     if(INTENTS >2){
+[e $ ! > -> _INTENTS `i -> 2 `i 323  ]
+{
+"207
+[; ;EQM.c: 207:                      state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"208
+[; ;EQM.c: 208:                      wifiSTATE=0;
+[e = _wifiSTATE -> -> 0 `i `uc ]
+"209
+[; ;EQM.c: 209:                      return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 285  ]
+"210
+[; ;EQM.c: 210:                     }
+}
+[e :U 323 ]
+"211
+[; ;EQM.c: 211:                 }
+}
+[e :U 322 ]
+"212
+[; ;EQM.c: 212:                 index++;
+[e ++ _index -> -> 1 `i `uc ]
+"213
+[; ;EQM.c: 213:             }
+}
+[e :U 320 ]
+"214
+[; ;EQM.c: 214:             if (TI_GetTics(timer)>=1000) {
+[e $ ! >= ( _TI_GetTics (1 _timer -> -> -> 1000 `i `l `ul 324  ]
+{
+"216
+[; ;EQM.c: 216:                 if (comptSEC>=100){
+[e $ ! >= -> _comptSEC `i -> 100 `i 325  ]
+{
+"217
+[; ;EQM.c: 217:                     endMSG();
+[e ( _endMSG ..  ]
+"218
+[; ;EQM.c: 218:                      state_option=11;
+[e = _state_option -> -> 11 `i `uc ]
+"219
+[; ;EQM.c: 219:                      INTENTS++;
+[e ++ _INTENTS -> -> 1 `i `uc ]
+"220
+[; ;EQM.c: 220:                     if (Opt4==1){
+[e $ ! == -> _Opt4 `i -> 1 `i 326  ]
+{
+"221
+[; ;EQM.c: 221:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"222
+[; ;EQM.c: 222:                         wifiSTATE=0;
+[e = _wifiSTATE -> -> 0 `i `uc ]
+"223
+[; ;EQM.c: 223:                         return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 285  ]
+"224
+[; ;EQM.c: 224:                     }
+}
+[e :U 326 ]
+"225
+[; ;EQM.c: 225:                      if(INTENTS > 2){
+[e $ ! > -> _INTENTS `i -> 2 `i 327  ]
+{
+"226
+[; ;EQM.c: 226:                          state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"227
+[; ;EQM.c: 227:                          wifiSTATE=0;
+[e = _wifiSTATE -> -> 0 `i `uc ]
+"228
+[; ;EQM.c: 228:                          return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 285  ]
+"229
+[; ;EQM.c: 229:                  }}else{
+}
+[e :U 327 ]
+}
+[e $U 328  ]
+[e :U 325 ]
+{
+"230
+[; ;EQM.c: 230:                     comptSEC++;
+[e ++ _comptSEC -> -> 1 `i `uc ]
+"231
+[; ;EQM.c: 231:                     TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"232
+[; ;EQM.c: 232:                  }
+}
+[e :U 328 ]
+"233
+[; ;EQM.c: 233:             }
+}
+[e :U 324 ]
+"234
+[; ;EQM.c: 234:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 285  ]
+"235
+[; ;EQM.c: 235:     }
+}
+[e $U 286  ]
+[e :U 287 ]
+[e [\ _state_option , $ -> 0 `i 288
+ , $ -> 1 `i 289
+ , $ -> 2 `i 291
+ , $ -> 3 `i 293
+ , $ -> 4 `i 295
+ , $ -> 5 `i 298
+ , $ -> 6 `i 300
+ , $ -> 7 `i 302
+ , $ -> 8 `i 304
+ , $ -> 9 `i 306
+ , $ -> 10 `i 311
+ , $ -> 11 `i 313
+ , $ -> 12 `i 315
+ , $ -> 13 `i 317
+ , $ -> 14 `i 319
+ 286 ]
+[e :U 286 ]
+"236
+[; ;EQM.c: 236: }
+[e :UE 285 ]
+}
+"239
+[; ;EQM.c: 239: char ListAccesPoints(void) {
+[v _ListAccesPoints `(uc ~T0 @X0 1 ef ]
+{
+[e :U _ListAccesPoints ]
+[f ]
+"241
+[; ;EQM.c: 241:  switch(state_option) {
+[e $U 331  ]
+{
+"242
+[; ;EQM.c: 242:   case 0:
+[e :U 332 ]
+"243
+[; ;EQM.c: 243:             msgToLCD =(char*)"SCANNING...\0";
+[e = _msgToLCD :s 7C ]
+"244
+[; ;EQM.c: 244:             if(LcPutString(msgToLCD) == 2){
+[e $ ! == -> ( _LcPutString (1 _msgToLCD `i -> 2 `i 333  ]
+{
+"245
+[; ;EQM.c: 245:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"246
+[; ;EQM.c: 246:             }
+}
+[e :U 333 ]
+"247
+[; ;EQM.c: 247:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 329  ]
+"249
+[; ;EQM.c: 249:         case 1:
+[e :U 334 ]
+"251
+[; ;EQM.c: 251:             if(MotorCOM("AT+CWLAP\r\n")==3) {
+[e $ ! == -> ( _MotorCOM (1 :s 8C `i -> 3 `i 335  ]
+{
+"253
+[; ;EQM.c: 253:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"254
+[; ;EQM.c: 254:             }
+}
+[e :U 335 ]
+"255
+[; ;EQM.c: 255:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 329  ]
+"256
+[; ;EQM.c: 256:         case 2:
+[e :U 336 ]
+"257
+[; ;EQM.c: 257:             if(SIO_RXAvail()==1){
+[e $ ! == -> ( _SIO_RXAvail ..  `i -> 1 `i 337  ]
+{
+"258
+[; ;EQM.c: 258:                 msg = SIO_GetChar();
+[e = _msg ( _SIO_GetChar ..  ]
+"259
+[; ;EQM.c: 259:                 state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"260
+[; ;EQM.c: 260:                 return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 329  ]
+"261
+[; ;EQM.c: 261:             }
+}
+[e :U 337 ]
+"262
+[; ;EQM.c: 262:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 329  ]
+"263
+[; ;EQM.c: 263:     }
+}
+[e $U 330  ]
+[e :U 331 ]
+[e [\ _state_option , $ -> 0 `i 332
+ , $ -> 1 `i 334
+ , $ -> 2 `i 336
+ 330 ]
+[e :U 330 ]
+"264
+[; ;EQM.c: 264: }
+[e :UE 329 ]
+}
+"266
+[; ;EQM.c: 266: char ShowConnStatus(void) {
+[v _ShowConnStatus `(uc ~T0 @X0 1 ef ]
+{
+[e :U _ShowConnStatus ]
+[f ]
+"268
+[; ;EQM.c: 268:  switch(state_option) {
+[e $U 340  ]
+{
+"269
+[; ;EQM.c: 269:   case 0:
+[e :U 341 ]
+"270
+[; ;EQM.c: 270:             msgToLCD =(char*)"SCANNING...\0";
+[e = _msgToLCD :s 9C ]
+"271
+[; ;EQM.c: 271:             if(LcPutString(msgToLCD)==2) {
+[e $ ! == -> ( _LcPutString (1 _msgToLCD `i -> 2 `i 342  ]
+{
+"273
+[; ;EQM.c: 273:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"274
+[; ;EQM.c: 274:             }
+}
+[e :U 342 ]
+"275
+[; ;EQM.c: 275:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 338  ]
+"276
+[; ;EQM.c: 276:         case 1:
+[e :U 343 ]
+"284
+[; ;EQM.c: 284:             if(MotorCOM("AT+CIPSTATUS\r\n")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 10C `i -> 3 `i 344  ]
+{
+"285
+[; ;EQM.c: 285:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"286
+[; ;EQM.c: 286:             }
+}
+[e :U 344 ]
+"287
+[; ;EQM.c: 287:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 338  ]
+"288
+[; ;EQM.c: 288:         case 2:
+[e :U 345 ]
+"289
+[; ;EQM.c: 289:             if(SIO_RXAvail()==1){
+[e $ ! == -> ( _SIO_RXAvail ..  `i -> 1 `i 346  ]
+{
+"290
+[; ;EQM.c: 290:                 msg = SIO_GetChar();
+[e = _msg ( _SIO_GetChar ..  ]
+"291
+[; ;EQM.c: 291:                 if(msg == 0x06){
+[e $ ! == -> _msg `i -> 6 `i 347  ]
+{
+"292
+[; ;EQM.c: 292:                     statusSTATE=1;
+[e = _statusSTATE -> -> 1 `i `uc ]
+"293
+[; ;EQM.c: 293:                 } else {
+}
+[e $U 348  ]
+[e :U 347 ]
+{
+"294
+[; ;EQM.c: 294:                     statusSTATE=0;
+[e = _statusSTATE -> -> 0 `i `uc ]
+"295
+[; ;EQM.c: 295:                 }
+}
+[e :U 348 ]
+"296
+[; ;EQM.c: 296:                 state_option = 0;
+[e = _state_option -> -> 0 `i `uc ]
+"297
+[; ;EQM.c: 297:                 return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 338  ]
+"298
+[; ;EQM.c: 298:             }
+}
+[e :U 346 ]
+"299
+[; ;EQM.c: 299:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 338  ]
+"300
+[; ;EQM.c: 300:     }
+}
+[e $U 339  ]
+[e :U 340 ]
+[e [\ _state_option , $ -> 0 `i 341
+ , $ -> 1 `i 343
+ , $ -> 2 `i 345
+ 339 ]
+[e :U 339 ]
+"301
+[; ;EQM.c: 301: }
+[e :UE 338 ]
+}
+"303
+[; ;EQM.c: 303: char CloseConn(void) {
+[v _CloseConn `(uc ~T0 @X0 1 ef ]
+{
+[e :U _CloseConn ]
+[f ]
+"305
+[; ;EQM.c: 305:     switch(state_option) {
+[e $U 351  ]
+{
+"306
+[; ;EQM.c: 306:   case 0:
+[e :U 352 ]
+"307
+[; ;EQM.c: 307:             LcClear();
+[e ( _LcClear ..  ]
+"308
+[; ;EQM.c: 308:             LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"309
+[; ;EQM.c: 309:             state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"310
+[; ;EQM.c: 310:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 349  ]
+"311
+[; ;EQM.c: 311:         case 1:
+[e :U 353 ]
+"312
+[; ;EQM.c: 312:             if(LcPutString("bye bye ")==2){
+[e $ ! == -> ( _LcPutString (1 :s 11C `i -> 2 `i 354  ]
+{
+"313
+[; ;EQM.c: 313:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"314
+[; ;EQM.c: 314:             }
+}
+[e :U 354 ]
+"315
+[; ;EQM.c: 315:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 349  ]
+"316
+[; ;EQM.c: 316:         case 2:
+[e :U 355 ]
+"317
+[; ;EQM.c: 317:             if(LcPutString(user)==2){
+[e $ ! == -> ( _LcPutString (1 -> &U _user `*uc `i -> 2 `i 356  ]
+{
+"318
+[; ;EQM.c: 318:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"319
+[; ;EQM.c: 319:             }
+}
+[e :U 356 ]
+"320
+[; ;EQM.c: 320:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 349  ]
+"321
+[; ;EQM.c: 321:         case 3:
+[e :U 357 ]
+"322
+[; ;EQM.c: 322:             LcPutChar('!');
+[e ( _LcPutChar (1 -> -> 33 `ui `uc ]
+"323
+[; ;EQM.c: 323:             state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"324
+[; ;EQM.c: 324:             TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"325
+[; ;EQM.c: 325:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 349  ]
+"326
+[; ;EQM.c: 326:         case 4:
+[e :U 358 ]
+"327
+[; ;EQM.c: 327:             if(TI_GetTics(timer)>20000){
+[e $ ! > ( _TI_GetTics (1 _timer -> -> -> 20000 `i `l `ul 359  ]
+{
+"328
+[; ;EQM.c: 328:                 LcClear();
+[e ( _LcClear ..  ]
+"329
+[; ;EQM.c: 329:                 LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"330
+[; ;EQM.c: 330:                 return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 349  ]
+"331
+[; ;EQM.c: 331:             }
+}
+[e :U 359 ]
+"332
+[; ;EQM.c: 332:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 349  ]
+"333
+[; ;EQM.c: 333:     }
+}
+[e $U 350  ]
+[e :U 351 ]
+[e [\ _state_option , $ -> 0 `i 352
+ , $ -> 1 `i 353
+ , $ -> 2 `i 355
+ , $ -> 3 `i 357
+ , $ -> 4 `i 358
+ 350 ]
+[e :U 350 ]
+"335
+[; ;EQM.c: 335: }
+[e :UE 349 ]
+}
+"337
+[; ;EQM.c: 337: char EnterChatMode(void) {
+[v _EnterChatMode `(uc ~T0 @X0 1 ef ]
+{
+[e :U _EnterChatMode ]
+[f ]
+"339
+[; ;EQM.c: 339:  switch(state4) {
+[e $U 362  ]
+{
+"340
+[; ;EQM.c: 340:   case 0:
+[e :U 363 ]
+"341
+[; ;EQM.c: 341:             LcClear();
+[e ( _LcClear ..  ]
+"342
+[; ;EQM.c: 342:             LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"343
+[; ;EQM.c: 343:             StartRead(10);
+[e ( _StartRead (1 -> -> 10 `i `uc ]
+"344
+[; ;EQM.c: 344:             state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"345
+[; ;EQM.c: 345:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"346
+[; ;EQM.c: 346:         case 1:
+[e :U 364 ]
+"347
+[; ;EQM.c: 347:             if (ValorsState()==0) {
+[e $ ! == -> ( _ValorsState ..  `i -> 0 `i 365  ]
+{
+"348
+[; ;EQM.c: 348:                 if(GetTecla()=='*'){
+[e $ ! == -> ( _GetTecla ..  `ui -> 42 `ui 366  ]
+{
+"349
+[; ;EQM.c: 349:                     state4 = 0;
+[e = _state4 -> -> 0 `i `uc ]
+"350
+[; ;EQM.c: 350:                     return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 360  ]
+"351
+[; ;EQM.c: 351:                 }
+}
+[e :U 366 ]
+"352
+[; ;EQM.c: 352:                 state_option=1;
+[e = _state_option -> -> 1 `i `uc ]
+"353
+[; ;EQM.c: 353:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"354
+[; ;EQM.c: 354:             }
+}
+[e :U 365 ]
+"355
+[; ;EQM.c: 355:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"356
+[; ;EQM.c: 356:         case 2:
+[e :U 367 ]
+"357
+[; ;EQM.c: 357:             if (ShowConnStatus()==1){
+[e $ ! == -> ( _ShowConnStatus ..  `i -> 1 `i 368  ]
+{
+"358
+[; ;EQM.c: 358:                 if (statusSTATE==1){
+[e $ ! == -> _statusSTATE `i -> 1 `i 369  ]
+{
+"359
+[; ;EQM.c: 359:                     state4=6;
+[e = _state4 -> -> 6 `i `uc ]
+"360
+[; ;EQM.c: 360:                 } else {
+}
+[e $U 370  ]
+[e :U 369 ]
+{
+"361
+[; ;EQM.c: 361:                     state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"362
+[; ;EQM.c: 362:                     state_option=7;
+[e = _state_option -> -> 7 `i `uc ]
+"363
+[; ;EQM.c: 363:                     Opt4=1;
+[e = _Opt4 -> -> 1 `i `uc ]
+"364
+[; ;EQM.c: 364:                 }
+}
+[e :U 370 ]
+"365
+[; ;EQM.c: 365:             }
+}
+[e :U 368 ]
+"366
+[; ;EQM.c: 366:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"367
+[; ;EQM.c: 367:         case 3:
+[e :U 371 ]
+"368
+[; ;EQM.c: 368:             if(ConfWIFI()==1) {
+[e $ ! == -> ( _ConfWIFI ..  `i -> 1 `i 372  ]
+{
+"369
+[; ;EQM.c: 369:                 if (wifiSTATE==1){
+[e $ ! == -> _wifiSTATE `i -> 1 `i 373  ]
+{
+"370
+[; ;EQM.c: 370:                     state4=6;
+[e = _state4 -> -> 6 `i `uc ]
+"371
+[; ;EQM.c: 371:                 } else{
+}
+[e $U 374  ]
+[e :U 373 ]
+{
+"372
+[; ;EQM.c: 372:                     state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"373
+[; ;EQM.c: 373:                 }
+}
+[e :U 374 ]
+"374
+[; ;EQM.c: 374:             }
+}
+[e :U 372 ]
+"375
+[; ;EQM.c: 375:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"376
+[; ;EQM.c: 376:         case 4:
+[e :U 375 ]
+"377
+[; ;EQM.c: 377:             if(LcPutString("ERROR...F")==2){
+[e $ ! == -> ( _LcPutString (1 :s 12C `i -> 2 `i 376  ]
+{
+"378
+[; ;EQM.c: 378:                 TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"379
+[; ;EQM.c: 379:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"380
+[; ;EQM.c: 380:             }
+}
+[e :U 376 ]
+"381
+[; ;EQM.c: 381:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"382
+[; ;EQM.c: 382:         case 5:
+[e :U 377 ]
+"383
+[; ;EQM.c: 383:             if(TI_GetTics(timer)>temps){
+[e $ ! > ( _TI_GetTics (1 _timer _temps 378  ]
+{
+"384
+[; ;EQM.c: 384:                 LcClear();
+[e ( _LcClear ..  ]
+"385
+[; ;EQM.c: 385:                 LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"386
+[; ;EQM.c: 386:                 state4=0;
+[e = _state4 -> -> 0 `i `uc ]
+"387
+[; ;EQM.c: 387:                 return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 360  ]
+"388
+[; ;EQM.c: 388:             }
+}
+[e :U 378 ]
+"389
+[; ;EQM.c: 389:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"390
+[; ;EQM.c: 390:         case 6:
+[e :U 379 ]
+"391
+[; ;EQM.c: 391:             if(MotorCOM("AT+CIPSEND=\0")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 13C `i -> 3 `i 380  ]
+{
+"395
+[; ;EQM.c: 395:                 index = getIND() + 6;
+[e = _index -> + -> ( _getIND ..  `i -> 6 `i `uc ]
+"396
+[; ;EQM.c: 396:                 if (index > 9){
+[e $ ! > -> _index `i -> 9 `i 381  ]
+{
+"397
+[; ;EQM.c: 397:                     SetMSG('1');
+[e ( _SetMSG (1 -> -> 49 `ui `uc ]
+"398
+[; ;EQM.c: 398:                     index= index - 10;
+[e = _index -> - -> _index `i -> 10 `i `uc ]
+"399
+[; ;EQM.c: 399:                 }
+}
+[e :U 381 ]
+"400
+[; ;EQM.c: 400:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"401
+[; ;EQM.c: 401:             }
+}
+[e :U 380 ]
+"402
+[; ;EQM.c: 402:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"403
+[; ;EQM.c: 403:         case 7:
+[e :U 382 ]
+"404
+[; ;EQM.c: 404:             if (GetEND()==1){
+[e $ ! == -> ( _GetEND ..  `i -> 1 `i 383  ]
+{
+"405
+[; ;EQM.c: 405:                 SetMSG('0'+index);
+[e ( _SetMSG (1 -> + -> 48 `ui -> _index `ui `uc ]
+"406
+[; ;EQM.c: 406:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"407
+[; ;EQM.c: 407:             }
+}
+[e :U 383 ]
+"408
+[; ;EQM.c: 408:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"409
+[; ;EQM.c: 409:         case 8:
+[e :U 384 ]
+"410
+[; ;EQM.c: 410:             if (GetEND()==1){
+[e $ ! == -> ( _GetEND ..  `i -> 1 `i 385  ]
+{
+"411
+[; ;EQM.c: 411:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"412
+[; ;EQM.c: 412:             }
+}
+[e :U 385 ]
+"413
+[; ;EQM.c: 413:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"414
+[; ;EQM.c: 414:         case 9:
+[e :U 386 ]
+"415
+[; ;EQM.c: 415:             if (MotorCOM("\r\n\0")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 14C `i -> 3 `i 387  ]
+{
+"416
+[; ;EQM.c: 416:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"417
+[; ;EQM.c: 417:             }
+}
+[e :U 387 ]
+"418
+[; ;EQM.c: 418:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"419
+[; ;EQM.c: 419:         case 10:
+[e :U 388 ]
+"420
+[; ;EQM.c: 420:             if (GetFlag()==1 && GetRxMSG() == '>'){
+[e $ ! && == -> ( _GetFlag ..  `i -> 1 `i == -> ( _GetRxMSG ..  `ui -> 62 `ui 389  ]
+{
+"421
+[; ;EQM.c: 421:                 index=0;
+[e = _index -> -> 0 `i `uc ]
+"422
+[; ;EQM.c: 422:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"423
+[; ;EQM.c: 423:             }
+}
+[e :U 389 ]
+"424
+[; ;EQM.c: 424:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"425
+[; ;EQM.c: 425:         case 11:
+[e :U 390 ]
+"426
+[; ;EQM.c: 426:             if (GetEND()==1){
+[e $ ! == -> ( _GetEND ..  `i -> 1 `i 391  ]
+{
+"427
+[; ;EQM.c: 427:                 if(index < 3){
+[e $ ! < -> _index `i -> 3 `i 392  ]
+{
+"429
+[; ;EQM.c: 429:                     SetMSG(user[index]);
+[e ( _SetMSG (1 *U + &U _user * -> _index `ux -> -> # *U &U _user `ui `ux ]
+"430
+[; ;EQM.c: 430:                     SIO_PutChar(user[index]);
+[e ( _SIO_PutChar (1 *U + &U _user * -> _index `ux -> -> # *U &U _user `ui `ux ]
+"431
+[; ;EQM.c: 431:                 }
+}
+[e :U 392 ]
+"432
+[; ;EQM.c: 432:                 if (index ==3){
+[e $ ! == -> _index `i -> 3 `i 393  ]
+{
+"433
+[; ;EQM.c: 433:                     SetMSG(';');
+[e ( _SetMSG (1 -> -> 59 `ui `uc ]
+"434
+[; ;EQM.c: 434:                     SIO_PutChar(';');
+[e ( _SIO_PutChar (1 -> -> 59 `ui `uc ]
+"436
+[; ;EQM.c: 436:                 }
+}
+[e :U 393 ]
+"437
+[; ;EQM.c: 437:                 if(3 < index){
+[e $ ! < -> 3 `i -> _index `i 394  ]
+{
+"439
+[; ;EQM.c: 439:                     SetMSG(getMSG(index-4));
+[e ( _SetMSG (1 -> ( _getMSG (1 -> - -> _index `i -> 4 `i `uc `uc ]
+"440
+[; ;EQM.c: 440:                     SIO_PutChar(getMSG(index-4));
+[e ( _SIO_PutChar (1 -> ( _getMSG (1 -> - -> _index `i -> 4 `i `uc `uc ]
+"441
+[; ;EQM.c: 441:                     if(index-3 == getIND()){
+[e $ ! == - -> _index `i -> 3 `i -> ( _getIND ..  `i 395  ]
+{
+"443
+[; ;EQM.c: 443:                         state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"444
+[; ;EQM.c: 444:                     }
+}
+[e :U 395 ]
+"445
+[; ;EQM.c: 445:                 }
+}
+[e :U 394 ]
+"447
+[; ;EQM.c: 447:                 index++;
+[e ++ _index -> -> 1 `i `uc ]
+"448
+[; ;EQM.c: 448:             }
+}
+[e :U 391 ]
+"449
+[; ;EQM.c: 449:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"450
+[; ;EQM.c: 450:         case 12:
+[e :U 396 ]
+"451
+[; ;EQM.c: 451:             if (MotorCOM("\r\n\0")==3){
+[e $ ! == -> ( _MotorCOM (1 :s 15C `i -> 3 `i 397  ]
+{
+"461
+[; ;EQM.c: 461:                 state4++;
+[e ++ _state4 -> -> 1 `i `uc ]
+"462
+[; ;EQM.c: 462:             }
+}
+[e :U 397 ]
+"463
+[; ;EQM.c: 463:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"464
+[; ;EQM.c: 464:         case 13:
+[e :U 398 ]
+"465
+[; ;EQM.c: 465:             if(SIO_RXAvail()==1){
+[e $ ! == -> ( _SIO_RXAvail ..  `i -> 1 `i 399  ]
+{
+"466
+[; ;EQM.c: 466:                 state4=0;
+[e = _state4 -> -> 0 `i `uc ]
+"467
+[; ;EQM.c: 467:                 if(SIO_GetChar()!=0x06){
+[e $ ! != -> ( _SIO_GetChar ..  `i -> 6 `i 400  ]
+{
+"468
+[; ;EQM.c: 468:                     return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 360  ]
+"469
+[; ;EQM.c: 469:                 }
+}
+[e :U 400 ]
+"470
+[; ;EQM.c: 470:             }
+}
+[e :U 399 ]
+"471
+[; ;EQM.c: 471:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 360  ]
+"472
+[; ;EQM.c: 472:     }
+}
+[e $U 361  ]
+[e :U 362 ]
+[e [\ _state4 , $ -> 0 `i 363
+ , $ -> 1 `i 364
+ , $ -> 2 `i 367
+ , $ -> 3 `i 371
+ , $ -> 4 `i 375
+ , $ -> 5 `i 377
+ , $ -> 6 `i 379
+ , $ -> 7 `i 382
+ , $ -> 8 `i 384
+ , $ -> 9 `i 386
+ , $ -> 10 `i 388
+ , $ -> 11 `i 390
+ , $ -> 12 `i 396
+ , $ -> 13 `i 398
+ 361 ]
+[e :U 361 ]
+"473
+[; ;EQM.c: 473: }
+[e :UE 360 ]
+}
+"475
+[; ;EQM.c: 475: char ListLastMessages (void) {
+[v _ListLastMessages `(uc ~T0 @X0 1 ef ]
+{
+[e :U _ListLastMessages ]
+[f ]
+"476
+[; ;EQM.c: 476:     switch(state_option) {
+[e $U 403  ]
+{
+"477
+[; ;EQM.c: 477:     case 0:
+[e :U 404 ]
+"478
+[; ;EQM.c: 478:         LcClear();
+[e ( _LcClear ..  ]
+"479
+[; ;EQM.c: 479:         LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"480
+[; ;EQM.c: 480:         compt = lastMSG + 1;
+[e = _compt -> + -> _lastMSG `i -> 1 `i `uc ]
+"481
+[; ;EQM.c: 481:         if (compt==8){
+[e $ ! == -> _compt `i -> 8 `i 405  ]
+{
+"482
+[; ;EQM.c: 482:             compt=0;
+[e = _compt -> -> 0 `i `uc ]
+"483
+[; ;EQM.c: 483:         }
+}
+[e :U 405 ]
+"484
+[; ;EQM.c: 484:         index=0;
+[e = _index -> -> 0 `i `uc ]
+"485
+[; ;EQM.c: 485:         if (maxMSG>1){
+[e $ ! > -> _maxMSG `i -> 1 `i 406  ]
+{
+"486
+[; ;EQM.c: 486:             compt2 = compt+1;
+[e = _compt2 -> + -> _compt `i -> 1 `i `uc ]
+"487
+[; ;EQM.c: 487:             if (compt==7){
+[e $ ! == -> _compt `i -> 7 `i 407  ]
+{
+"488
+[; ;EQM.c: 488:                 compt2=0;
+[e = _compt2 -> -> 0 `i `uc ]
+"489
+[; ;EQM.c: 489:             }
+}
+[e :U 407 ]
+"490
+[; ;EQM.c: 490:         } else{
+}
+[e $U 408  ]
+[e :U 406 ]
+{
+"491
+[; ;EQM.c: 491:             compt2='*';
+[e = _compt2 -> -> 42 `ui `uc ]
+"492
+[; ;EQM.c: 492:         }
+}
+[e :U 408 ]
+"493
+[; ;EQM.c: 493:         iMSG=0;
+[e = _iMSG -> -> 0 `i `uc ]
+"494
+[; ;EQM.c: 494:         if (maxMSG == 0){
+[e $ ! == -> _maxMSG `i -> 0 `i 409  ]
+{
+"495
+[; ;EQM.c: 495:             state_option=7;
+[e = _state_option -> -> 7 `i `uc ]
+"496
+[; ;EQM.c: 496:         } else{
+}
+[e $U 410  ]
+[e :U 409 ]
+{
+"497
+[; ;EQM.c: 497:             state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"498
+[; ;EQM.c: 498:             LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"499
+[; ;EQM.c: 499:         }
+}
+[e :U 410 ]
+"500
+[; ;EQM.c: 500:         return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"501
+[; ;EQM.c: 501:      case 1:
+[e :U 411 ]
+"502
+[; ;EQM.c: 502:         if(index == 0){
+[e $ ! == -> _index `i -> 0 `i 412  ]
+{
+"503
+[; ;EQM.c: 503:             LcPutChar('1'+ iMSG);
+[e ( _LcPutChar (1 -> + -> 49 `ui -> _iMSG `ui `uc ]
+"504
+[; ;EQM.c: 504:         }
+}
+[e :U 412 ]
+"505
+[; ;EQM.c: 505:         if (index ==1){
+[e $ ! == -> _index `i -> 1 `i 413  ]
+{
+"506
+[; ;EQM.c: 506:             LcPutChar(':');
+[e ( _LcPutChar (1 -> -> 58 `ui `uc ]
+"507
+[; ;EQM.c: 507:         }
+}
+[e :U 413 ]
+"508
+[; ;EQM.c: 508:         if(1 < index ){
+[e $ ! < -> 1 `i -> _index `i 414  ]
+{
+"509
+[; ;EQM.c: 509:             LcPutChar(msgs[compt][index-2]);
+[e ( _LcPutChar (1 -> *U + &U *U + &U _msgs * -> _compt `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> -> - -> _index `i -> 2 `i `ui `ux -> -> # *U &U *U + &U _msgs * -> _compt `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux `uc ]
+"510
+[; ;EQM.c: 510:             if (index == 15){
+[e $ ! == -> _index `i -> 15 `i 415  ]
+{
+"511
+[; ;EQM.c: 511:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"512
+[; ;EQM.c: 512:                 index=0;
+[e = _index -> -> 0 `i `uc ]
+"513
+[; ;EQM.c: 513:                 LcGotoXY(0,1);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+"514
+[; ;EQM.c: 514:                 if (compt2=='*'){
+[e $ ! == -> _compt2 `ui -> 42 `ui 416  ]
+{
+"515
+[; ;EQM.c: 515:                     state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"516
+[; ;EQM.c: 516:                 }
+}
+[e :U 416 ]
+"517
+[; ;EQM.c: 517:                 return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"518
+[; ;EQM.c: 518:             }
+}
+[e :U 415 ]
+"519
+[; ;EQM.c: 519:             if ('*' == msgs[compt][index-1]){
+[e $ ! == -> 42 `ui -> *U + &U *U + &U _msgs * -> _compt `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> -> - -> _index `i -> 1 `i `ui `ux -> -> # *U &U *U + &U _msgs * -> _compt `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux `ui 417  ]
+{
+"520
+[; ;EQM.c: 520:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"521
+[; ;EQM.c: 521:                 index=0;
+[e = _index -> -> 0 `i `uc ]
+"522
+[; ;EQM.c: 522:                 LcGotoXY(0,1);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+"523
+[; ;EQM.c: 523:                 if (compt2=='*'){
+[e $ ! == -> _compt2 `ui -> 42 `ui 418  ]
+{
+"524
+[; ;EQM.c: 524:                     state_option=3;
+[e = _state_option -> -> 3 `i `uc ]
+"525
+[; ;EQM.c: 525:                 }
+}
+[e :U 418 ]
+"526
+[; ;EQM.c: 526:                 return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"527
+[; ;EQM.c: 527:             }
+}
+[e :U 417 ]
+"528
+[; ;EQM.c: 528:         }
+}
+[e :U 414 ]
+"529
+[; ;EQM.c: 529:         index++;
+[e ++ _index -> -> 1 `i `uc ]
+"530
+[; ;EQM.c: 530:         return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"531
+[; ;EQM.c: 531:      case 2:
+[e :U 419 ]
+"532
+[; ;EQM.c: 532:         if(index == 0){
+[e $ ! == -> _index `i -> 0 `i 420  ]
+{
+"533
+[; ;EQM.c: 533:             LcPutChar('2'+iMSG);
+[e ( _LcPutChar (1 -> + -> 50 `ui -> _iMSG `ui `uc ]
+"534
+[; ;EQM.c: 534:             SIO_PutChar('2'+iMSG);
+[e ( _SIO_PutChar (1 -> + -> 50 `ui -> _iMSG `ui `uc ]
+"535
+[; ;EQM.c: 535:         }
+}
+[e :U 420 ]
+"536
+[; ;EQM.c: 536:         if (index ==1){
+[e $ ! == -> _index `i -> 1 `i 421  ]
+{
+"537
+[; ;EQM.c: 537:             LcPutChar(':');
+[e ( _LcPutChar (1 -> -> 58 `ui `uc ]
+"538
+[; ;EQM.c: 538:             SIO_PutChar(':');
+[e ( _SIO_PutChar (1 -> -> 58 `ui `uc ]
+"539
+[; ;EQM.c: 539:         }
+}
+[e :U 421 ]
+"540
+[; ;EQM.c: 540:         if(1 < index ){
+[e $ ! < -> 1 `i -> _index `i 422  ]
+{
+"541
+[; ;EQM.c: 541:             LcPutChar(msgs[compt2][index-2]);
+[e ( _LcPutChar (1 -> *U + &U *U + &U _msgs * -> _compt2 `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> -> - -> _index `i -> 2 `i `ui `ux -> -> # *U &U *U + &U _msgs * -> _compt2 `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux `uc ]
+"542
+[; ;EQM.c: 542:             SIO_PutChar(msgs[compt2][index-2]);
+[e ( _SIO_PutChar (1 *U + &U *U + &U _msgs * -> _compt2 `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> -> - -> _index `i -> 2 `i `ui `ux -> -> # *U &U *U + &U _msgs * -> _compt2 `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux ]
+"543
+[; ;EQM.c: 543:             if ('*' == msgs[compt2][index-1]){
+[e $ ! == -> 42 `ui -> *U + &U *U + &U _msgs * -> _compt2 `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> -> - -> _index `i -> 1 `i `ui `ux -> -> # *U &U *U + &U _msgs * -> _compt2 `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux `ui 423  ]
+{
+"544
+[; ;EQM.c: 544:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"545
+[; ;EQM.c: 545:             }
+}
+[e :U 423 ]
+"546
+[; ;EQM.c: 546:             if (index == 13){
+[e $ ! == -> _index `i -> 13 `i 424  ]
+{
+"547
+[; ;EQM.c: 547:                 state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"548
+[; ;EQM.c: 548:             }
+}
+[e :U 424 ]
+"549
+[; ;EQM.c: 549:         }
+}
+[e :U 422 ]
+"550
+[; ;EQM.c: 550:         index++;
+[e ++ _index -> -> 1 `i `uc ]
+"551
+[; ;EQM.c: 551:         return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"552
+[; ;EQM.c: 552:      case 3:
+[e :U 425 ]
+"553
+[; ;EQM.c: 553:          if (HiHaTecla()) {
+[e $ ! != -> ( _HiHaTecla ..  `i -> 0 `i 426  ]
+{
+"554
+[; ;EQM.c: 554:              tecla = GetTecla();
+[e = _tecla -> ( _GetTecla ..  `uc ]
+"555
+[; ;EQM.c: 555:              state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"556
+[; ;EQM.c: 556:          }
+}
+[e $U 427  ]
+"557
+[; ;EQM.c: 557:          else if (!HiHaTecla() && maxMSG !=0) {
+[e :U 426 ]
+[e $ ! && ! != -> ( _HiHaTecla ..  `i -> 0 `i != -> _maxMSG `i -> 0 `i 428  ]
+{
+"558
+[; ;EQM.c: 558:              startConversion();
+[e ( _startConversion ..  ]
+"559
+[; ;EQM.c: 559:              state_option = 5;
+[e = _state_option -> -> 5 `i `uc ]
+"560
+[; ;EQM.c: 560:          }
+}
+[e :U 428 ]
+[e :U 427 ]
+"561
+[; ;EQM.c: 561:          return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"562
+[; ;EQM.c: 562:      case 4:
+[e :U 429 ]
+"563
+[; ;EQM.c: 563:          if (tecla=='*') {
+[e $ ! == -> _tecla `ui -> 42 `ui 430  ]
+{
+"564
+[; ;EQM.c: 564:              return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 401  ]
+"565
+[; ;EQM.c: 565:          }
+}
+[e $U 431  ]
+"566
+[; ;EQM.c: 566:          else {
+[e :U 430 ]
+{
+"567
+[; ;EQM.c: 567:              state_option--;
+[e -- _state_option -> -> 1 `i `uc ]
+"568
+[; ;EQM.c: 568:          }
+}
+[e :U 431 ]
+"569
+[; ;EQM.c: 569:          break;
+[e $U 402  ]
+"570
+[; ;EQM.c: 570:      case 5:
+[e :U 432 ]
+"571
+[; ;EQM.c: 571:          if (finishConversion()==1 && mouJoyAvail()==1) {
+[e $ ! && == -> ( _finishConversion ..  `i -> 1 `i == -> ( _mouJoyAvail ..  `i -> 1 `i 433  ]
+{
+"572
+[; ;EQM.c: 572:              action=getAction();
+[e = _action -> ( _getAction ..  `uc ]
+"573
+[; ;EQM.c: 573:              state_option++;
+[e ++ _state_option -> -> 1 `i `uc ]
+"574
+[; ;EQM.c: 574:          }
+}
+[e $U 434  ]
+"575
+[; ;EQM.c: 575:          else if (finishConversion()==1 && mouJoyAvail()==0) {
+[e :U 433 ]
+[e $ ! && == -> ( _finishConversion ..  `i -> 1 `i == -> ( _mouJoyAvail ..  `i -> 0 `i 435  ]
+{
+"576
+[; ;EQM.c: 576:              state_option=3;
+[e = _state_option -> -> 3 `i `uc ]
+"577
+[; ;EQM.c: 577:          }
+}
+[e :U 435 ]
+[e :U 434 ]
+"578
+[; ;EQM.c: 578:          return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"579
+[; ;EQM.c: 579:      case 6:
+[e :U 436 ]
+"580
+[; ;EQM.c: 580:          if (action==2) {
+[e $ ! == -> _action `i -> 2 `i 437  ]
+{
+"581
+[; ;EQM.c: 581:              if (iMSG != 0){
+[e $ ! != -> _iMSG `i -> 0 `i 438  ]
+{
+"582
+[; ;EQM.c: 582:                  iMSG--;
+[e -- _iMSG -> -> 1 `i `uc ]
+"583
+[; ;EQM.c: 583:                  compt2 = compt;
+[e = _compt2 _compt ]
+"584
+[; ;EQM.c: 584:                  if (compt==0){
+[e $ ! == -> _compt `i -> 0 `i 439  ]
+{
+"585
+[; ;EQM.c: 585:                      compt=7;
+[e = _compt -> -> 7 `i `uc ]
+"586
+[; ;EQM.c: 586:                  }else{
+}
+[e $U 440  ]
+[e :U 439 ]
+{
+"587
+[; ;EQM.c: 587:                      compt--;
+[e -- _compt -> -> 1 `i `uc ]
+"588
+[; ;EQM.c: 588:                  }
+}
+[e :U 440 ]
+"589
+[; ;EQM.c: 589:              } else{
+}
+[e $U 441  ]
+[e :U 438 ]
+{
+"590
+[; ;EQM.c: 590:                  state_option=3;
+[e = _state_option -> -> 3 `i `uc ]
+"591
+[; ;EQM.c: 591:                  return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"592
+[; ;EQM.c: 592:              }
+}
+[e :U 441 ]
+"593
+[; ;EQM.c: 593:          }
+}
+[e $U 442  ]
+"594
+[; ;EQM.c: 594:          else if (action==1) {
+[e :U 437 ]
+[e $ ! == -> _action `i -> 1 `i 443  ]
+{
+"595
+[; ;EQM.c: 595:              if (maxMSG > 2){
+[e $ ! > -> _maxMSG `i -> 2 `i 444  ]
+{
+"596
+[; ;EQM.c: 596:                 if (iMSG < maxMSG-2){
+[e $ ! < -> _iMSG `i - -> _maxMSG `i -> 2 `i 445  ]
+{
+"597
+[; ;EQM.c: 597:                     iMSG++;
+[e ++ _iMSG -> -> 1 `i `uc ]
+"598
+[; ;EQM.c: 598:                     compt=compt2;
+[e = _compt _compt2 ]
+"599
+[; ;EQM.c: 599:                     if (compt2==7){
+[e $ ! == -> _compt2 `i -> 7 `i 446  ]
+{
+"600
+[; ;EQM.c: 600:                         compt2=0;
+[e = _compt2 -> -> 0 `i `uc ]
+"601
+[; ;EQM.c: 601:                     }else{
+}
+[e $U 447  ]
+[e :U 446 ]
+{
+"602
+[; ;EQM.c: 602:                         compt2++;
+[e ++ _compt2 -> -> 1 `i `uc ]
+"603
+[; ;EQM.c: 603:                     }
+}
+[e :U 447 ]
+"604
+[; ;EQM.c: 604:                 } else{
+}
+[e $U 448  ]
+[e :U 445 ]
+{
+"605
+[; ;EQM.c: 605:                     state_option=3;
+[e = _state_option -> -> 3 `i `uc ]
+"606
+[; ;EQM.c: 606:                     return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"607
+[; ;EQM.c: 607:                 }
+}
+[e :U 448 ]
+"608
+[; ;EQM.c: 608:              }
+}
+[e :U 444 ]
+"609
+[; ;EQM.c: 609:          }
+}
+[e :U 443 ]
+[e :U 442 ]
+"610
+[; ;EQM.c: 610:          index=0;
+[e = _index -> -> 0 `i `uc ]
+"611
+[; ;EQM.c: 611:          LcClear();
+[e ( _LcClear ..  ]
+"612
+[; ;EQM.c: 612:          LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"613
+[; ;EQM.c: 613:          state_option=1;
+[e = _state_option -> -> 1 `i `uc ]
+"614
+[; ;EQM.c: 614:          return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"615
+[; ;EQM.c: 615:         case 7:
+[e :U 449 ]
+"616
+[; ;EQM.c: 616:             msgToLCD =(char*)"NO MSGS.";
+[e = _msgToLCD :s 16C ]
+"617
+[; ;EQM.c: 617:             if(LcPutString(msgToLCD)==2) {
+[e $ ! == -> ( _LcPutString (1 _msgToLCD `i -> 2 `i 450  ]
+{
+"619
+[; ;EQM.c: 619:                 state_option=3;
+[e = _state_option -> -> 3 `i `uc ]
+"620
+[; ;EQM.c: 620:             }
+}
+[e :U 450 ]
+"621
+[; ;EQM.c: 621:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 401  ]
+"624
+[; ;EQM.c: 624:     }}
+}
+[e $U 402  ]
+[e :U 403 ]
+[e [\ _state_option , $ -> 0 `i 404
+ , $ -> 1 `i 411
+ , $ -> 2 `i 419
+ , $ -> 3 `i 425
+ , $ -> 4 `i 429
+ , $ -> 5 `i 432
+ , $ -> 6 `i 436
+ , $ -> 7 `i 449
+ 402 ]
+[e :U 402 ]
+[e :UE 401 ]
+}
+"625
+[; ;EQM.c: 625: void ReciveMSG(void){
+[v _ReciveMSG `(v ~T0 @X0 1 ef ]
+{
+[e :U _ReciveMSG ]
+[f ]
+"626
+[; ;EQM.c: 626:     static unsigned char stateMSG = 0;
+[v F2695 `uc ~T0 @X0 1 s stateMSG ]
+[i F2695
+-> -> 0 `i `uc
+]
+"627
+[; ;EQM.c: 627:         switch(stateMSG) {
+[e $U 453  ]
+{
+"628
+[; ;EQM.c: 628:             case 0:
+[e :U 454 ]
+"629
+[; ;EQM.c: 629:                 if(StateMenu()==1){
+[e $ ! == -> ( _StateMenu ..  `i -> 1 `i 455  ]
+{
+"630
+[; ;EQM.c: 630:                     stopMenu();
+[e ( _stopMenu ..  ]
+"631
+[; ;EQM.c: 631:                     resetMENU=1;
+[e = _resetMENU -> -> 1 `i `uc ]
+"632
+[; ;EQM.c: 632:                 }else{
+}
+[e $U 456  ]
+[e :U 455 ]
+{
+"633
+[; ;EQM.c: 633:                     resetMENU=0;
+[e = _resetMENU -> -> 0 `i `uc ]
+"634
+[; ;EQM.c: 634:                 }
+}
+[e :U 456 ]
+"635
+[; ;EQM.c: 635:                 stateMSG++;
+[e ++ F2695 -> -> 1 `i `uc ]
+"636
+[; ;EQM.c: 636:                 break;
+[e $U 452  ]
+"637
+[; ;EQM.c: 637:             case 1:
+[e :U 457 ]
+"638
+[; ;EQM.c: 638:                 if (GetFlag()==1) {
+[e $ ! == -> ( _GetFlag ..  `i -> 1 `i 458  ]
+{
+"639
+[; ;EQM.c: 639:                     msg=GetRxMSG();
+[e = _msg -> ( _GetRxMSG ..  `uc ]
+"641
+[; ;EQM.c: 641:                     if (msg==':'){
+[e $ ! == -> _msg `ui -> 58 `ui 459  ]
+{
+"642
+[; ;EQM.c: 642:                         stateMSG++;
+[e ++ F2695 -> -> 1 `i `uc ]
+"643
+[; ;EQM.c: 643:                         index=0;
+[e = _index -> -> 0 `i `uc ]
+"644
+[; ;EQM.c: 644:                     }
+}
+[e :U 459 ]
+"645
+[; ;EQM.c: 645:                 }
+}
+[e :U 458 ]
+"646
+[; ;EQM.c: 646:                  break;
+[e $U 452  ]
+"647
+[; ;EQM.c: 647:             case 2:
+[e :U 460 ]
+"648
+[; ;EQM.c: 648:                 if (GetFlag()==1 ) {
+[e $ ! == -> ( _GetFlag ..  `i -> 1 `i 461  ]
+{
+"649
+[; ;EQM.c: 649:                     msg=GetRxMSG();
+[e = _msg -> ( _GetRxMSG ..  `uc ]
+"651
+[; ;EQM.c: 651:                     if(msg=='\r'){
+[e $ ! == -> _msg `ui -> 13 `ui 462  ]
+{
+"652
+[; ;EQM.c: 652:                         if(index!=13){
+[e $ ! != -> _index `i -> 13 `i 463  ]
+{
+"653
+[; ;EQM.c: 653:                             msgs[lastMSG][index] = '*';
+[e = *U + &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> _index `ux -> -> # *U &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux -> -> 42 `ui `uc ]
+"655
+[; ;EQM.c: 655:                         }
+}
+[e :U 463 ]
+"656
+[; ;EQM.c: 656:                         SIO_PutChar('-');
+[e ( _SIO_PutChar (1 -> -> 45 `ui `uc ]
+"657
+[; ;EQM.c: 657:                         stateMSG++;
+[e ++ F2695 -> -> 1 `i `uc ]
+"658
+[; ;EQM.c: 658:                     }else{
+}
+[e $U 464  ]
+[e :U 462 ]
+{
+"659
+[; ;EQM.c: 659:                         msgs[lastMSG][index] = msg;
+[e = *U + &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> _index `ux -> -> # *U &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux _msg ]
+"660
+[; ;EQM.c: 660:                         index++;
+[e ++ _index -> -> 1 `i `uc ]
+"661
+[; ;EQM.c: 661:                     }
+}
+[e :U 464 ]
+"662
+[; ;EQM.c: 662:                     }
+}
+[e :U 461 ]
+"663
+[; ;EQM.c: 663:                 break;
+[e $U 452  ]
+"664
+[; ;EQM.c: 664:             case 3:
+[e :U 465 ]
+"665
+[; ;EQM.c: 665:                 LcClear();
+[e ( _LcClear ..  ]
+"666
+[; ;EQM.c: 666:                 LcGotoXY(0,1);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+"667
+[; ;EQM.c: 667:                 index=0;
+[e = _index -> -> 0 `i `uc ]
+"668
+[; ;EQM.c: 668:                 stateMSG++;
+[e ++ F2695 -> -> 1 `i `uc ]
+"671
+[; ;EQM.c: 671:                 break;
+[e $U 452  ]
+"672
+[; ;EQM.c: 672:             case 4:
+[e :U 466 ]
+"673
+[; ;EQM.c: 673:                 if(index < 14 ){
+[e $ ! < -> _index `i -> 14 `i 467  ]
+{
+"674
+[; ;EQM.c: 674:                     if(msgs[lastMSG][index] != '*'){
+[e $ ! != -> *U + &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> _index `ux -> -> # *U &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux `ui -> 42 `ui 468  ]
+{
+"676
+[; ;EQM.c: 676:                         LcPutChar(msgs[lastMSG][index]);
+[e ( _LcPutChar (1 -> *U + &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux * -> _index `ux -> -> # *U &U *U + &U _msgs * -> _lastMSG `ux -> * -> # *U &U *U &U _msgs `ui -> -> 14 `i `ui `ux `ui `ux `uc ]
+"677
+[; ;EQM.c: 677:                         index++;
+[e ++ _index -> -> 1 `i `uc ]
+"678
+[; ;EQM.c: 678:                     }else {
+}
+[e $U 469  ]
+[e :U 468 ]
+{
+"679
+[; ;EQM.c: 679:                         index=20;
+[e = _index -> -> 20 `i `uc ]
+"681
+[; ;EQM.c: 681:                     }
+}
+[e :U 469 ]
+"682
+[; ;EQM.c: 682:                 }else{
+}
+[e $U 470  ]
+[e :U 467 ]
+{
+"683
+[; ;EQM.c: 683:                     SorollAlt(4);
+[e ( _SorollAlt (1 -> -> 4 `i `uc ]
+"684
+[; ;EQM.c: 684:                     comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"685
+[; ;EQM.c: 685:                     stateMSG=5;
+[e = F2695 -> -> 5 `i `uc ]
+"686
+[; ;EQM.c: 686:                 }
+}
+[e :U 470 ]
+"687
+[; ;EQM.c: 687:                 TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"688
+[; ;EQM.c: 688:                 break;
+[e $U 452  ]
+"689
+[; ;EQM.c: 689:             case 5:
+[e :U 471 ]
+"690
+[; ;EQM.c: 690:                 if (TI_GetTics(timer) > 10000){
+[e $ ! > ( _TI_GetTics (1 _timer -> -> -> 10000 `i `l `ul 472  ]
+{
+"691
+[; ;EQM.c: 691:                         SorollAlt(5);
+[e ( _SorollAlt (1 -> -> 5 `i `uc ]
+"692
+[; ;EQM.c: 692:                         comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"693
+[; ;EQM.c: 693:                         TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"694
+[; ;EQM.c: 694:                         stateMSG++;}
+[e ++ F2695 -> -> 1 `i `uc ]
+}
+[e :U 472 ]
+"695
+[; ;EQM.c: 695:                 break;
+[e $U 452  ]
+"696
+[; ;EQM.c: 696:             case 6:
+[e :U 473 ]
+"698
+[; ;EQM.c: 698:                if (TI_GetTics(timer) > 10000){
+[e $ ! > ( _TI_GetTics (1 _timer -> -> -> 10000 `i `l `ul 474  ]
+{
+"699
+[; ;EQM.c: 699:                         SorollAlt(6);
+[e ( _SorollAlt (1 -> -> 6 `i `uc ]
+"700
+[; ;EQM.c: 700:                         comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"701
+[; ;EQM.c: 701:                         TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"702
+[; ;EQM.c: 702:                         stateMSG++;}
+[e ++ F2695 -> -> 1 `i `uc ]
+}
+[e :U 474 ]
+"703
+[; ;EQM.c: 703:                 break;
+[e $U 452  ]
+"704
+[; ;EQM.c: 704:             case 7:
+[e :U 475 ]
+"705
+[; ;EQM.c: 705:                if (TI_GetTics(timer) > 10000){
+[e $ ! > ( _TI_GetTics (1 _timer -> -> -> 10000 `i `l `ul 476  ]
+{
+"706
+[; ;EQM.c: 706:                         SorollAlt(7);
+[e ( _SorollAlt (1 -> -> 7 `i `uc ]
+"707
+[; ;EQM.c: 707:                         comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"708
+[; ;EQM.c: 708:                         TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"709
+[; ;EQM.c: 709:                         stateMSG++;}
+[e ++ F2695 -> -> 1 `i `uc ]
+}
+[e :U 476 ]
+"710
+[; ;EQM.c: 710:                 break;
+[e $U 452  ]
+"711
+[; ;EQM.c: 711:             case 8:
+[e :U 477 ]
+"712
+[; ;EQM.c: 712:                if (TI_GetTics(timer) > 10000){
+[e $ ! > ( _TI_GetTics (1 _timer -> -> -> 10000 `i `l `ul 478  ]
+{
+"713
+[; ;EQM.c: 713:                         SorollAlt(8);
+[e ( _SorollAlt (1 -> -> 8 `i `uc ]
+"714
+[; ;EQM.c: 714:                         comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"715
+[; ;EQM.c: 715:                         TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"716
+[; ;EQM.c: 716:                         stateMSG++;}
+[e ++ F2695 -> -> 1 `i `uc ]
+}
+[e :U 478 ]
+"718
+[; ;EQM.c: 718:                 break;
+[e $U 452  ]
+"719
+[; ;EQM.c: 719:             case 9:
+[e :U 479 ]
+"720
+[; ;EQM.c: 720:                 if (TI_GetTics(timer) > 10000){
+[e $ ! > ( _TI_GetTics (1 _timer -> -> -> 10000 `i `l `ul 480  ]
+{
+"721
+[; ;EQM.c: 721:                         fiSoroll();
+[e ( _fiSoroll ..  ]
+"722
+[; ;EQM.c: 722:                         comptSEC=0;
+[e = _comptSEC -> -> 0 `i `uc ]
+"723
+[; ;EQM.c: 723:                         TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"724
+[; ;EQM.c: 724:                         stateMSG++;}
+[e ++ F2695 -> -> 1 `i `uc ]
+}
+[e :U 480 ]
+"726
+[; ;EQM.c: 726:                 break;
+[e $U 452  ]
+"727
+[; ;EQM.c: 727:             case 10:
+[e :U 481 ]
+"728
+[; ;EQM.c: 728:                 TI_ResetTics(timer);
+[e ( _TI_ResetTics (1 _timer ]
+"729
+[; ;EQM.c: 729:                 if (lastMSG != 0){
+[e $ ! != -> _lastMSG `i -> 0 `i 482  ]
+{
+"730
+[; ;EQM.c: 730:                     lastMSG--;
+[e -- _lastMSG -> -> 1 `i `uc ]
+"731
+[; ;EQM.c: 731:                 }else{
+}
+[e $U 483  ]
+[e :U 482 ]
+{
+"732
+[; ;EQM.c: 732:                     lastMSG=7;
+[e = _lastMSG -> -> 7 `i `uc ]
+"733
+[; ;EQM.c: 733:                 }
+}
+[e :U 483 ]
+"734
+[; ;EQM.c: 734:                 if (maxMSG<8){
+[e $ ! < -> _maxMSG `i -> 8 `i 484  ]
+{
+"735
+[; ;EQM.c: 735:                     maxMSG++;
+[e ++ _maxMSG -> -> 1 `i `uc ]
+"736
+[; ;EQM.c: 736:                 }
+}
+[e :U 484 ]
+"737
+[; ;EQM.c: 737:                 start=1;
+[e = _start -> -> 1 `i `uc ]
+"738
+[; ;EQM.c: 738:                 stateMSG=0;
+[e = F2695 -> -> 0 `i `uc ]
+"740
+[; ;EQM.c: 740:                 LcClear();
+[e ( _LcClear ..  ]
+"741
+[; ;EQM.c: 741:                 LcGotoXY(0,0);
+[e ( _LcGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"742
+[; ;EQM.c: 742:                 state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"743
+[; ;EQM.c: 743:                 state4=0;
+[e = _state4 -> -> 0 `i `uc ]
+"744
+[; ;EQM.c: 744:                 if(resetMENU==1){
+[e $ ! == -> _resetMENU `i -> 1 `i 485  ]
+{
+"745
+[; ;EQM.c: 745:                     startMenu();
+[e ( _startMenu ..  ]
+"746
+[; ;EQM.c: 746:                 }
+}
+[e :U 485 ]
+"747
+[; ;EQM.c: 747:                 break;
+[e $U 452  ]
+"748
+[; ;EQM.c: 748:         }
+}
+[e $U 452  ]
+[e :U 453 ]
+[e [\ F2695 , $ -> 0 `i 454
+ , $ -> 1 `i 457
+ , $ -> 2 `i 460
+ , $ -> 3 `i 465
+ , $ -> 4 `i 466
+ , $ -> 5 `i 471
+ , $ -> 6 `i 473
+ , $ -> 7 `i 475
+ , $ -> 8 `i 477
+ , $ -> 9 `i 479
+ , $ -> 10 `i 481
+ 452 ]
+[e :U 452 ]
+"751
+[; ;EQM.c: 751:     }
+[e :UE 451 ]
+}
+"753
+[; ;EQM.c: 753: void MotorEQM(void) {
+[v _MotorEQM `(v ~T0 @X0 1 ef ]
+{
+[e :U _MotorEQM ]
+[f ]
+"754
+[; ;EQM.c: 754:     static unsigned char state = 0;
+[v F2701 `uc ~T0 @X0 1 s state ]
+[i F2701
+-> -> 0 `i `uc
+]
+"756
+[; ;EQM.c: 756:     if (start==1){
+[e $ ! == -> _start `i -> 1 `i 487  ]
+{
+"757
+[; ;EQM.c: 757:  switch(state) {
+[e $U 489  ]
+{
+"758
+[; ;EQM.c: 758:   case 0:
+[e :U 490 ]
+"759
+[; ;EQM.c: 759:    if (start == 1) {
+[e $ ! == -> _start `i -> 1 `i 491  ]
+{
+"760
+[; ;EQM.c: 760:                 maxMSG = 0;
+[e = _maxMSG -> -> 0 `i `uc ]
+"761
+[; ;EQM.c: 761:                 lastMSG = 7;
+[e = _lastMSG -> -> 7 `i `uc ]
+"762
+[; ;EQM.c: 762:                 Opt3 = 0;
+[e = _Opt3 -> -> 0 `i `uc ]
+"763
+[; ;EQM.c: 763:                 Opt4 = 0;
+[e = _Opt4 -> -> 0 `i `uc ]
+"764
+[; ;EQM.c: 764:                 INTENTS=0;
+[e = _INTENTS -> -> 0 `i `uc ]
+"765
+[; ;EQM.c: 765:                 port[4]=',';
+[e = *U + &U _port * -> -> -> 4 `i `ui `ux -> -> # *U &U _port `ui `ux -> -> 44 `ui `uc ]
+"766
+[; ;EQM.c: 766:                 port[9]='\0';
+[e = *U + &U _port * -> -> -> 9 `i `ui `ux -> -> # *U &U _port `ui `ux -> -> 0 `ui `uc ]
+"767
+[; ;EQM.c: 767:                 state++;
+[e ++ F2701 -> -> 1 `i `uc ]
+"768
+[; ;EQM.c: 768:    }
+}
+[e :U 491 ]
+"769
+[; ;EQM.c: 769:             break;
+[e $U 488  ]
+"770
+[; ;EQM.c: 770:         case 1:
+[e :U 492 ]
+"771
+[; ;EQM.c: 771:             if (ConfWIFI()==1){
+[e $ ! == -> ( _ConfWIFI ..  `i -> 1 `i 493  ]
+{
+"772
+[; ;EQM.c: 772:                 if(wifiSTATE==1){
+[e $ ! == -> _wifiSTATE `i -> 1 `i 494  ]
+{
+"773
+[; ;EQM.c: 773:                     startMenu();
+[e ( _startMenu ..  ]
+"774
+[; ;EQM.c: 774:                     state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"775
+[; ;EQM.c: 775:                     state++;
+[e ++ F2701 -> -> 1 `i `uc ]
+"776
+[; ;EQM.c: 776:                 }else{
+}
+[e $U 495  ]
+[e :U 494 ]
+{
+"777
+[; ;EQM.c: 777:                     state--;
+[e -- F2701 -> -> 1 `i `uc ]
+"778
+[; ;EQM.c: 778:                 }
+}
+[e :U 495 ]
+"779
+[; ;EQM.c: 779:             }
+}
+[e :U 493 ]
+"780
+[; ;EQM.c: 780:             break;
+[e $U 488  ]
+"781
+[; ;EQM.c: 781:         case 2:
+[e :U 496 ]
+"782
+[; ;EQM.c: 782:             if (StateMenu() == 0){
+[e $ ! == -> ( _StateMenu ..  `i -> 0 `i 497  ]
+{
+"783
+[; ;EQM.c: 783:                 if(OpcioMenu()== 0) {
+[e $ ! == -> ( _OpcioMenu ..  `i -> 0 `i 498  ]
+{
+"784
+[; ;EQM.c: 784:                     if(ListAccesPoints()== 1) {
+[e $ ! == -> ( _ListAccesPoints ..  `i -> 1 `i 499  ]
+{
+"785
+[; ;EQM.c: 785:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"786
+[; ;EQM.c: 786:                         startMenu();
+[e ( _startMenu ..  ]
+"787
+[; ;EQM.c: 787:                     }
+}
+[e :U 499 ]
+"788
+[; ;EQM.c: 788:                     break;
+[e $U 488  ]
+"789
+[; ;EQM.c: 789:                 }
+}
+[e :U 498 ]
+"790
+[; ;EQM.c: 790:                 if(OpcioMenu()== 1) {
+[e $ ! == -> ( _OpcioMenu ..  `i -> 1 `i 500  ]
+{
+"791
+[; ;EQM.c: 791:                     if(ShowConnStatus()== 1) {
+[e $ ! == -> ( _ShowConnStatus ..  `i -> 1 `i 501  ]
+{
+"792
+[; ;EQM.c: 792:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"793
+[; ;EQM.c: 793:                         startMenu();
+[e ( _startMenu ..  ]
+"794
+[; ;EQM.c: 794:                     }
+}
+[e :U 501 ]
+"795
+[; ;EQM.c: 795:                      break;
+[e $U 488  ]
+"796
+[; ;EQM.c: 796:                 }
+}
+[e :U 500 ]
+"798
+[; ;EQM.c: 798:                 if(OpcioMenu()== 2) {
+[e $ ! == -> ( _OpcioMenu ..  `i -> 2 `i 502  ]
+{
+"799
+[; ;EQM.c: 799:                     Opt3 = 1;
+[e = _Opt3 -> -> 1 `i `uc ]
+"800
+[; ;EQM.c: 800:                     if(ConfWIFI()== 1) {
+[e $ ! == -> ( _ConfWIFI ..  `i -> 1 `i 503  ]
+{
+"801
+[; ;EQM.c: 801:                         Opt3 = 0;
+[e = _Opt3 -> -> 0 `i `uc ]
+"802
+[; ;EQM.c: 802:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"803
+[; ;EQM.c: 803:                         startMenu();
+[e ( _startMenu ..  ]
+"804
+[; ;EQM.c: 804:                     }
+}
+[e :U 503 ]
+"805
+[; ;EQM.c: 805:                      break;
+[e $U 488  ]
+"806
+[; ;EQM.c: 806:                 }
+}
+[e :U 502 ]
+"808
+[; ;EQM.c: 808:                 if(OpcioMenu()== 3) {
+[e $ ! == -> ( _OpcioMenu ..  `i -> 3 `i 504  ]
+{
+"809
+[; ;EQM.c: 809:                     if(EnterChatMode()==1) {
+[e $ ! == -> ( _EnterChatMode ..  `i -> 1 `i 505  ]
+{
+"810
+[; ;EQM.c: 810:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"811
+[; ;EQM.c: 811:                         startMenu();
+[e ( _startMenu ..  ]
+"812
+[; ;EQM.c: 812:                     }
+}
+[e :U 505 ]
+"813
+[; ;EQM.c: 813:                      break;
+[e $U 488  ]
+"814
+[; ;EQM.c: 814:                 }
+}
+[e :U 504 ]
+"816
+[; ;EQM.c: 816:                 if(OpcioMenu()== 4) {
+[e $ ! == -> ( _OpcioMenu ..  `i -> 4 `i 506  ]
+{
+"817
+[; ;EQM.c: 817:                     if(ListLastMessages()== 1) {
+[e $ ! == -> ( _ListLastMessages ..  `i -> 1 `i 507  ]
+{
+"818
+[; ;EQM.c: 818:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"819
+[; ;EQM.c: 819:                         startMenu();
+[e ( _startMenu ..  ]
+"820
+[; ;EQM.c: 820:                     }
+}
+[e :U 507 ]
+"821
+[; ;EQM.c: 821:                      break;
+[e $U 488  ]
+"822
+[; ;EQM.c: 822:                 }
+}
+[e :U 506 ]
+"824
+[; ;EQM.c: 824:                 if(OpcioMenu()== 5) {
+[e $ ! == -> ( _OpcioMenu ..  `i -> 5 `i 508  ]
+{
+"825
+[; ;EQM.c: 825:                     if (CloseConn() == 1) {
+[e $ ! == -> ( _CloseConn ..  `i -> 1 `i 509  ]
+{
+"826
+[; ;EQM.c: 826:                         state_option=0;
+[e = _state_option -> -> 0 `i `uc ]
+"827
+[; ;EQM.c: 827:                         state=0;
+[e = F2701 -> -> 0 `i `uc ]
+"828
+[; ;EQM.c: 828:                     }
+}
+[e :U 509 ]
+"830
+[; ;EQM.c: 830:                      break;
+[e $U 488  ]
+"831
+[; ;EQM.c: 831:                 }
+}
+[e :U 508 ]
+"832
+[; ;EQM.c: 832:             }
+}
+[e :U 497 ]
+"833
+[; ;EQM.c: 833:             break;
+[e $U 488  ]
+"834
+[; ;EQM.c: 834:  }
+}
+[e $U 488  ]
+[e :U 489 ]
+[e [\ F2701 , $ -> 0 `i 490
+ , $ -> 1 `i 492
+ , $ -> 2 `i 496
+ 488 ]
+[e :U 488 ]
+"835
+[; ;EQM.c: 835:     }else{
+}
+[e $U 510  ]
+[e :U 487 ]
+{
+"836
+[; ;EQM.c: 836:         ReciveMSG();
+[e ( _ReciveMSG ..  ]
+"837
+[; ;EQM.c: 837:     }
+}
+[e :U 510 ]
+"838
+[; ;EQM.c: 838: }
+[e :UE 486 ]
+}
+[a 12C 69 82 82 79 82 46 46 46 70 0 ]
+[a 16C 78 79 32 77 83 71 83 46 0 ]
+[a 11C 98 121 101 32 98 121 101 32 0 ]
+[a 1C 68 69 83 84 46 80 79 82 84 58 32 0 ]
+[a 2C 82 69 67 46 80 79 82 84 58 32 0 ]
+[a 3C 85 83 69 82 32 78 65 77 69 58 32 0 ]
+[a 10C 65 84 43 67 73 80 83 84 65 84 85 83 13 10 0 ]
+[a 8C 65 84 43 67 87 76 65 80 13 10 0 ]
+[a 4C 65 84 43 67 73 80 67 76 79 83 69 13 10 0 ]
+[a 13C 65 84 43 67 73 80 83 69 78 68 61 0 0 ]
+[a 7C 83 67 65 78 78 73 78 71 46 46 46 0 0 ]
+[a 9C 83 67 65 78 78 73 78 71 46 46 46 0 0 ]
+[a 5C 65 84 43 67 73 80 83 84 65 82 84 61 34 85 68 80 34 44 34 50 53 53 46 50 53 53 46 50 53 53 46 50 53 53 34 44 0 0 ]
+[a 6C 13 10 0 0 ]
+[a 14C 13 10 0 0 ]
+[a 15C 13 10 0 0 ]

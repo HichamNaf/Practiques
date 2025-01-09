@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_Blob.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_Fling.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_IRs.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_Lane.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_Led.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_ModuleControlCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_MovePanTiltCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_MoveWheelsCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_OrientationEuler.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_PlaySoundCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_QrCode.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_QrCodeChange.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_ResetWheelsCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_SetBlobCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_SetCameraCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_SetEmotionCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_SetLedCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_SetSensorFrequencyCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_TalkCommand.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_Tap.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/_Wheels.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/msg/__init__.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_MovePanTilt.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_MoveWheels.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_PlaySound.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_ResetWheels.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_SetCamera.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_SetEmotion.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_SetLed.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_SetLoad.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_SetModule.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_SetSensorFrequency.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/_Talk.py"
+  "/home/vboxuser/practica_ws/devel/lib/python3/dist-packages/robobo_msgs/srv/__init__.py"
+  "CMakeFiles/robobo_msgs_generate_messages_py"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/robobo_msgs_generate_messages_py.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

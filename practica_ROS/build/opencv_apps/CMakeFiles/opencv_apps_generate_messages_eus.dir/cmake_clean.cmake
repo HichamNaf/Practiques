@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/manifest.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Circle.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/CircleArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/CircleArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Contour.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/ContourArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/ContourArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Face.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/FaceArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/FaceArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Flow.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/FlowArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/FlowArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/FlowStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Line.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/LineArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/LineArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Moment.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/MomentArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/MomentArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Point2D.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Point2DArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Point2DArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Point2DStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Rect.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/RectArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/RectArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/RotatedRect.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/RotatedRectArray.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/RotatedRectArrayStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/RotatedRectStamped.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/msg/Size.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/opencv_apps/srv/FaceRecognitionTrain.l"
+  "CMakeFiles/opencv_apps_generate_messages_eus"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/opencv_apps_generate_messages_eus.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

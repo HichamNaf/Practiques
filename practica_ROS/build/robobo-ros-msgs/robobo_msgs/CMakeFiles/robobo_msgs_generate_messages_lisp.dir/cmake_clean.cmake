@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/Blob.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/Fling.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/IRs.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/Lane.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/Led.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/ModuleControlCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/MovePanTiltCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/MoveWheelsCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/OrientationEuler.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/PlaySoundCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/QrCode.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/QrCodeChange.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/ResetWheelsCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/SetBlobCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/SetCameraCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/SetEmotionCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/SetLedCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/SetSensorFrequencyCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/TalkCommand.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/Tap.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/msg/Wheels.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/MovePanTilt.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/MoveWheels.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/PlaySound.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/ResetWheels.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/SetCamera.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/SetEmotion.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/SetLed.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/SetLoad.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/SetModule.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/SetSensorFrequency.lisp"
+  "/home/vboxuser/practica_ws/devel/share/common-lisp/ros/robobo_msgs/srv/Talk.lisp"
+  "CMakeFiles/robobo_msgs_generate_messages_lisp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/robobo_msgs_generate_messages_lisp.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

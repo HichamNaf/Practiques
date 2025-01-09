@@ -1,0 +1,185 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Wed Jan 10 10:31:11 2024
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000004
+                   .cinit    romdata   0x000004    program   0x000002
+                   .org_1       code   0x000008    program   0x000004
+                   .org_2       code   0x000018    program   0x000002
+                   .org_3       code   0x000020    program   0x000524
+.config_300001_BUILD/DEFAULT/PRODUCTION/P1F2.O    romdata   0x300001    program   0x000001
+.config_300003_BUILD/DEFAULT/PRODUCTION/P1F2.O    romdata   0x300003    program   0x000001
+.config_300005_BUILD/DEFAULT/PRODUCTION/P1F2.O    romdata   0x300005    program   0x000001
+.config_300006_BUILD/DEFAULT/PRODUCTION/P1F2.O    romdata   0x300006    program   0x000001
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000005      
+                            0x000008    0x00000b      
+                            0x000018    0x000019      
+                            0x000020    0x000543      
+                            0x300001    0x300001      
+                            0x300003    0x300003      
+                            0x300005    0x300006      
+            1332 out of 8472 program addresses used, program memory utilization is 15%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              ASSIGN_BLUE   0x000382    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             ASSIGN_GREEN   0x00038e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               ASSIGN_RED   0x00039a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             ASSIGN_WHITE   0x000376    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   ATACAR   0x00027c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            BUCLE_LECTURA   0x0001b8    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+           CONFIG_BUTTONS   0x000058    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            CONFIG_COORDS   0x000060    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               CONFIG_INT   0x0000de    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             CONFIG_PORTS   0x00004a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+         CONFIG_PWM_PORTS   0x00004a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            CONTROL_ATACK   0x00045a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             CONTROL_DOWN   0x000442    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             CONTROL_LEFT   0x000472    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            CONTROL_RIGHT   0x000424    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               CONTROL_UP   0x00048a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+     CONVERT_COORD_TO_RAM   0x000214    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 COORD_F1   0x0001f6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                END_BUCLE   0x0004d4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 END_GAME   0x0004a2    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             END_RSI_INT0   0x00019a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             END_RSI_INT1   0x0001ae    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               END_RSI_T0   0x00017c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+     ESCRIPTURA_VALORS_F1   0x0001e2    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   ESPERA   0x000064    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              ESPERA_16MS   0x0003f0    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               ESPERA_1MS   0x00040a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                ESPERA_1S   0x000316    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB3   0x000496    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB4   0x00047e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB5   0x00044e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB7   0x000466    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RD1   0x000430    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                ESPERA_T0   0x00014c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                    FASE1   0x000506    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          HAS_TOCAT_AIGUA   0x00029c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          HAS_TOCAT_BARCO   0x0002ce    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          INCREMENTA_16MS   0x0003fa    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            INCREMENTA_XS   0x000414    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              INIT_CURSOR   0x00022e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+  INIT_INTERUPT_VARIABLES   0x0000b0    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 INIT_PWM   0x00007c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 INIT_RAM   0x000088    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              INIT_TIMER0   0x0000a4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                INIT_VARS   0x000074    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+           LECTURA_VALORS   0x0001b2    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 LED_BLUE   0x0003d6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                LED_GREEN   0x0003a6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                  LED_RED   0x0003be    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                     LOOP   0x000522    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                     MAIN   0x0004da    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               MOURE_DOWN   0x000238    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               MOURE_LEFT   0x00026e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              MOURE_RIGHT   0x00025a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 MOURE_UP   0x00024c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                PRINT_LED   0x0003a6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          PRINT_VALORS_F1   0x00033e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          PRINT_VALORS_F2   0x000350    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                PRINT_V_2   0x000362    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                READ_WORD   0x0000c4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                RESET_RAM   0x000094    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                  RSI_GEN   0x0000f4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 RSI_INT0   0x000182    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 RSI_INT1   0x00019e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   RSI_T0   0x000154    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+           SOROLL_ALTAVEU   0x000320    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                  T0_HIGH   0x000140    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   T0_LOW   0x000134    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              TIMER0_HIGH   0x000128    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+         TIMER0_INCREMENT   0x00011a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               TIMER0_LOW   0x000108    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             CONFIG_PORTS   0x00004a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+         CONFIG_PWM_PORTS   0x00004a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+           CONFIG_BUTTONS   0x000058    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            CONFIG_COORDS   0x000060    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   ESPERA   0x000064    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                INIT_VARS   0x000074    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 INIT_PWM   0x00007c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 INIT_RAM   0x000088    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                RESET_RAM   0x000094    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              INIT_TIMER0   0x0000a4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+  INIT_INTERUPT_VARIABLES   0x0000b0    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                READ_WORD   0x0000c4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               CONFIG_INT   0x0000de    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                  RSI_GEN   0x0000f4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               TIMER0_LOW   0x000108    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+         TIMER0_INCREMENT   0x00011a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              TIMER0_HIGH   0x000128    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   T0_LOW   0x000134    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                  T0_HIGH   0x000140    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                ESPERA_T0   0x00014c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   RSI_T0   0x000154    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               END_RSI_T0   0x00017c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 RSI_INT0   0x000182    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             END_RSI_INT0   0x00019a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 RSI_INT1   0x00019e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             END_RSI_INT1   0x0001ae    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+           LECTURA_VALORS   0x0001b2    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            BUCLE_LECTURA   0x0001b8    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+     ESCRIPTURA_VALORS_F1   0x0001e2    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 COORD_F1   0x0001f6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+     CONVERT_COORD_TO_RAM   0x000214    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              INIT_CURSOR   0x00022e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               MOURE_DOWN   0x000238    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 MOURE_UP   0x00024c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              MOURE_RIGHT   0x00025a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               MOURE_LEFT   0x00026e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                   ATACAR   0x00027c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          HAS_TOCAT_AIGUA   0x00029c    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          HAS_TOCAT_BARCO   0x0002ce    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                ESPERA_1S   0x000316    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+           SOROLL_ALTAVEU   0x000320    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          PRINT_VALORS_F1   0x00033e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          PRINT_VALORS_F2   0x000350    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                PRINT_V_2   0x000362    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             ASSIGN_WHITE   0x000376    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              ASSIGN_BLUE   0x000382    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             ASSIGN_GREEN   0x00038e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               ASSIGN_RED   0x00039a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                LED_GREEN   0x0003a6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                PRINT_LED   0x0003a6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                  LED_RED   0x0003be    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 LED_BLUE   0x0003d6    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+              ESPERA_16MS   0x0003f0    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+          INCREMENTA_16MS   0x0003fa    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               ESPERA_1MS   0x00040a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            INCREMENTA_XS   0x000414    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            CONTROL_RIGHT   0x000424    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RD1   0x000430    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             CONTROL_DOWN   0x000442    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB5   0x00044e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+            CONTROL_ATACK   0x00045a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB7   0x000466    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+             CONTROL_LEFT   0x000472    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB4   0x00047e    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+               CONTROL_UP   0x00048a    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+      ESPERA_POLSADOR_RB3   0x000496    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                 END_GAME   0x0004a2    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                END_BUCLE   0x0004d4    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                     MAIN   0x0004da    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                    FASE1   0x000506    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+                     LOOP   0x000522    program     static C:\Users\drago\Documents\3R\Compus\Prac1_Fase2\P1F2.X\P1F2.asm
+
+

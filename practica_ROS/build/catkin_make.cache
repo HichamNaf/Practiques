@@ -1,0 +1,2 @@
+opencv_apps:robobo-gazebo-simulator:robobo-ros-msgs/robobo_msgs:turtle_controller
+-DCATKIN_DEVEL_PREFIX=/home/vboxuser/practica_ws/devel -DCMAKE_INSTALL_PREFIX=/home/vboxuser/practica_ws/install -G Unix Makefiles

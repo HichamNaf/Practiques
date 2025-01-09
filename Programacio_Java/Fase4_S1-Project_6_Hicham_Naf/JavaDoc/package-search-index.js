@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"business"},{"l":"business.entities"},{"l":"business.entities.Characters"},{"l":"business.entities.GameEntities"},{"l":"persistence"},{"l":"persistence.ApiHelper"},{"l":"persistence.CharacterPersistence"},{"l":"persistence.exception"},{"l":"presentation"}];updateSearchResults();

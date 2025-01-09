@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Orsted",
+    "player": "DEKU",
+    "xp": 1132,
+    "body": 1,
+    "mind": 1,
+    "spirit": 1,
+    "class": "Champion"
+  },
+  {
+    "name": "Rudy",
+    "player": "DEKU",
+    "xp": 1132,
+    "body": 1,
+    "mind": 1,
+    "spirit": 1,
+    "class": "Paladin"
+  },
+  {
+    "name": "Silphy",
+    "player": "DEKU",
+    "xp": 1132,
+    "body": 1,
+    "mind": 1,
+    "spirit": 1,
+    "class": "Paladin"
+  },
+  {
+    "name": "Eris",
+    "player": "DEKU",
+    "xp": 1132,
+    "body": 2,
+    "mind": 1,
+    "spirit": 1,
+    "class": "Champion"
+  },
+  {
+    "name": "Roxy",
+    "player": "DEKU",
+    "xp": 1132,
+    "body": 0,
+    "mind": 1,
+    "spirit": 0,
+    "class": "Wizard"
+  }
+]

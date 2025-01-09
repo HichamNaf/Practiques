@@ -1,0 +1,7 @@
+set(robobo_gazebo_SETUP_PY_SETUP_MODULE "distutils.core")
+set(robobo_gazebo_SETUP_PY_VERSION "2.0.0")
+set(robobo_gazebo_SETUP_PY_SCRIPTS "")
+set(robobo_gazebo_SETUP_PY_PACKAGES "robobo")
+set(robobo_gazebo_SETUP_PY_PACKAGE_DIRS "nodes/src/robobo")
+set(robobo_gazebo_SETUP_PY_MODULES "")
+set(robobo_gazebo_SETUP_PY_MODULE_DIRS "")

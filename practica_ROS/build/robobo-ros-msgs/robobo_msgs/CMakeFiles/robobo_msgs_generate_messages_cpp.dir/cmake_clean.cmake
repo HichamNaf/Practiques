@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Blob.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Fling.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/IRs.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Lane.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Led.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/ModuleControlCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/MovePanTilt.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/MovePanTiltCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/MoveWheels.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/MoveWheelsCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/OrientationEuler.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/PlaySound.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/PlaySoundCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/QrCode.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/QrCodeChange.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/ResetWheels.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/ResetWheelsCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetBlobCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetCamera.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetCameraCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetEmotion.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetEmotionCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetLed.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetLedCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetLoad.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetModule.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetSensorFrequency.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/SetSensorFrequencyCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Talk.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/TalkCommand.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Tap.h"
+  "/home/vboxuser/practica_ws/devel/include/robobo_msgs/Wheels.h"
+  "CMakeFiles/robobo_msgs_generate_messages_cpp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/robobo_msgs_generate_messages_cpp.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

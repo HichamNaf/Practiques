@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Adv3",
+    "encounters": 3,
+    "monster": [
+      {
+        "encounter": 1,
+        "name": "Goblin",
+        "challenge": "Minion",
+        "quantity": 6
+      },
+      {
+        "encounter": 1,
+        "name": "Warg Rider",
+        "challenge": "Minion",
+        "quantity": 5
+      },
+      {
+        "encounter": 2,
+        "name": "Easterling",
+        "challenge": "Minion",
+        "quantity": 3
+      },
+      {
+        "encounter": 2,
+        "name": "Mirkwood Spider",
+        "challenge": "Minion",
+        "quantity": 9
+      },
+      {
+        "encounter": 3,
+        "name": "Sauron",
+        "challenge": "Boss",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "name": "adventure2",
+    "encounters": 3,
+    "monster": [
+      {
+        "encounter": 3,
+        "name": "Orc Shaman",
+        "challenge": "Minion",
+        "quantity": 4
+      },
+      {
+        "encounter": 1,
+        "name": "Mirkwood Spider",
+        "challenge": "Minion",
+        "quantity": 3
+      },
+      {
+        "encounter": 3,
+        "name": "Orc Captain",
+        "challenge": "Lieutenant",
+        "quantity": 1
+      },
+      {
+        "encounter": 1,
+        "name": "Vampire",
+        "challenge": "Lieutenant",
+        "quantity": 5
+      },
+      {
+        "encounter": 3,
+        "name": "Vampire",
+        "challenge": "Lieutenant",
+        "quantity": 3
+      },
+      {
+        "encounter": 3,
+        "name": "Olog-hai",
+        "challenge": "Lieutenant",
+        "quantity": 8
+      },
+      {
+        "encounter": 2,
+        "name": "Balrog",
+        "challenge": "Boss",
+        "quantity": 1
+      },
+      {
+        "encounter": 3,
+        "name": "Sauron",
+        "challenge": "Boss",
+        "quantity": 1
+      },
+      {
+        "encounter": 1,
+        "name": "Morgoth",
+        "challenge": "Boss",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "name": "adventure1",
+    "encounters": 1,
+    "monster": [
+      {
+        "encounter": 1,
+        "name": "Warg Rider",
+        "challenge": "Minion",
+        "quantity": 1
+      },
+      {
+        "encounter": 1,
+        "name": "Easterling",
+        "challenge": "Minion",
+        "quantity": 2
+      },
+      {
+        "encounter": 1,
+        "name": "Morgoth",
+        "challenge": "Boss",
+        "quantity": 1
+      }
+    ]
+  }
+]

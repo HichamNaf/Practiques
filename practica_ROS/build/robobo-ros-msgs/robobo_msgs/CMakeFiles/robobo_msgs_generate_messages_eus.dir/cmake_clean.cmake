@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/manifest.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/Blob.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/Fling.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/IRs.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/Lane.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/Led.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/ModuleControlCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/MovePanTiltCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/MoveWheelsCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/OrientationEuler.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/PlaySoundCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/QrCode.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/QrCodeChange.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/ResetWheelsCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/SetBlobCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/SetCameraCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/SetEmotionCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/SetLedCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/SetSensorFrequencyCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/TalkCommand.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/Tap.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/msg/Wheels.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/MovePanTilt.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/MoveWheels.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/PlaySound.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/ResetWheels.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/SetCamera.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/SetEmotion.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/SetLed.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/SetLoad.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/SetModule.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/SetSensorFrequency.l"
+  "/home/vboxuser/practica_ws/devel/share/roseus/ros/robobo_msgs/srv/Talk.l"
+  "CMakeFiles/robobo_msgs_generate_messages_eus"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/robobo_msgs_generate_messages_eus.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
