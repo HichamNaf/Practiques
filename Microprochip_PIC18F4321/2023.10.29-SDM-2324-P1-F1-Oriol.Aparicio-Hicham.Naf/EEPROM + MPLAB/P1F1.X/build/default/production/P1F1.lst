@@ -1,0 +1,1868 @@
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001     ;--------------------------------------------------------------------------;
+                      00002     ;                        Configuracions Generals                           ;
+                      00003     ;--------------------------------------------------------------------------;
+                      00004     #include <p18f4321.inc>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Oct 24 2019
+                      00005 ;  MPASM PIC18F4321 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      01455         LIST
+                      00005     
+                      00006     CONFIG OSC = INTIO1
+                      00007     CONFIG WDT = OFF
+                      00008     CONFIG PBADEN = DIG
+                      00009     CONFIG LVP = OFF
+  00000000            00010 RESULT EQU 0x00 ;Variable on guardarem el resultat de la equacio
+                      00011  
+                      00012     ORG 0x0000
+000000 EF?? F???      00013     GOTO MAIN
+                      00014     ORG 0x0008
+000008 0011           00015     RETFIE FAST
+                      00016     ORG 0x0018
+000018 0011           00017     RETFIE FAST
+                      00018       
+00001A                00019 CONFIG_OSC 
+00001A 0E70           00020     MOVLW b'01110000'
+00001C 6ED3           00021     MOVWF OSCCON, 0  
+00001E 0E40           00022     MOVLW b'01000000'
+000020 6E9B           00023     MOVWF OSCTUNE, 0
+000022 0012           00024     RETURN
+                      00025    
+000024                00026 MAIN
+000024 0E0F           00027     movlw 0x0F
+000026 6EC1           00028     movwf ADCON1,0
+000028 EC?? F???      00029     CALL CONFIG_OSC ;Cridem la funcio que configura l'oscil�lador intern
+                      00030     
+                      00031     
+                      00032     ;Primer hem d'assignar les diferents entrades i sortides als pins del PIC
+                      00033     ;EA[3..0] = PORTC[3..0] ;EF[1..0] = PORTC[7..4] ;Tecla = PORTA[0] ;OC16 = PORTA[1]
+                      00034     ;Hash = PORTA[2] ;Est = PORTA[3] ;Parell = PORTA[4] ;ACK = PORTA[5]
+                      00035     ;OS = PORTB[0] ;Vaixell = PORTB[1] ;C_P = PORTB[2] ;clk = PORTB[3]
+                      00036     ;R_V = PORTB[4] ;R_R_M = PORTA[7] ;EnE0 = PORTD[0] ;EnE1 = PORTD[1]
+                      00037     ;OC16 = PORTD[2] ;G_V = PORTD[3] ;L_M = PORTD[4] ;S_G = PORTD[5]
+                      00038     ;C1S = PORTE[0] ;N_B = PORTE[1] ;clk_n = PORTE[2]
+                      00039     
+                      00040     ;1 = INPUT, 0 = OUTPUT
+00002C 0E0F           00041     MOVLW 0x0F
+00002E 6E94           00042     MOVWF TRISC, 0
+                      00043     
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044     ;Input for EA0
+                      00045     ;Input for EA1
+                      00046     ;Input for EA2
+                      00047     ;Input for EA3
+                      00048     
+                      00049     ;Output for EF0
+                      00050     ;Output for EF1
+                      00051     ;Output for EF2
+                      00052     ;Output for EF3
+                      00053     
+000030 8092           00054     BSF TRISA, 0, 0 ;Input for Tecla
+000032 8292           00055     BSF TRISA, 1, 0 ;Input for OC16
+000034 8492           00056     BSF TRISA, 2, 0 ;Input for Hash
+000036 8692           00057     BSF TRISA, 3, 0 ;Input for Est
+000038 8892           00058     BSF TRISA, 4, 0 ;Input for Parell
+00003A 8A92           00059     BSF TRISA, 5, 0 ;Input for ACK
+                      00060     
+00003C 9E92           00061     BCF TRISA, 7, 0 ;Output for R_R_M
+                      00062     
+00003E 8093           00063     BSF TRISB, 0, 0 ;Input for OS
+000040 8293           00064     BSF TRISB, 1, 0 ;Input for Vaixell
+000042 8493           00065     BSF TRISB, 2, 0 ;Input for CurrentPlayer
+000044 8693           00066     BSF TRISB, 3, 0 ;Input for clk
+                      00067     
+000046 9893           00068     BCF TRISB, 4, 0 ;Output for R_V
+                      00069 
+000048 6A95           00070     CLRF TRISD, 0
+                      00071     ;Output for EnE0
+                      00072     ;Output for EnE1
+                      00073     ;Output for OC16
+                      00074     ;Output for G_V
+                      00075     ;Output for L_M
+                      00076     ;Output for S_G
+                      00077     ;Output for G
+                      00078     ;Output for N_C
+                      00079     
+00004A 9096           00080     BCF TRISE, 0, 0 ;Output for C1S
+00004C 9296           00081     BCF TRISE, 1, 0 ;Output for New_Boat
+00004E 9496           00082     BCF TRISE, 2, 0 ;Output for !clk
+                      00083     
+000050 6A8C           00084     CLRF LATD,0
+000052 908B           00085     BCF LATC,0,0
+000054 928B           00086     BCF LATC,1,0
+000056 948B           00087     BCF LATC,2,0
+000058 968B           00088     BCF LATC,3,0
+00005A 988B           00089     BCF LATC,4,0
+00005C 9A8B           00090     BCF LATC,5,0
+                      00091     
+00005E 908D           00092     BCF LATE,0,0
+000060 928D           00093     BCF LATE,1,0
+000062 948D           00094     BCF LATE,2,0
+                      00095    
+                      00096     ;Farem tot el sistema combinacional i qualsevol porta logica aqui� al LOOP
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000064                00097 LOOP
+                      00098     ;--------------------------------------------------------------------------;
+                      00099     ;        Minterms per EF3                                                  ;
+                      00100     ;--------------------------------------------------------------------------;
+                      00101 
+000064 6A00           00102     CLRF RESULT, 0 ;Inicialitzzem RESULT a 0
+                      00103     
+                      00104     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & !H & E)
+000066 5082           00105     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000068 0B0F           00106     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00006A 0804           00107     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+00006C A080           00108     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+00006E 80E8           00109     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+000070 B280           00110     BTFSC PORTA, 1, 0 ;Comprovar que 0C16 = 0;
+000072 80E8           00111     BSF WREG, 0, 0 ;Posar a 0 el WREG;
+000074 B480           00112     BTFSC PORTA, 2, 0 ;Comprovar que H = 0;
+000076 80E8           00113     BSF WREG, 0, 0 ;Posar a 0 el WREG;
+000078 A680           00114     BTFSS PORTA, 3, 0 ;Comprovar que E = 1;
+00007A 80E8           00115     BSF WREG, 0, 0 ;Posar a 0 el WREG;
+00007C 0800           00116     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00007E B4D8           00117     BTFSC STATUS, Z, 0 
+000080 8000           00118     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00119     
+                      00120     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & H & !E)
+000082 5082           00121     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000084 0B0F           00122     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la màscara [00001111] 
+000086 0804           00123     SUBLW 0x04 ;Ara restem 0, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+000088 A080           00124     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+00008A 80E8           00125     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+00008C B280           00126     BTFSC PORTA, 1, 0 ;Comprovar que 0C16 = 0;
+00008E 80E8           00127     BSF WREG, 0, 0 ;Posar a 0 el WREG;
+000090 A480           00128     BTFSS PORTA, 2, 0 ;Comprovar que H = 1;
+000092 80E8           00129     BSF WREG, 0, 0 ;Posar a 0 el WREG;
+000094 B680           00130     BTFSC PORTA, 3, 0 ;Comprovar que E = 0;
+000096 80E8           00131     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+000098 0800           00132     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00009A B4D8           00133     BTFSC STATUS, Z, 0 
+00009C 8000           00134     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00135     
+                      00136     ;Minterm (!EA3 & EA2 & EA1 & EA0 & OS)
+00009E 5082           00137     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0000A0 0B0F           00138     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0000A2 0807           00139     SUBLW 0x07 ;Ara restem 7, si el resultat es 0 (EA[3..0] - 7 = 0) significa que EA[3..0] = 7
+0000A4 A081           00140     BTFSS PORTB, 0, 0 ;Comprovar que OS = 1;
+0000A6 80E8           00141     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+0000A8 0800           00142     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0000AA B4D8           00143     BTFSC STATUS, Z, 0 
+0000AC 8000           00144     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00145     
+                      00146     ;Minterm (EA3 & !EA2 & !EA1 & !EA0 & V)
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000AE 5082           00147     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0000B0 0B0F           00148     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0000B2 0808           00149     SUBLW 0x08 ;Ara restem 8, si el resultat es 0 (EA[3..0] - 8 = 0) significa que EA[3..0] = 8
+0000B4 B281           00150     BTFSC PORTB, 1, 0 ;Comprovar que V = 0;
+0000B6 80E8           00151     BSF WREG, 0, 0 ;Posar a 0 el WREG;
+0000B8 0800           00152     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0000BA B4D8           00153     BTFSC STATUS, Z, 0 
+0000BC 8000           00154     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00155     
+                      00156     ;Minterm (EA3 & !EA2 & !EA1 & EA0 & CP)
+0000BE 5082           00157     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0000C0 0B0F           00158     ANDLW 0x0F ;Per tal de nomès treballar amb els quatre ultims bits, apliquem la màscara [00001111] 
+0000C2 0809           00159     SUBLW 0x09 ;Ara restem 9, si el resultat es 0 (EA[3..0] - 9 = 0) significa que EA[3..0] = 9
+0000C4 A481           00160     BTFSS PORTB, 2, 0 ;Comprovar que CP = 1;
+0000C6 80E8           00161     BSF WREG, 0, 0 ;Posar a 0 el WREG si CP = 1;
+0000C8 0800           00162     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0000CA B4D8           00163     BTFSC STATUS, Z, 0 
+0000CC 8000           00164     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00165     
+                      00166     ;Minterm (EA3 & EA2 & !EA1 & !EA0)
+0000CE 5082           00167     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0000D0 0B0F           00168     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0000D2 080C           00169     SUBLW 0x0C ;Ara restem 12, si el resultat es 0 (EA[3..0] - 12 = 0) significa que EA[3..0] = 12
+0000D4 0800           00170     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0000D6 B4D8           00171     BTFSC STATUS, Z, 0 
+0000D8 8000           00172     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00173     
+                      00174     ;Ara nomes hem de comprovar si RESULT es un 1 o un 0, si es un 1, significa que s'han completat un o
+                             mes minterms, si es 0, no s'ha completat cap minterm
+0000DA B000           00175     BTFSC RESULT, 0, 0 
+0000DC 8E8B           00176     BSF LATC, 7, 0 ;Si RESULT = 1 llavors EF3 = 1
+0000DE A000           00177     BTFSS RESULT, 0, 0
+0000E0 9E8B           00178     BCF LATC, 7, 0 ;Si RESULT = 0 llavors EF3 = 0
+                      00179     
+                      00180     ;--------------------------------------------------------------------------;
+                      00181     ;                 Minterms per EF2 = !EA1 & EA0 & X & Y                    ;
+                      00182     ;--------------------------------------------------------------------------;
+                      00183     
+0000E2 6A00           00184     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00185     
+                      00186     ;Minterm (!EA3 & !EA2 & EA1 & EA0 & T)
+0000E4 5082           00187     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0000E6 0B0F           00188     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0000E8 0803           00189     SUBLW 0x03 ;Ara restem 3, si el resultat es 0 (EA[3..3] - 0 = 0) significa que EA[3..0] = 3
+0000EA A080           00190     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+0000EC 80E8           00191     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+0000EE 0800           00192     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0000F0 B4D8           00193     BTFSC STATUS, Z, 0 
+0000F2 8000           00194     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00195     
+                      00196     
+                      00197     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & OC16)
+0000F4 5082           00198     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0000F6 0B0F           00199     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0000F8 0804           00200     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+0000FA A280           00201     BTFSS PORTA, 1, 0 ;Comprovar que OC16 = 1;
+0000FC 80E8           00202     BSF WREG, 0, 0 ;Posar a 0 el WREG si OC16 = 0;
+0000FE 0800           00203     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000100 B4D8           00204     BTFSC STATUS, Z, 0 
+000102 8000           00205     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00206     
+                      00207     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & H & !E)
+000104 5082           00208     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000106 0B0F           00209     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000108 0804           00210     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+00010A A080           00211     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+00010C 80E8           00212     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+00010E B280           00213     BTFSC PORTA, 1, 0 ;Comprovar que OC16 = 0;
+000110 80E8           00214     BSF WREG, 0, 0 
+000112 A480           00215     BTFSS PORTA, 2, 0 ;Comprovar que H = 1;
+000114 80E8           00216     BSF WREG, 0, 0 
+000116 B680           00217     BTFSC PORTA, 3, 0 ;Comprovar que E = 0;
+000118 80E8           00218     BSF WREG, 0, 0 
+00011A 0800           00219     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00011C B4D8           00220     BTFSC STATUS, Z, 0 
+00011E 8000           00221     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00222     
+                      00223     
+                      00224     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & !H & !E)
+000120 5082           00225     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000122 0B0F           00226     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000124 0804           00227     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+000126 A080           00228     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+000128 80E8           00229     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+00012A B280           00230     BTFSC PORTA, 1, 0 ;Comprovar que OC16 = 0;
+00012C 80E8           00231     BSF WREG, 0, 0 
+00012E B480           00232     BTFSC PORTA, 2, 0 ;Comprovar que H = 0;
+000130 80E8           00233     BSF WREG, 0, 0 
+000132 B680           00234     BTFSC PORTA, 3, 0 ;Comprovar que E = 0;
+000134 80E8           00235     BSF WREG, 0, 0 
+000136 0800           00236     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000138 B4D8           00237     BTFSC STATUS, Z, 0 
+00013A 8000           00238     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00239     
+                      00240     
+                      00241     ;Minterm (!EA3 & EA2 & !EA1 & EA0 & P)
+00013C 5082           00242     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00013E 0B0F           00243     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000140 0805           00244     SUBLW 0x05 ;Ara restem 5, si el resultat es 0 (EA[3..0] - 5 = 0) significa que EA[3..0] = 5
+000142 A880           00245     BTFSS PORTA, 4, 0 ;Comprovar que P = 1;
+000144 80E8           00246     BSF WREG, 0, 0 ;Posar a 0 el WREG si P = 0;
+000146 0800           00247     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000148 B4D8           00248     BTFSC STATUS, Z, 0 
+00014A 8000           00249     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00250 
+                      00251     ;Minterm (!EA3 & EA2 & EA1 & !EA0)
+00014C 5082           00252     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00014E 0B0F           00253     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000150 0806           00254     SUBLW 0x06 ;Ara restem 6, si el resultat es 0 (EA[3..0] - 6 = 0) significa que EA[3..0] = 6
+000152 0800           00255     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000154 B4D8           00256     BTFSC STATUS, Z, 0 
+000156 8000           00257     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00258     
+                      00259     ;Minterm (!EA3 & EA2 & EA1 & EA0 & !OS)
+000158 5082           00260     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00015A 0B0F           00261     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00015C 0807           00262     SUBLW 0x07 ;Ara restem 7, si el resultat es 0 (EA[3..0] - 7 = 0) significa que EA[3..0] = 7
+00015E B081           00263     BTFSC PORTB, 0, 0 ;Comprovar que OS = 0;
+000160 80E8           00264     BSF WREG, 0, 0 ;Posar a 0 el WREG si OS = 1;
+000162 0800           00265     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000164 B4D8           00266     BTFSC STATUS, Z, 0 
+000166 8000           00267     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00268     
+                      00269     
+                      00270     ;Minterm (EA3 & EA2 & !EA1 & !EA0)
+000168 5082           00271     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00016A 0B0F           00272     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00016C 080C           00273     SUBLW 0x0C ;Ara restem 12, si el resultat es 0 (EA[3..0] - 12 = 0) significa que EA[3..0] = 12 
+00016E 0800           00274     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000170 B4D8           00275     BTFSC STATUS, Z, 0 
+000172 8000           00276     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00277     
+000174 B000           00278     BTFSC RESULT, 0, 0 
+000176 8C8B           00279     BSF LATC, 6, 0 ;Si RESULT = 1 llavors EF1 = 1
+000178 A000           00280     BTFSS RESULT, 0, 0
+00017A 9C8B           00281     BCF LATC, 6, 0 ;Si RESULT = 0 llavors EF1 = 0
+                      00282     
+                      00283     ;--------------------------------------------------------------------------;
+                      00284     ;        Minterms per EF1 = (!EA1 & !EA0 & X) | (!EA1 & EA0 & !Y)          ;
+                      00285     ;--------------------------------------------------------------------------;
+                      00286 
+00017C 6A00           00287     CLRF RESULT, 0 ;Inicialitzem RESULT a 0
+                      00288     
+                      00289     ;Minterm (!EA3 & !EA2 & !EA1 & EA0 & !T)
+00017E 5082           00290     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000180 0B0F           00291     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000182 0801           00292     SUBLW 0x01 ;Ara restem 1, si el resultat es 0 (EA[3..0] - 1 = 0) significa que EA[3..0] = 1
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000184 B080           00293     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+000186 80E8           00294     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+000188 0800           00295     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00018A B4D8           00296     BTFSC STATUS, Z, 0 
+00018C 8000           00297     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00298     
+                      00299     ;Minterm (!EA3 & !EA2 & EA1 & !EA0 & !OC16)
+00018E 5082           00300     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000190 0B0F           00301     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000192 0802           00302     SUBLW 0x02 ;Ara restem 2, si el resultat es 0 (EA[3..0] - 2 = 0) significa que EA[3..0] = 2
+000194 A280           00303     BTFSS PORTA, 1, 0 ;Comprovar que OC16 = 0;
+000196 80E8           00304     BSF WREG, 0, 0 ;Posar a 0 el WREG si OC16 = 1;
+000198 0800           00305     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00019A B4D8           00306     BTFSC STATUS, Z, 0 
+00019C 8000           00307     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00308     
+                      00309     ;Minterm (!EA3 & !EA2 & EA1 & !EA0 & !T & !OC16)
+00019E 5082           00310     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0001A0 0B0F           00311     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0001A2 0802           00312     SUBLW 0x02 ;Ara restem 2, si el resultat es 0 (EA[3..0] - 2 = 0) significa que EA[3..0] = 2
+0001A4 B080           00313     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+0001A6 80E8           00314     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+0001A8 B280           00315     BTFSC PORTA, 1, 0 ;Comprovar que OC16 = 0;
+0001AA 80E8           00316     BSF WREG, 0, 0 ;Posar a 0 el WREG si OC16 = 1;
+0001AC 0800           00317     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0001AE B4D8           00318     BTFSC STATUS, Z, 0 
+0001B0 8000           00319     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00320     
+                      00321     ;Minterm (!EA3 & !EA2 & EA1 & EA0 & !T)
+0001B2 5082           00322     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0001B4 0B0F           00323     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0001B6 0803           00324     SUBLW 0x03 ;Ara restem 3, si el resultat es 0 (EA[3..0] - 3 = 0) significa que EA[3..0] = 3
+0001B8 B080           00325     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+0001BA 80E8           00326     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+0001BC 0800           00327     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0001BE B4D8           00328     BTFSC STATUS, Z, 0 
+0001C0 8000           00329     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00330     
+                      00331     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & !T & !OC16)
+0001C2 5082           00332     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0001C4 0B0F           00333     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0001C6 0804           00334     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+0001C8 B080           00335     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+0001CA 80E8           00336     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+0001CC B280           00337     BTFSC PORTA, 1, 0 ;Comprovar que OC16 = 0;
+0001CE 80E8           00338     BSF WREG, 0, 0  ;Posar a 0 el WREG si OC16 = 1;
+0001D0 0800           00339     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0001D2 B4D8           00340     BTFSC STATUS, Z, 0 
+0001D4 8000           00341     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00342     
+                      00343     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & !H & E)
+0001D6 5082           00344     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0001D8 0B0F           00345     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0001DA 0804           00346     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+0001DC A080           00347     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 0;
+0001DE 80E8           00348     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+0001E0 B280           00349     BTFSC PORTA, 1, 0 ;Comprovar que OC16 = 0;
+0001E2 80E8           00350     BSF WREG, 0, 0 
+0001E4 B480           00351     BTFSC PORTA, 2, 0 ;Comprovar que H = 0;
+0001E6 80E8           00352     BSF WREG, 0, 0 
+0001E8 A680           00353     BTFSS PORTA, 3, 0 ;Comprovar que E = 1;
+0001EA 80E8           00354     BSF WREG, 0, 0 
+0001EC 0800           00355     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0001EE B4D8           00356     BTFSC STATUS, Z, 0 
+0001F0 8000           00357     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00358     
+                      00359     ;Minterm (!EA3 & EA2 & !EA1 & EA0 & P)
+0001F2 5082           00360     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0001F4 0B0F           00361     ANDLW 0x0F ;Per tal de nomes treballar amb els dos ultims bits, apliquem la mascara [00001111] 
+0001F6 0805           00362     SUBLW 0x05 ;Ara restem 5, si el resultat es 0 (EA[3..0] - 5 = 0) significa que EA[3..0] = 5
+0001F8 A880           00363     BTFSS PORTA, 4, 0 ;Comprovar que P = 1;
+0001FA 80E8           00364     BSF WREG, 0, 0 ;Posar a 0 el WREG si P = 0;
+0001FC 0800           00365     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0001FE B4D8           00366     BTFSC STATUS, Z, 0 
+000200 8000           00367     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00368     
+                      00369     ;Minterm (!EA3 & EA2 & EA1 & !EA0) & (ACK + !ACK) 
+000202 5082           00370     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000204 0B0F           00371     ANDLW 0x0F ;Per tal de nomes treballar amb els dos ultims bits, apliquem la mascara [00001111] 
+000206 0806           00372     SUBLW 0x06 ;Ara restem 6, si el resultat es 0 (EA[3..0] - 6 = 0) significa que EA[3..0] = 6
+000208 0800           00373     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00020A B4D8           00374     BTFSC STATUS, Z, 0 
+00020C 8000           00375     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00376     
+                      00377     ;Minterm (!EA3 & EA2 & !EA1 & EA0 & !OS)
+00020E 5082           00378     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000210 0B0F           00379     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000212 0807           00380     SUBLW 0x07 ;Ara restem 7, si el resultat es 0 (EA[3..0] - 7 = 0) significa que EA[3..0] = 7
+000214 B081           00381     BTFSC PORTB, 0, 0 ;Comprovar que OS = 0;
+000216 80E8           00382     BSF WREG, 0, 0 ;Posar a 0 el WREG si OS = 1;
+000218 0800           00383     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00021A B4D8           00384     BTFSC STATUS, Z, 0 
+00021C 8000           00385     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00386     
+                      00387     ;Minterm (EA3 & !EA2 & !EA1 & EA0 & CP)
+00021E 5082           00388     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000220 0B0F           00389     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000222 0809           00390     SUBLW 0x09 ;Ara restem 9, si el resultat es 0 (EA[3..0] - 9 = 0) significa que EA[3..0] = 9
+000224 A481           00391     BTFSS PORTB, 2, 0 ;Comprovar que CP = 1;
+000226 80E8           00392     BSF WREG, 0, 0 ;Posar a 0 el WREG si CP = 0;
+000228 0800           00393     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00022A B4D8           00394     BTFSC STATUS, Z, 0 
+00022C 8000           00395     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00396     
+00022E B000           00397     BTFSC RESULT, 0, 0 
+000230 8A8B           00398     BSF LATC, 5, 0 ;Si RESULT = 1 llavors EF1 = 1
+000232 A000           00399     BTFSS RESULT, 0, 0
+000234 9A8B           00400     BCF LATC, 5, 0 ;Si RESULT = 0 llavors EF1 = 0    
+                      00401     ;--------------------------------------------------------------------------;
+                      00402     ;        Minterms per EF0 = (!EA1 & !EA0 & X) | (!EA1 & EA0 & !Y)          ;
+                      00403     ;--------------------------------------------------------------------------;
+                      00404 
+000236 6A00           00405     CLRF RESULT, 0 ;Inicialitzzem RESULT a 0
+                      00406     
+                      00407     ;Minterm (!EA3 & !EA2 & !EA1 & !EA0)
+000238 5082           00408     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00023A 0B0F           00409     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00023C 0800           00410     SUBLW 0x00 ;Ara restem 0, si el resultat es 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+00023E B4D8           00411     BTFSC STATUS, Z, 0 
+000240 8000           00412     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00413     
+                      00414     ;Minterm (!EA3 & !EA2 & !EA1 & !EA0 & T)
+000242 5082           00415     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000244 0B0F           00416     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000246 0801           00417     SUBLW 0x01 ;Ara restem 1, si el resultat es 0 (EA[3..0] - 1 = 0) significa que EA[3..0] = 1
+000248 A080           00418     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+00024A 80E8           00419     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+00024C 0800           00420     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00024E B4D8           00421     BTFSC STATUS, Z, 0 
+000250 8000           00422     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00423     
+                      00424     ;Minterm (!EA3 & !EA2 & EA1 & !EA0 & T & !OC16)
+000252 5082           00425     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000254 0B0F           00426     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+000256 0802           00427     SUBLW 0x02 ;Ara restem 2, si el resultat es 0 (EA[3..0] - 2 = 0) significa que EA[3..0] = 2
+000258 A080           00428     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+00025A 80E8           00429     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+00025C B280           00430     BTFSC PORTA, 1, 0 
+00025E 80E8           00431     BSF WREG, 0, 0 
+000260 0800           00432     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000262 B4D8           00433     BTFSC STATUS, Z, 0 
+000264 8000           00434     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00435     
+                      00436     ;Minterm (!EA3 & !EA2 & EA1 & !EA0 & !T & !OC16)
+000266 5082           00437     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000268 0B0F           00438     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00026A 0802           00439     SUBLW 0x02 ;Ara restem 2, si el resultat es 0 (EA[3..0] - 2 = 0) significa que EA[3..0] = 2
+00026C B080           00440     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+00026E 80E8           00441     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+000270 B280           00442     BTFSC PORTA, 1, 0 
+000272 80E8           00443     BSF WREG, 0, 0 
+000274 0800           00444     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000276 B4D8           00445     BTFSC STATUS, Z, 0 
+000278 8000           00446     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00447     
+                      00448     ;Minterm (!EA3 & !EA2 & EA1 & EA0 & !T)
+00027A 5082           00449     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00027C 0B0F           00450     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00027E 0803           00451     SUBLW 0x03 ;Ara restem 3, si el resultat es 0 (EA[3..0] - 3 = 0) significa que EA[3..0] = 3
+000280 B080           00452     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+000282 80E8           00453     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+000284 0800           00454     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000286 B4D8           00455     BTFSC STATUS, Z, 0 
+000288 8000           00456     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00457     
+                      00458     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & !T & !OC16)
+00028A 5082           00459     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00028C 0B0F           00460     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00028E 0804           00461     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+000290 B080           00462     BTFSC PORTA, 0, 0 ;Comprovar que Tecla = 0;
+000292 80E8           00463     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+000294 B280           00464     BTFSC PORTA, 1, 0 
+000296 80E8           00465     BSF WREG, 0, 0 
+000298 0800           00466     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00029A B4D8           00467     BTFSC STATUS, Z, 0 
+00029C 8000           00468     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00469     
+                      00470     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & !H & E)
+00029E 5082           00471     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0002A0 0B0F           00472     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0002A2 0804           00473     SUBLW 0x04 ;Ara restem 0, si el resultat es 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0002A4 A080           00474     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+0002A6 80E8           00475     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+0002A8 B280           00476     BTFSC PORTA, 1, 0 
+0002AA 80E8           00477     BSF WREG, 0, 0 
+0002AC B480           00478     BTFSC PORTA, 2, 0 
+0002AE 80E8           00479     BSF WREG, 0, 0 
+0002B0 A680           00480     BTFSS PORTA, 3, 0 
+0002B2 80E8           00481     BSF WREG, 0, 0 
+0002B4 0800           00482     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0002B6 B4D8           00483     BTFSC STATUS, Z, 0 
+0002B8 8000           00484     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00485     
+                      00486     ;Minterm (!EA3 & EA2 & !EA1 & !EA0 & T & !OC16 & !H & !E)
+0002BA 5082           00487     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0002BC 0B0F           00488     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0002BE 0804           00489     SUBLW 0x04 ;Ara restem 4, si el resultat es 0 (EA[3..0] - 4 = 0) significa que EA[3..0] = 4
+0002C0 A080           00490     BTFSS PORTA, 0, 0 ;Comprovar que Tecla = 1;
+0002C2 80E8           00491     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 0;
+0002C4 B280           00492     BTFSC PORTA, 1, 0 
+0002C6 80E8           00493     BSF WREG, 0, 0 
+0002C8 B480           00494     BTFSC PORTA, 2, 0 
+0002CA 80E8           00495     BSF WREG, 0, 0 
+0002CC B680           00496     BTFSC PORTA, 3, 0 
+0002CE 80E8           00497     BSF WREG, 0, 0 
+0002D0 0800           00498     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0002D2 B4D8           00499     BTFSC STATUS, Z, 0 
+0002D4 8000           00500     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00501     
+                      00502     ;Minterm (!EA3 & EA2 & !EA1 & EA0 & !P)
+0002D6 5082           00503     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0002D8 0B0F           00504     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0002DA 0805           00505     SUBLW 0x05 ;Ara restem 5, si el resultat es 0 (EA[3..0] - 5 = 0) significa que EA[3..0] = 5
+0002DC B880           00506     BTFSC PORTA, 4, 0 ;Comprovar que P = 0;
+0002DE 80E8           00507     BSF WREG, 0, 0 ;Posar a 0 el WREG si P = 1;
+0002E0 0800           00508     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0002E2 B4D8           00509     BTFSC STATUS, Z, 0 
+0002E4 8000           00510     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00511     
+                      00512         ;Minterm (!EA3 & EA2 & EA1 & !EA0 & ACK)
+0002E6 5082           00513     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0002E8 0B0F           00514     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0002EA 0806           00515     SUBLW 0x06 ;Ara restem 6, si el resultat es 0 (EA[3..0] - 6 = 0) significa que EA[3..0] = 6
+0002EC AA80           00516     BTFSS PORTA, 5, 0 ;Comprovar que ACK = 1;
+0002EE 80E8           00517     BSF WREG, 0, 0 ;Posar a 0 el WREG si ACK = 0;
+0002F0 0800           00518     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+0002F2 B4D8           00519     BTFSC STATUS, Z, 0 
+0002F4 8000           00520     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00521     
+                      00522     ;Minterm (!EA3 & EA2 & EA1 & EA0 & !OS)
+0002F6 5082           00523     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0002F8 0B0F           00524     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+0002FA 0807           00525     SUBLW 0x07 ;Ara restem 7, si el resultat es 0 (EA[3..0] - 7 = 0) significa que EA[3..0] = 7
+0002FC B081           00526     BTFSC PORTB, 0, 0 ;Comprovar que OS = 0;
+0002FE 80E8           00527     BSF WREG, 0, 0 ;Posar a 0 el WREG si OS = 1;
+000300 0800           00528     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000302 B4D8           00529     BTFSC STATUS, Z, 0 
+000304 8000           00530     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00531     
+                      00532     ;Minterm (EA3 & !EA2 & !EA1 & !EA0)
+000306 5082           00533     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000308 0B0F           00534     ANDLW 0x0F ;Per tal de nomes treballar amb els quatre ultims bits, apliquem la mascara [00001111] 
+00030A 0808           00535     SUBLW 0x08 ;Ara restem 8, si el resultat es 0 (EA[3..0] - 8 = 0) significa que EA[3..0] = 8
+00030C 0800           00536     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00030E B4D8           00537     BTFSC STATUS, Z, 0 
+000310 8000           00538     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00539     
+                      00540     ;Minterm (EA3 & !EA2 & !EA1 & EA0 & !CP)
+000312 5082           00541     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000314 0B0F           00542     ANDLW 0x0F ;Per tal de nomes treballar amb els dos ultims bits, apliquem la mascara [00001111] 
+000316 0809           00543     SUBLW 0x09 ;Ara restem 0, si el resultat es 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000318 B481           00544     BTFSC PORTB, 2, 0 ;Comprovar que Tecla = 0;
+00031A 80E8           00545     BSF WREG, 0, 0 ;Posar a 0 el WREG si Tecla = 1;
+00031C 0800           00546     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00031E B4D8           00547     BTFSC STATUS, Z, 0 
+000320 8000           00548     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00549     
+                      00550     ;Minterm (EA3 & !EA2 & EA1 & !EA0)
+000322 5082           00551     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000324 0B0F           00552     ANDLW 0x0F ;Per tal de nomes treballar amb els dos ultims bits, apliquem la mascara [00001111] 
+000326 080A           00553     SUBLW 0x0A ;Ara restem 0, si el resultat es 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000328 0800           00554     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+00032A B4D8           00555     BTFSC STATUS, Z, 0 
+00032C 8000           00556     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00557     
+                      00558     ;Minterm (EA3 & !EA2 & EA1 & EA0)
+00032E 5082           00559     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000330 0B0F           00560     ANDLW 0x0F ;Per tal de nomes treballar amb els dos ultims bits, apliquem la mascara [00001111] 
+000332 080B           00561     SUBLW 0x0B ;Ara restem 0, si el resultat es 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000334 0800           00562     SUBLW 0x00 ;si WREG - 0 = 0 llavors STATUS, Z = 1
+000336 B4D8           00563     BTFSC STATUS, Z, 0 
+000338 8000           00564     BSF RESULT, 0, 0 ;si STATUS, Z = 1 posem RESULT a 1, per indicar que el midterm s'ha completat
+                      00565     
+00033A B000           00566     BTFSC RESULT, 0, 0 
+00033C 888B           00567     BSF LATC, 4, 0 ;Si RESULT = 1 llavors EF1 = 1
+00033E A000           00568     BTFSS RESULT, 0, 0
+000340 988B           00569     BCF LATC, 4, 0 ;Si RESULT = 0 llavors EF1 = 0    
+                      00570     
+                      00571     
+                      00572     
+                      00573     ;--------------------------------------------------------------------------;
+                      00574     ;        Equació de sortida per R_V = (!EA1 & !EA0) | (EA1 & !EA0)           ;
+                      00575     ;--------------------------------------------------------------------------;
+000342 6A00           00576     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00577      
+000344 5082           00578     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000346 0B0F           00579     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000348 0800           00580     SUBLW 0x00 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+00034A B4D8           00581     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+00034C 8000           00582     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00583     
+00034E 5082           00584     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en ell
+000350 0B0F           00585     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00000011]
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000352 0808           00586     SUBLW 0x08 ;Ara restem 2, si el resultat és 0 (EA[1..0] - 2 = 0) significa que EA[1..0] = 2
+000354 B4D8           00587     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 2 = 0, llavors STATUS, Z = 1
+000356 8000           00588     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00589     
+                      00590     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+000358 A000           00591     BTFSS RESULT, 0, 0 
+00035A 888A           00592     BSF LATB, 4, 0 ;Si RESULT = 0 llavors A = 1
+00035C B000           00593     BTFSC RESULT, 0, 0
+00035E 988A           00594     BCF LATB, 4, 0 ;Si RESULT = 1 llavors A = 0
+                      00595     
+                      00596     ;--------------------------------------------------------------------------;
+                      00597     ;        Equació de sortida per R_R_M = (!EA1 & !EA0) | (EA1 & !EA0)           ;
+                      00598     ;--------------------------------------------------------------------------;
+000360 6A00           00599     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00600      
+000362 5082           00601     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000364 0B0F           00602     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000366 0800           00603     SUBLW 0x00 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000368 B4D8           00604     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+00036A 8000           00605     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00606     
+00036C 5082           00607     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en ell
+00036E 0B0F           00608     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00000011]
+000370 080A           00609     SUBLW 0x0A ;Ara restem 2, si el resultat és 0 (EA[1..0] - 2 = 0) significa que EA[1..0] = 2
+000372 B4D8           00610     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 2 = 0, llavors STATUS, Z = 1
+000374 8000           00611     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00612     
+                      00613     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+000376 A000           00614     BTFSS RESULT, 0, 0 
+000378 8E89           00615     BSF LATA, 7, 0 ;Si RESULT = 0 llavors A = 1
+00037A B000           00616     BTFSC RESULT, 0, 0
+00037C 9E89           00617     BCF LATA, 7, 0 ;Si RESULT = 1 llavors A = 0
+                      00618     
+                      00619     ;--------------------------------------------------------------------------;
+                      00620     ;        Equació de sortida per En_E0 = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00621     ;--------------------------------------------------------------------------;
+00037E 6A00           00622     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00623      
+000380 5082           00624     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000382 0B0F           00625     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000384 0800           00626     SUBLW 0x00 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000386 B4D8           00627     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+000388 8000           00628     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00629     
+00038A 5082           00630     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en ell
+00038C 0B0F           00631     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00000011]
+00038E 0801           00632     SUBLW 0x01 ;Ara restem 2, si el resultat és 0 (EA[1..0] - 2 = 0) significa que EA[1..0] = 2
+000390 B4D8           00633     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 2 = 0, llavors STATUS, Z = 1
+000392 8000           00634     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00635     
+                      00636     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+000394 B000           00637     BTFSC RESULT, 0, 0 
+000396 808C           00638     BSF LATD, 0, 0 ;Si RESULT = 0 llavors A = 1
+000398 A000           00639     BTFSS RESULT, 0, 0
+00039A 908C           00640     BCF LATD, 0, 0 ;Si RESULT = 1 llavors A = 0
+                      00641     
+                      00642         ;--------------------------------------------------------------------------;
+                      00643     ;        Equació de sortida per En_E1 = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00644     ;--------------------------------------------------------------------------;
+00039C 6A00           00645     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00646      
+00039E 5082           00647     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003A0 0B0F           00648     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+0003A2 0800           00649     SUBLW 0x00 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0003A4 B4D8           00650     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+0003A6 8000           00651     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00652     
+                      00653     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+0003A8 B000           00654     BTFSC RESULT, 0, 0 
+0003AA 828C           00655     BSF LATD, 1, 0 ;Si RESULT = 0 llavors A = 1
+0003AC A000           00656     BTFSS RESULT, 0, 0
+0003AE 928C           00657     BCF LATD, 1, 0 ;Si RESULT = 1 llavors A = 0
+                      00658     
+                      00659     ;--------------------------------------------------------------------------;
+                      00660     ;        Equació de sortida per Cont = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00661     ;--------------------------------------------------------------------------;
+0003B0 6A00           00662     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00663      
+0003B2 5082           00664     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003B4 0B0F           00665     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+0003B6 0802           00666     SUBLW 0x02 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0003B8 B4D8           00667     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+0003BA 8000           00668     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00669     
+0003BC 5082           00670     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003BE 0B0F           00671     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+0003C0 0804           00672     SUBLW 0x04 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0003C2 B4D8           00673     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+0003C4 8000           00674     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00675     
+0003C6 5082           00676     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003C8 0B0F           00677     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+0003CA 0807           00678     SUBLW 0x07 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0003CC B4D8           00679     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+0003CE 8000           00680     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00681     
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00682     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+0003D0 A000           00683     BTFSS RESULT, 0, 0 
+0003D2 848C           00684     BSF LATD, 2, 0 ;Si RESULT = 0 llavors A = 1
+0003D4 B000           00685     BTFSC RESULT, 0, 0
+0003D6 948C           00686     BCF LATD, 2, 0 ;Si RESULT = 1 llavors A = 0
+                      00687     
+                      00688         ;--------------------------------------------------------------------------;
+                      00689     ;        Equació de sortida per G_V = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00690     ;--------------------------------------------------------------------------;
+0003D8 6A00           00691     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00692      
+0003DA 5082           00693     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003DC 0B0F           00694     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+0003DE 080B           00695     SUBLW 0x0B ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0003E0 B4D8           00696     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+0003E2 8000           00697     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00698     
+                      00699     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+0003E4 B000           00700     BTFSC RESULT, 0, 0 
+0003E6 868C           00701     BSF LATD, 3, 0 ;Si RESULT = 0 llavors A = 1
+0003E8 A000           00702     BTFSS RESULT, 0, 0
+0003EA 968C           00703     BCF LATD, 3, 0 ;Si RESULT = 1 llavors A = 0
+                      00704     
+                      00705         ;--------------------------------------------------------------------------;
+                      00706     ;        Equació de sortida per L_M =     ;
+                      00707     ;--------------------------------------------------------------------------;
+0003EC 6A00           00708     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00709      
+0003EE 5082           00710     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003F0 0B0F           00711     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+0003F2 080B           00712     SUBLW 0x0B ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+0003F4 B681           00713     BTFSC PORTB, 3, 0 ;Comprovar que clk = 0;
+0003F6 80E8           00714     BSF WREG, 0, 0 ;Posar a 0 el WREG si clk = 1;
+0003F8 B4D8           00715     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+0003FA 8000           00716     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00717     
+0003FC 5082           00718     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+0003FE 0B0F           00719     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000400 0809           00720     SUBLW 0x09 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000402 B4D8           00721     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+000404 8000           00722     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00723     
+                      00724     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+000406 A000           00725     BTFSS RESULT, 0, 0 
+000408 888C           00726     BSF LATD, 4, 0 ;Si RESULT = 0 llavors A = 1
+00040A B000           00727     BTFSC RESULT, 0, 0
+00040C 988C           00728     BCF LATD, 4, 0 ;Si RESULT = 1 llavors A = 0
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00729    
+                      00730     
+                      00731     ;--------------------------------------------------------------------------;
+                      00732     ;        Equació de sortida per S_G = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00733     ;--------------------------------------------------------------------------;
+00040E 6A00           00734     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00735      
+000410 5082           00736     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000412 0B0F           00737     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000414 080C           00738     SUBLW 0x0C ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000416 B4D8           00739     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+000418 8000           00740     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00741     
+                      00742     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+00041A B000           00743     BTFSC RESULT, 0, 0 
+00041C 8A8C           00744     BSF LATD, 5, 0 ;Si RESULT = 0 llavors A = 1
+00041E A000           00745     BTFSS RESULT, 0, 0
+000420 9A8C           00746     BCF LATD, 5, 0 ;Si RESULT = 1 llavors A = 0
+                      00747     
+                      00748     
+                      00749     ;--------------------------------------------------------------------------;
+                      00750     ;        Equació de sortida per G = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00751     ;--------------------------------------------------------------------------;
+000422 6A00           00752     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00753      
+000424 5082           00754     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000426 0B0F           00755     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000428 0805           00756     SUBLW 0x05 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+00042A B4D8           00757     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+00042C 8000           00758     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00759     
+                      00760     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+00042E B000           00761     BTFSC RESULT, 0, 0 
+000430 8C8C           00762     BSF LATD, 6, 0 ;Si RESULT = 0 llavors A = 1
+000432 A000           00763     BTFSS RESULT, 0, 0
+000434 9C8C           00764     BCF LATD, 6, 0 ;Si RESULT = 1 llavors A = 0
+                      00765     
+                      00766     
+                      00767     ;--------------------------------------------------------------------------;
+                      00768     ;        Equació de sortida per N_C = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00769     ;--------------------------------------------------------------------------;
+000436 6A00           00770     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00771      
+000438 5082           00772     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00043A 0B0F           00773     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+00043C 0806           00774     SUBLW 0x06 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+00043E B4D8           00775     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+000440 8000           00776     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00777     
+                      00778     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+000442 A000           00779     BTFSS RESULT, 0, 0 
+000444 8E8C           00780     BSF LATD, 7, 0 ;Si RESULT = 0 llavors A = 1
+000446 B000           00781     BTFSC RESULT, 0, 0
+000448 9E8C           00782     BCF LATD, 7, 0 ;Si RESULT = 1 llavors A = 0
+                      00783     
+                      00784     
+                      00785     ;--------------------------------------------------------------------------;
+                      00786     ;        Equació de sortida per Save = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00787     ;--------------------------------------------------------------------------;
+00044A 6A00           00788     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00789      
+00044C 5082           00790     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+00044E 0B0F           00791     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000450 0803           00792     SUBLW 0x03 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000452 B4D8           00793     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+000454 8000           00794     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00795     
+                      00796     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+000456 B000           00797     BTFSC RESULT, 0, 0 
+000458 808D           00798     BSF LATE, 0, 0 ;Si RESULT = 0 llavors A = 1
+00045A A000           00799     BTFSS RESULT, 0, 0
+00045C 908D           00800     BCF LATE, 0, 0 ;Si RESULT = 1 llavors A = 0
+                      00801     
+                      00802     
+                      00803     ;--------------------------------------------------------------------------;
+                      00804     ;        Equació de sortida per NewBoat = (!EA1 & !EA0) | (EA1 & !EA0)      ;
+                      00805     ;--------------------------------------------------------------------------;
+00045E 6A00           00806     CLRF RESULT, 0 ;Resetejem RESULT per les futures operacions
+                      00807      
+000460 5082           00808     MOVF PORTC, 0, 0 ;Movem els 8 bits del PORTC al WREG per poder realitzar operacions en aquest regist
+                            re
+000462 0B0F           00809     ANDLW 0x0F ;Per tal de nomès treballar amb els dos ultims bits, apliquem la màscara [00001111] 
+000464 0809           00810     SUBLW 0x09 ;Ara restem 0, si el resultat és 0 (EA[3..0] - 0 = 0) significa que EA[3..0] = 0
+000466 B4D8           00811     BTFSC STATUS, Z, 0 ;Si EA[1..0] - 0 = 0, llavors STATUS, Z = 1
+000468 8000           00812     BSF RESULT, 0, 0 ;Si STATUS, Z = 1 llavors RESULT = 1
+                      00813     
+                      00814     ;Ara només hem de comprovar si el RESULT és un 1 o un 0, si és un 1, s'han completat un o més mi
+                            nterms, si és 0, no s'ha completat cap
+00046A B000           00815     BTFSC RESULT, 0, 0 
+00046C 828D           00816     BSF LATE, 1, 0 ;Si RESULT = 0 llavors A = 1
+00046E A000           00817     BTFSS RESULT, 0, 0
+000470 928D           00818     BCF LATE, 1, 0 ;Si RESULT = 1 llavors A = 0
+                      00819     
+                      00820     
+                      00821     
+                      00822     ;--------------------------------------------------------------------------;
+                      00823     ;                          Exemple de Porta Lògica                                 ;
+                      00824     ;--------------------------------------------------------------------------;
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00825 
+                      00826     ;Finalment implementem una porta NOT --> Z = !B
+000472 A681           00827     BTFSS PORTB, 3, 0
+000474 848D           00828     BSF LATE, 2, 0 ;Si B = 1, saltem la linea, si B = 0 llavors Z = 1
+000476 B681           00829     BTFSC PORTB, 3, 0
+000478 948D           00830     BCF LATE, 2, 0 ;Si B = 0, saltem la linea, si B = 1 llavors Z = 0
+                      00831     
+00047A EF?? F???      00832     GOTO LOOP
+                      00833     END
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+A                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ACCESS                            00000000
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ACQT0                             00000003
+ACQT1                             00000004
+ACQT2                             00000005
+ADCON0                            00000FC2
+ADCON1                            00000FC1
+ADCON2                            00000FC0
+ADCS0                             00000000
+ADCS1                             00000001
+ADCS2                             00000002
+ADDEN                             00000003
+ADEN                              00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADIP                              00000006
+ADMSK1                            00000001
+ADMSK2                            00000002
+ADMSK3                            00000003
+ADMSK4                            00000004
+ADMSK5                            00000005
+ADON                              00000000
+ADRES                             00000FC3
+ADRESH                            00000FC4
+ADRESL                            00000FC3
+AN0                               00000000
+AN1                               00000001
+AN10                              00000001
+AN11                              00000004
+AN12                              00000000
+AN2                               00000002
+AN3                               00000003
+AN4                               00000005
+AN5                               00000000
+AN6                               00000001
+AN7                               00000002
+AN8                               00000002
+AN9                               00000003
+BANKED                            00000001
+BAUDCON                           00000FB8
+BAUDCTL                           00000FB8
+BCLIE                             00000003
+BCLIF                             00000003
+BCLIP                             00000003
+BF                                00000000
+BGST                              00000005
+BOR                               00000000
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRG16                             00000003
+BRGH                              00000002
+BSR                               00000FE0
+C                                 00000000
+C1INV                             00000004
+C1N                               00000000
+C1OUT_CMCON                       00000006
+C1OUT_PORTA                       00000004
+C1P                               00000003
+C2INV                             00000005
+C2N                               00000001
+C2OUT_CMCON                       00000007
+C2OUT_PORTA                       00000005
+C2P                               00000002
+CCP1                              00000002
+CCP1CON                           00000FBD
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1IP                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           00000FBA
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2IP                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCP2_PORTB                        00000003
+CCP2_PORTC                        00000001
+CCPR1                             00000FBE
+CCPR1H                            00000FBF
+CCPR1L                            00000FBE
+CCPR2                             00000FBB
+CCPR2H                            00000FBC
+CCPR2L                            00000FBB
+CFGS                              00000006
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CIS                               00000003
+CK                                00000006
+CKE                               00000006
+CKP                               00000004
+CLKI                              00000007
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CLKO                              00000006
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000FB4
+CMIE                              00000006
+CMIF                              00000006
+CMIP                              00000006
+CONFIG_OSC                        0000001A
+CREN                              00000004
+CS                                00000002
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            00000FB5
+CVREF                             00000002
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+CVRSS                             00000004
+D                                 00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+DDRA                              TRISA
+DDRB                              TRISB
+DDRC                              TRISC
+DDRD                              TRISD
+DDRE                              TRISE
+DONE                              00000001
+D_A                               00000005
+D_NOT_A                           00000005
+ECCP1AS                           00000FB6
+ECCP1CON                          00000FBD
+ECCP1DEL                          00000FB7
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             00000FA9
+EECON1                            00000FA6
+EECON2                            00000FA7
+EEDATA                            00000FA8
+EEIE                              00000004
+EEIF                              00000004
+EEIP                              00000004
+EEPGD                             00000007
+FAST                              00000001
+FERR                              00000002
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+FLT0                              00000000
+FLTS                              00000002
+FREE                              00000004
+FSR0                              00000000
+FSR0H                             00000FEA
+FSR0L                             00000FE9
+FSR1                              00000001
+FSR1H                             00000FE2
+FSR1L                             00000FE1
+FSR2                              00000002
+FSR2H                             00000FDA
+FSR2L                             00000FD9
+GCEN                              00000007
+GIE                               00000007
+GIEH                              00000007
+GIEL                              00000006
+GIE_GIEH                          00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HLVDCON                           00000FD2
+HLVDEN                            00000004
+HLVDIE                            00000002
+HLVDIF                            00000002
+HLVDIN                            00000005
+HLVDIP                            00000002
+HLVDL0                            00000000
+HLVDL1                            00000001
+HLVDL2                            00000002
+HLVDL3                            00000003
+IBF                               00000007
+IBOV                              00000005
+IDLEN                             00000007
+INDF0                             00000FEF
+INDF1                             00000FE7
+INDF2                             00000FDF
+INT0                              00000000
+INT0E                             00000004
+INT0F                             00000001
+INT0IE                            00000004
+INT0IF                            00000001
+INT1                              00000001
+INT1E                             00000003
+INT1F                             00000000
+INT1IE                            00000003
+INT1IF                            00000000
+INT1IP                            00000006
+INT1P                             00000006
+INT2                              00000002
+INT2E                             00000004
+INT2F                             00000001
+INT2IE                            00000004
+INT2IF                            00000001
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INT2IP                            00000007
+INT2P                             00000007
+INTCON                            00000FF2
+INTCON2                           00000FF1
+INTCON3                           00000FF0
+INTEDG0                           00000006
+INTEDG1                           00000005
+INTEDG2                           00000004
+INTSRC                            00000007
+IOFS                              00000002
+IPEN                              00000007
+IPR1                              00000F9F
+IPR2                              00000FA2
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRVST                             00000005
+KBI0                              00000004
+KBI1                              00000005
+KBI2                              00000006
+KBI3                              00000007
+LATA                              00000F89
+LATA0                             00000000
+LATA1                             00000001
+LATA2                             00000002
+LATA3                             00000003
+LATA4                             00000004
+LATA5                             00000005
+LATA6                             00000006
+LATA7                             00000007
+LATB                              00000F8A
+LATB0                             00000000
+LATB1                             00000001
+LATB2                             00000002
+LATB3                             00000003
+LATB4                             00000004
+LATB5                             00000005
+LATB6                             00000006
+LATB7                             00000007
+LATC                              00000F8B
+LATC0                             00000000
+LATC1                             00000001
+LATC2                             00000002
+LATC3                             00000003
+LATC4                             00000004
+LATC5                             00000005
+LATC6                             00000006
+LATC7                             00000007
+LATD                              00000F8C
+LATD0                             00000000
+LATD1                             00000001
+LATD2                             00000002
+LATD3                             00000003
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LATD4                             00000004
+LATD5                             00000005
+LATD6                             00000006
+LATD7                             00000007
+LATE                              00000F8D
+LATE0                             00000000
+LATE1                             00000001
+LATE2                             00000002
+LOOP                              00000064
+LVDCON                            00000FD2
+LVDEN                             00000004
+LVDIE                             00000002
+LVDIF                             00000002
+LVDIP                             00000002
+LVDL0                             00000000
+LVDL1                             00000001
+LVDL2                             00000002
+LVDL3                             00000003
+LVV0                              00000000
+LVV1                              00000001
+LVV2                              00000002
+LVV3                              00000003
+MAIN                              00000024
+MCLR                              00000003
+N                                 00000004
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_CS                            00000002
+NOT_DONE                          00000001
+NOT_MCLR                          00000003
+NOT_PD                            00000002
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RD                            00000000
+NOT_RI                            00000004
+NOT_SS                            00000005
+NOT_T1SYNC                        00000002
+NOT_T3SYNC                        00000002
+NOT_TO                            00000003
+NOT_W                             00000002
+NOT_WR                            00000001
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OSC1                              00000007
+OSC2                              00000006
+OSCCON                            00000FD3
+OSCFIE                            00000007
+OSCFIF                            00000007
+OSCFIP                            00000007
+OSCTUNE                           00000F9B
+OSTS                              00000003
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+OV                                00000003
+P                                 00000004
+P1A                               00000002
+P1B                               00000005
+P1C                               00000006
+P1D                               00000007
+P1M0                              00000006
+P1M1                              00000007
+PC                                00000FF9
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000FF9
+PCLATH                            00000FFA
+PCLATU                            00000FFB
+PD                                00000002
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PEIE_GIEL                         00000006
+PEN                               00000002
+PGC                               00000006
+PGD                               00000007
+PGM                               00000005
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIR1                              00000F9E
+PIR2                              00000FA1
+PLLEN                             00000006
+PLUSW0                            00000FEB
+PLUSW1                            00000FE3
+PLUSW2                            00000FDB
+POR                               00000001
+PORTA                             00000F80
+PORTB                             00000F81
+PORTC                             00000F82
+PORTD                             00000F83
+PORTE                             00000F84
+POSTDEC0                          00000FED
+POSTDEC1                          00000FE5
+POSTDEC2                          00000FDD
+POSTINC0                          00000FEE
+POSTINC1                          00000FE6
+POSTINC2                          00000FDE
+PR2                               00000FCB
+PREINC0                           00000FEC
+PREINC1                           00000FE4
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PREINC2                           00000FDC
+PROD                              00000FF3
+PRODH                             00000FF4
+PRODL                             00000FF3
+PRSEN                             00000007
+PSA                               00000003
+PSP0                              00000000
+PSP1                              00000001
+PSP2                              00000002
+PSP3                              00000003
+PSP4                              00000004
+PSP5                              00000005
+PSP6                              00000006
+PSP7                              00000007
+PSPIE                             00000007
+PSPIF                             00000007
+PSPIP                             00000007
+PSPMODE                           00000004
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PWM1CON                           00000FB7
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RBIP                              00000000
+RBPU                              00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCEN                              00000003
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 27
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCIP                              00000005
+RCMT                              00000006
+RCON                              00000FD0
+RCREG                             00000FAE
+RCSTA                             00000FAB
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD16                              00000007
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+RE3                               00000003
+RESULT                            00000000
+RI                                00000004
+RSEN                              00000001
+RX                                00000007
+RX9                               00000006
+RX9D                              00000000
+RXDTP                             00000005
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000006
+SCK                               00000003
+SCKP                              00000004
+SCL                               00000003
+SCS0                              00000000
+SCS1                              00000001
+SDA                               00000004
+SDI                               00000004
+SDO                               00000005
+SEN                               00000000
+SENDB                             00000003
+SMP                               00000007
+SP0                               00000000
+SP1                               00000001
+SP2                               00000002
+SP3                               00000003
+SP4                               00000004
+SPBRG                             00000FAF
+SPBRGH                            00000FB0
+SPEN                              00000007
+SREN                              00000005
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 28
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON1                           00000FC6
+SSPCON2                           00000FC5
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPIP                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000FC7
+STATUS                            00000FD8
+STKFUL                            00000007
+STKOVF                            00000007
+STKPTR                            00000FFC
+STKUNF                            00000006
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+T016BIT                           00000006
+T08BIT                            00000006
+T0CKI                             00000004
+T0CON                             00000FD5
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0PS0                             00000000
+T0PS1                             00000001
+T0PS2                             00000002
+T0SE                              00000004
+T13CKI                            00000000
+T1CKI                             00000000
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000FCD
+T1OSCEN                           00000003
+T1OSI                             00000001
+T1OSO                             00000000
+T1RUN                             00000006
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000FCA
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+T3CCP1                            00000003
+T3CCP2                            00000006
+T3CKPS0                           00000004
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T3CKPS1                           00000005
+T3CON                             00000FB1
+T3SYNC                            00000002
+TABLAT                            00000FF5
+TBLPTR                            00000FF6
+TBLPTRH                           00000FF7
+TBLPTRL                           00000FF6
+TBLPTRU                           00000FF8
+TMR0                              00000FD6
+TMR0H                             00000FD7
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR0IP                            00000002
+TMR0L                             00000FD6
+TMR0ON                            00000007
+TMR1                              00000FCE
+TMR1CS                            00000001
+TMR1H                             00000FCF
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1IP                            00000000
+TMR1L                             00000FCE
+TMR1ON                            00000000
+TMR2                              00000FCC
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2IP                            00000001
+TMR2ON                            00000002
+TMR3                              00000FB2
+TMR3CS                            00000001
+TMR3H                             00000FB3
+TMR3IE                            00000001
+TMR3IF                            00000001
+TMR3IP                            00000001
+TMR3L                             00000FB2
+TMR3ON                            00000000
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
+TOSL                              00000FFD
+TOSU                              00000FFF
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000F92
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISA7                            00000007
+TRISB                             00000F93
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000F94
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000F95
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000F96
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX                                00000006
+TX9                               00000006
+TX9D                              00000000
+TXCKP                             00000004
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXIP                              00000004
+TXREG                             00000FAD
+TXSTA                             00000FAC
+UA                                00000001
+VCFG0                             00000004
+VCFG1                             00000005
+VDIRMAG                           00000007
+VPP                               00000003
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+VREFM                             00000002
+VREFP                             00000003
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000FD1
+WR                                00000001
+WREG                              00000FE8
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_BBSIZ_BB1K_4L                    000000FF
+_BBSIZ_BB256_4L                   000000CF
+_BBSIZ_BB512_4L                   000000DF
+_BORV_0_2L                        000000E7
+_BORV_1_2L                        000000EF
+_BORV_2_2L                        000000F7
+_BORV_3_2L                        000000FF
+_BOR_NOSLP_2L                     000000FD
+_BOR_OFF_2L                       000000F9
+_BOR_ON_2L                        000000FF
+_BOR_SOFT_2L                      000000FB
+_CCP2MX_RB3_3H                    000000FE
+_CCP2MX_RC1_3H                    000000FF
+_CONFIG1H                         00300001
+_CONFIG2H                         00300003
+_CONFIG2L                         00300002
+_CONFIG3H                         00300005
+_CONFIG4L                         00300006
+_CONFIG5H                         00300009
+_CONFIG5L                         00300008
+_CONFIG6H                         0030000B
+_CONFIG6L                         0030000A
+_CONFIG7H                         0030000D
+_CONFIG7L                         0030000C
+_CP0_OFF_5L                       000000FF
+_CP0_ON_5L                        000000FE
+_CP1_OFF_5L                       000000FF
+_CP1_ON_5L                        000000FD
+_CPB_OFF_5H                       000000FF
+_CPB_ON_5H                        000000BF
+_CPD_OFF_5H                       000000FF
+_CPD_ON_5H                        0000007F
+_DEBUG_OFF_4L                     000000FF
+_DEBUG_ON_4L                      0000007F
+_DEVID1                           003FFFFE
+_DEVID2                           003FFFFF
+_EBTR0_OFF_7L                     000000FF
+_EBTR0_ON_7L                      000000FE
+_EBTR1_OFF_7L                     000000FF
+_EBTR1_ON_7L                      000000FD
+_EBTRB_OFF_7H                     000000FF
+_EBTRB_ON_7H                      000000BF
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 32
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FCMEN_OFF_1H                     000000BF
+_FCMEN_ON_1H                      000000FF
+_IDLOC0                           00200000
+_IDLOC1                           00200001
+_IDLOC2                           00200002
+_IDLOC3                           00200003
+_IDLOC4                           00200004
+_IDLOC5                           00200005
+_IDLOC6                           00200006
+_IDLOC7                           00200007
+_IESO_OFF_1H                      0000007F
+_IESO_ON_1H                       000000FF
+_LPT1OSC_OFF_3H                   000000FB
+_LPT1OSC_ON_3H                    000000FF
+_LVP_OFF_4L                       000000FB
+_LVP_ON_4L                        000000FF
+_MCLRE_OFF_3H                     0000007F
+_MCLRE_ON_3H                      000000FF
+_OSC_ECIO_1H                      000000F5
+_OSC_EC_1H                        000000F4
+_OSC_HSPLL_1H                     000000F6
+_OSC_HS_1H                        000000F2
+_OSC_INTIO1_1H                    000000F9
+_OSC_INTIO2_1H                    000000F8
+_OSC_LP_1H                        000000F0
+_OSC_RCIO_1H                      000000F7
+_OSC_RC_1H                        000000F3
+_OSC_XT_1H                        000000F1
+_PBADEN_ANA_3H                    000000FF
+_PBADEN_DIG_3H                    000000FD
+_PWRT_OFF_2L                      000000FF
+_PWRT_ON_2L                       000000FE
+_STVREN_OFF_4L                    000000FE
+_STVREN_ON_4L                     000000FF
+_WDTPS_1024_2H                    000000F5
+_WDTPS_128_2H                     000000EF
+_WDTPS_16384_2H                   000000FD
+_WDTPS_16_2H                      000000E9
+_WDTPS_1_2H                       000000E1
+_WDTPS_2048_2H                    000000F7
+_WDTPS_256_2H                     000000F1
+_WDTPS_2_2H                       000000E3
+_WDTPS_32768_2H                   000000FF
+_WDTPS_32_2H                      000000EB
+_WDTPS_4096_2H                    000000F9
+_WDTPS_4_2H                       000000E5
+_WDTPS_512_2H                     000000F3
+_WDTPS_64_2H                      000000ED
+_WDTPS_8192_2H                    000000FB
+_WDTPS_8_2H                       000000E7
+_WDT_OFF_2H                       000000FE
+_WDT_ON_2H                        000000FF
+_WRT0_OFF_6L                      000000FF
+MPASM 5.86                          P1F1.ASM   10-27-2023  11:58:32         PAGE 33
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WRT0_ON_6L                       000000FE
+_WRT1_OFF_6L                      000000FF
+_WRT1_ON_6L                       000000FD
+_WRTB_OFF_6H                      000000FF
+_WRTB_ON_6H                       000000BF
+_WRTC_OFF_6H                      000000FF
+_WRTC_ON_6H                       000000DF
+_WRTD_OFF_6H                      000000FF
+_WRTD_ON_6H                       0000007F
+_XINST_OFF_4L                     000000BF
+_XINST_ON_4L                      000000FF
+__18F4321                         00000001
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
